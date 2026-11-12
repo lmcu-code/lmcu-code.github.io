@@ -1,0 +1,364 @@
+/* Startseite */
+
+/* ---------- Hero ---------- */
+.held {
+  --riese: min(30.5vw, 56vh);
+  --auto-weg: 12px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 60% 45% at 68% 78%, var(--kupfer-13), transparent 70%),
+    linear-gradient(180deg, var(--ton-0b0b0d) 0%, var(--ton-111113) 60%, var(--anthrazit) 100%);
+  padding-bottom: clamp(16px, 3vh, 36px);
+}
+.held__raum {
+  position: absolute; inset: 0 0 35% 0; z-index: -3;
+  background: url(bilder/raum-1344.webp) 70% 0 / cover no-repeat;
+  opacity: .55;
+  -webkit-mask-image: linear-gradient(180deg, var(--ton-000) 30%, transparent 100%);
+  mask-image: linear-gradient(180deg, var(--ton-000) 30%, transparent 100%);
+}
+/* feine Kupferlinie quer durch den Raum, zeichnet sich beim Laden einmal */
+.held::before {
+  content: ""; position: absolute; z-index: -1; left: 38%; top: -10%; width: 1px; height: 140%;
+  background: linear-gradient(180deg, transparent, var(--kupfer-55) 45%, transparent 85%);
+  transform: rotate(58deg); transform-origin: top;
+}
+/* Riesenschriftzug in gebürstetem Metall */
+.held__riese {
+  position: absolute; z-index: -2; left: 0; right: 0; top: clamp(4px, 1.5vh, 24px);
+  overflow: hidden; white-space: nowrap; text-align: center;
+  font-family: var(--breit); font-stretch: 125%; font-weight: 900;
+  font-size: var(--riese);
+  line-height: .8; letter-spacing: -0.035em;
+  color: transparent;
+  background:
+    repeating-linear-gradient(180deg, var(--weiss-4) 0 1px, var(--weiss-0) 1px 2px),
+    repeating-linear-gradient(180deg, var(--schwarz-0) 0 3px, var(--schwarz-10) 3px 4px, var(--schwarz-0) 4px 7px, var(--schwarz-10) 7px 8px, var(--schwarz-0) 8px 13px),
+    linear-gradient(90deg, var(--weiss-0) 0%, var(--weiss-8) 24%, var(--weiss-0) 40%, var(--weiss-8) 63%, var(--weiss-0) 78%, var(--weiss-4) 92%, var(--weiss-0) 100%),
+    linear-gradient(177deg, var(--metall-1) 0%, var(--metall-2) 15%, var(--metall-3) 29%, var(--metall-4) 41%, var(--metall-5) 52%, var(--metall-tief-55) 62%, var(--anthrazit-0) 74%);
+  -webkit-background-clip: text; background-clip: text;
+  user-select: none;
+  padding-top: .04em;
+}
+/* Lichtkante: ein heller Streif, der einmal über das Metall läuft */
+.held__glanz {
+  position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: calc(var(--riese) * .95);
+  overflow: hidden; mix-blend-mode: overlay; pointer-events: none;
+}
+.held__glanz::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 26%;
+  background: linear-gradient(100deg, var(--weiss-0) 0%, var(--weiss-90) 50%, var(--weiss-0) 100%);
+  opacity: 0; transform: translateX(-120%) skewX(-18deg);
+}
+
+.held__innen {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "auto" "kopf" "suche" "mehr";
+  padding-top: calc(var(--riese) * .3);
+}
+.held__kopf { grid-area: kopf; position: relative; z-index: 2; }
+.held__mehr { grid-area: mehr; position: relative; z-index: 2; margin-top: 18px; }
+.held__auto { grid-area: auto; position: relative; z-index: 1; margin: 0 0 10px; transform: translate3d(0, var(--par, 0px), 0); }
+.suche { grid-area: suche; position: relative; z-index: 3; }
+
+.held__kopf .kennung { margin-bottom: 12px; }
+.held__titel { font-size: min(7vw, 3rem); }
+@media (min-width: 700px) { .held__titel { font-size: clamp(2rem, 3.4vw, 4rem); } }
+.held__titel .maske { display: block; clip-path: inset(-0.3em -0.3em 0 -0.3em); }
+.held__titel .maske > span { display: inline-block; text-wrap: balance; }
+.held__titel .fein { font-weight: 250; letter-spacing: 0; }
+.held__satz { max-width: 46ch; color: var(--text); margin-bottom: 22px; }
+.held__knoepfe { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.held__bild { position: relative; }
+.held__bild img { width: 100%; }
+.held__scharf { position: relative; filter: drop-shadow(0 30px 40px var(--schwarz-55)); }
+.held__unscharf { position: absolute; inset: 0; filter: blur(14px); opacity: 0; }
+.held__blitz {
+  position: absolute; left: 37.98%; top: 43.48%; width: 24%; aspect-ratio: 4 / 1;
+  background: radial-gradient(closest-side, var(--weiss-90), var(--weiss-28) 45%, var(--weiss-0));
+  mix-blend-mode: screen; pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+}
+.held__demo { position: absolute; right: 0; bottom: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0 16px; }
+.held__demo .demo-hinweis { font-size: 0.75rem; }
+.held__demo a { display: inline-flex; align-items: center; min-height: 44px; color: var(--kalk); font-size: 0.875rem; }
+.held__punkte { display: none; }
+@media (max-width: 699px) { .held__demo a { display: none; } .held__kopf .kennung { display: none; } }
+
+@media (min-width: 1100px) {
+  .held { --riese: min(30.5vw, 53vh); --auto-weg: 16px; min-height: calc(100svh - 72px); display: flex; flex-direction: column; }
+  .held__innen {
+    flex: 1;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas: "kopf ." "mehr ." "suche suche";
+    align-content: end;
+    padding-top: calc(var(--riese) * .42);
+  }
+  .held__titel { font-size: min(3.4vw, 5.2vh); }
+  .held__kopf { margin-right: -30%; }
+  .held__auto { position: absolute; right: min(calc(var(--rand) * .5), calc(660px - 50vw + 28px)); bottom: 150px; width: min(60vw, (100svh - 290px) * 2.27, 1240px); margin: 0; }
+  .held__demo { bottom: -34px; }
+  .held__demo .demo-hinweis { font-size: 0.8125rem; }
+  .held__punkte { display: block; position: absolute; inset: 0 0 auto 0; aspect-ratio: 2387 / 1051; pointer-events: none; }
+  .held__punkte li { position: absolute; left: var(--x); top: var(--y); }
+  .held__punkte li::before { content: ""; position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--kupfer); background: radial-gradient(circle, var(--kupfer) 0 3px, var(--tief-60) 3.5px); }
+  .held__punkte li::after { content: ""; position: absolute; left: 7px; top: 0; width: 46px; height: 1px; background: var(--kupfer); transform-origin: left; }
+  .held__punkte span { position: absolute; left: 53px; top: -13px; white-space: nowrap; padding: 3px 9px; font-size: 0.75rem; background: var(--tief-85); border: 1px solid var(--linie-hell); color: var(--kalk); }
+}
+@media (min-width: 1100px) and (max-height: 700px) {
+  .held__innen { padding-top: calc(var(--riese) * .36); }
+  .held__satz { max-width: 70ch; margin-bottom: 14px; }
+  .held__mehr { margin-top: 14px; }
+}
+@media (min-width: 700px) and (max-width: 1099px) {
+  .held__auto { width: min(78%, 620px); margin-inline: auto; }
+}
+
+/* Ladefolge im Hero (nur ohne reduce; Endzustand ist der Grundzustand, ohne JS läuft sie genauso) */
+@media (prefers-reduced-motion: no-preference) {
+  .held__glanz::before { animation: glanz 1.7s var(--weich) .2s both; }
+  .held::before { animation: linie 1.5s var(--gleiten) .5s both; }
+  .held__bild { animation: auto-rein 1.2s var(--gleiten) .1s both; }
+  .held__scharf { animation: einblenden .9s var(--weich) .45s both; }
+  .held__unscharf { animation: unschaerfe 1.4s var(--weich) .1s both; }
+  .held__blitz { animation: blitz 1s var(--weich) 1.6s backwards; }
+  .held__kopf .kennung { animation: hoch .7s var(--gleiten) .4s both; }
+  .held__titel .maske > span { animation: maske .95s var(--gleiten) both; }
+  .held__titel .maske:nth-child(1) > span { animation-delay: .55s; }
+  .held__titel .maske:nth-child(2) > span { animation-delay: .7s; }
+  .held__titel .maske:nth-child(3) > span { animation-delay: .82s; }
+  .held__satz { animation: hoch .7s var(--gleiten) 1.05s both; }
+  .held__knoepfe { animation: hoch .7s var(--gleiten) 1.2s both; }
+  .suche { animation: hoch-kurz .7s var(--gleiten) 1.3s both; }
+  .held__demo { animation: einblenden .8s var(--weich) 1.6s both; }
+  .held__punkte li { animation: einblenden .6s var(--weich) both; }
+  .held__punkte li::after { animation: strich-x .6s var(--gleiten) both; animation-delay: inherit; }
+  .held__punkte li:nth-child(1) { animation-delay: 1.75s; }
+  .held__punkte li:nth-child(2) { animation-delay: 1.9s; }
+  .held__punkte li:nth-child(3) { animation-delay: 2.05s; }
+}
+@keyframes glanz { 0% { opacity: 0; transform: translateX(-120%) skewX(-18deg); } 15% { opacity: 1; } 85% { opacity: .9; } 100% { opacity: 0; transform: translateX(420%) skewX(-18deg); } }
+@keyframes linie { from { transform: rotate(58deg) scaleY(0); } to { transform: rotate(58deg) scaleY(1); } }
+@keyframes auto-rein { from { opacity: 0; transform: translateX(var(--auto-weg)); } }
+@keyframes einblenden { from { opacity: 0; } }
+@keyframes unschaerfe { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes blitz { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 99.9% { opacity: 0; transform: translate(-50%, -50%) scale(1.15); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); } }
+@keyframes hoch { from { opacity: 0; transform: translateY(14px); } }
+@keyframes hoch-kurz { from { opacity: 0; transform: translateY(8px); } }
+@keyframes maske { from { transform: translateY(108%); } }
+@keyframes strich-x { from { transform: scaleX(0); } }
+
+/* Suchleiste */
+.suche {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  padding: 10px; margin-top: 4px;
+  background: var(--flaeche-92); border: 1px solid var(--linie);
+  box-shadow: 0 24px 60px var(--schwarz-45);
+}
+.suche__feld { display: grid; gap: 2px; min-width: 0; }
+.suche label { font-size: 0.75rem; font-weight: 600; color: var(--text); padding-left: 2px; }
+.suche select, .formular select {
+  width: 100%; min-width: 0; height: 48px; padding: 0 25px 0 9px;
+  font-size: 0.875rem; color: var(--kalk);
+  background: var(--tief) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23c08a5c' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 9px center;
+  border: 1px solid var(--feldrand); border-radius: 3px;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  transition: border-color .3s var(--weich);
+}
+.suche select:hover, .formular select:hover { border-color: var(--kupfer); }
+.suche__knopf { align-self: end; height: 48px; min-height: 48px; padding: 0 14px; }
+@media (min-width: 700px) {
+  .suche { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 12px; padding: 16px; }
+  .suche select { font-size: 0.9375rem; padding-left: 14px; }
+  .suche__knopf { padding: 0 30px; min-width: 190px; }
+}
+
+/* ---------- Kennwerte ---------- */
+.werte { padding: clamp(20px, 3vw, 40px) 0 0; }
+.werte__liste { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--flaeche); border: 1px solid var(--linie); }
+.werte__liste li { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; align-content: start; justify-items: center; gap: 4px; text-align: center; padding: 16px 8px; border-right: 1px solid var(--linie); border-bottom: 1px solid var(--linie); }
+.werte__liste li:nth-child(2n) { border-right: 0; }
+.werte__liste li:nth-child(n+3) { border-bottom: 0; }
+.werte__liste strong { font-family: var(--ziffer); font-variant-numeric: lining-nums tabular-nums; font-weight: 500; font-size: clamp(1.45rem, 1rem + 1.6vw, 2.35rem); line-height: 1.05; color: var(--kupfer); letter-spacing: -0.005em; }
+.werte__liste strong small { font-size: .5em; font-weight: 500; margin-right: .1em; vertical-align: .32em; }
+.werte__titel { font-family: var(--marke); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--kalk); }
+.werte__klein { font-size: 0.8125rem; color: var(--text-2); line-height: 1.4; max-width: min(26ch, 100%); }
+.werte__titel, .werte__liste strong { max-width: 100%; overflow-wrap: anywhere; }
+@media (min-width: 900px) {
+  .werte__liste { grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 10px 0; }
+  .werte__liste li { border-bottom: 0; padding: 26px 20px; gap: 6px; }
+  .werte__liste li:nth-child(2n) { border-right: 1px solid var(--linie); }
+  .werte__liste li:last-child { border-right: 0; }
+  .werte__titel { font-size: 0.8125rem; }
+  .werte__klein { font-size: 0.875rem; }
+}
+
+/* ---------- Abschnitte ---------- */
+.bestand, .leistungen, .ablauf { padding: clamp(56px, 8vw, 112px) 0 0; }
+.kopfzeile { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px; margin-bottom: 24px; }
+.mehr-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--kalk); font-weight: 600; font-size: 0.9375rem; }
+.mehr-link::after { bottom: 6px; }
+.mehr-link svg { width: 18px; height: 18px; color: var(--kupfer); }
+
+/* Fahrzeugkarten */
+.bestand__status { margin: -8px 0 20px; color: var(--text-2); font-size: 0.9375rem; }
+.karten { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+@media (min-width: 700px) { .karten { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 1100px) { .karten { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+.karte[hidden] { display: none; }
+.karte article { position: relative; height: 100%; display: flex; flex-direction: column; background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; overflow: hidden; }
+.karte article::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--kupfer-verlauf); transform: scaleX(0); transform-origin: left; }
+.karte__bild {
+  position: relative; aspect-ratio: 16 / 10; display: grid; place-items: center; padding: 30px 14px 22px; overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 30% at 50% 82%, var(--kupfer-16), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 50% 40%, var(--ton-2a2a2f), var(--ton-151517) 70%);
+  border-bottom: 1px solid var(--linie);
+}
+.karte__bild img { width: 100%; height: 100%; object-fit: contain; }
+.vt-bmw { view-transition-name: auto-bmw; }
+@media (prefers-reduced-motion: no-preference) {
+  .karte article { transition: transform .5s var(--gleiten), border-color .4s var(--weich); }
+  .karte article::after { transition: transform .6s var(--gleiten); }
+  .karte__bild img { transition: transform .8s var(--gleiten); }
+  .karte article:hover, .karte article:focus-within { transform: translateY(-4px); }
+  .karte article:hover .karte__bild img, .karte article:focus-within .karte__bild img { transform: scale(1.03); }
+}
+.karte article:hover, .karte article:focus-within { border-color: var(--linie-hell); }
+.karte article:hover::after, .karte article:focus-within::after { transform: scaleX(1); }
+.karte__bild .marke-beispiel { position: absolute; left: 12px; top: 12px; }
+.karte__demo { position: absolute; right: 12px; bottom: 8px; font-size: 0.75rem; color: var(--text-2); }
+.karte__text { display: flex; flex-direction: column; flex: 1; padding: 20px 20px 8px; }
+.karte h3 { font-size: 1.1875rem; font-weight: 700; font-stretch: 108%; line-height: 1.25; letter-spacing: -0.005em; margin-bottom: 10px; }
+.karte h3 a { text-decoration: none; }
+.karte h3 a:hover { color: var(--kupfer-hell); }
+.karte__daten { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.875rem; color: var(--text-2); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.karte__daten > span { white-space: nowrap; }
+.karte__preis { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: auto; margin-bottom: 4px; }
+.preis { font-family: var(--ziffer); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 2.1rem; line-height: 1; color: var(--kupfer); letter-spacing: -0.01em; }
+.mwst { font-size: 0.8125rem; color: var(--text-2); }
+.karte__weiter { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 48px; font-weight: 600; font-size: 0.9375rem; color: var(--kalk); }
+.karte__weiter::after { bottom: 10px; }
+.karte__weiter svg { width: 18px; height: 18px; color: var(--kupfer); }
+@media (prefers-reduced-motion: no-preference) { .karte__weiter svg { transition: transform .3s var(--weich); } .karte__weiter:hover svg { transform: translateX(4px); } }
+
+/* Handy: Karten waagrecht, Bild links */
+@media (max-width: 699px) {
+  .karte article { display: grid; grid-template-columns: minmax(0, 41%) minmax(0, 1fr); }
+  .karte__bild { aspect-ratio: auto; height: 100%; min-height: 150px; padding: 30px 6px 22px; border-bottom: 0; border-right: 1px solid var(--linie); }
+  .karte__bild .marke-beispiel { left: 6px; top: 6px; font-size: 0.6875rem; padding: 2px 6px; }
+  .karte__demo { left: 6px; right: auto; bottom: 4px; font-size: 0.6875rem; }
+  .karte__text { padding: 12px 12px 2px; }
+  .karte h3 { font-size: 1rem; margin-bottom: 6px; }
+  .karte__daten { font-size: 0.8125rem; gap: 2px 10px; margin-bottom: 8px; }
+  .karte__daten .code { margin-right: 4px; }
+  .preis { font-size: 1.6rem; }
+  .karte__preis { gap: 2px 10px; }
+  .mwst { font-size: 0.75rem; }
+  .karte__weiter { min-height: 44px; font-size: 0.875rem; }
+}
+
+/* Leistungen */
+.leistungen__raster { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+@media (min-width: 1000px) { .leistungen__raster { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; } }
+.leistungen__kopf .h2 { margin-bottom: 18px; }
+.leistungen__kopf p:not(.kennung) { color: var(--text); max-width: 44ch; margin-bottom: 20px; }
+.leistungen__liste { display: grid; gap: 8px; }
+.zeile { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; transition: border-color .3s var(--weich); }
+.zeile[open] { border-color: var(--linie-hell); }
+.zeile summary { list-style: none; display: flex; align-items: center; gap: 18px; min-height: 76px; padding: 12px 18px; cursor: pointer; }
+.zeile summary::-webkit-details-marker { display: none; }
+.zeile__symbol { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--kupfer); color: var(--anthrazit); }
+.zeile__symbol svg { width: 24px; height: 24px; }
+.zeile__titel { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.zeile__titel strong { font-stretch: 115%; font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--kalk); }
+.zeile__titel span { font-size: 0.9375rem; color: var(--text-2); line-height: 1.4; }
+.zeile__plus { flex: none; position: relative; width: 20px; height: 20px; }
+.zeile__plus::before, .zeile__plus::after { content: ""; position: absolute; left: 2px; right: 2px; top: 9px; height: 2px; background: var(--kalk); }
+.zeile__plus::after { transform: rotate(90deg); }
+.zeile[open] .zeile__plus { transform: rotate(45deg); }
+.zeile summary:hover .zeile__plus::before, .zeile summary:hover .zeile__plus::after { background: var(--kupfer); }
+.zeile__text { padding: 0 18px 18px 84px; color: var(--text); }
+.zeile__text p { margin: 0; max-width: 60ch; }
+.zeile[open] .zeile__text { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .zeile__plus { transition: transform .45s var(--gleiten); }
+  .zeile__text { opacity: 0; transition: opacity .45s var(--weich) .1s; }
+  .zeile[open] .zeile__text { opacity: 1; }
+  .zeile::details-content { block-size: 0; overflow-y: clip; transition: block-size .5s var(--gleiten), content-visibility .5s allow-discrete; }
+  .zeile[open]::details-content { block-size: auto; }
+}
+@media (max-width: 559px) {
+  .zeile summary { gap: 12px; padding: 10px 12px; min-height: 64px; }
+  .zeile__symbol { width: 40px; height: 40px; }
+  .zeile__symbol svg { width: 20px; height: 20px; }
+  .zeile__titel strong { font-size: 0.9375rem; }
+  .zeile__titel span { font-size: 0.8125rem; }
+  .zeile__text { padding: 0 12px 14px 12px; font-size: 0.9375rem; }
+}
+
+/* Bildband: vier Schritte */
+.ablauf__hinweis { margin: 0; font-size: 0.875rem; color: var(--text-2); }
+.band { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+@media (min-width: 900px) { .band { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.band li { position: relative; overflow: hidden; background: var(--flaeche); color: var(--kalk); }
+.band img { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; }
+@media (max-width: 699px) { .band img { aspect-ratio: 4 / 3.3; } }
+@media (prefers-reduced-motion: no-preference) { .band img { transition: transform .9s var(--gleiten); } .band li:hover img { transform: scale(1.04); } }
+.band__text { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 2px; padding: 48px clamp(10px, 1.6vw, 24px) clamp(10px, 1.6vw, 22px); background: linear-gradient(180deg, transparent, var(--nacht-88) 46%, var(--nacht-96)); }
+.band__nr { font-family: var(--ziffer); font-variant-numeric: lining-nums; font-size: 1.5rem; font-weight: 500; color: var(--kupfer); line-height: 1; }
+.band__text strong { font-stretch: 120%; font-weight: 800; text-transform: uppercase; font-size: clamp(0.9rem, 0.8rem + 0.6vw, 1.3rem); letter-spacing: 0; }
+.band__text span:last-child { font-size: 0.875rem; color: var(--text); line-height: 1.35; }
+@media (max-width: 559px) { .band__text { padding-top: 36px; } .band__nr { font-size: 1.2rem; } .band__text span:last-child { font-size: 0.75rem; } }
+
+/* Kontakt */
+.kontakt { margin-top: clamp(56px, 8vw, 112px); padding: clamp(48px, 7vw, 96px) 0; background: linear-gradient(180deg, var(--tief), var(--ton-111113)); border-top: 1px solid var(--linie); }
+.kontakt__raster { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+@media (min-width: 1000px) { .kontakt__raster { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; } }
+.kontakt__text .h2 { margin-bottom: 18px; }
+.kontakt__text > p { color: var(--text); max-width: 46ch; }
+.kontakt__daten { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin: 22px 0; }
+.kontakt__daten dt { font-family: var(--marke); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--kupfer); margin-bottom: 4px; }
+.kontakt__daten dd { margin: 0; color: var(--kalk); font-size: 0.9375rem; }
+.kontakt__daten a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); }
+.kontakt__wege { display: grid; gap: 6px; }
+.kontakt__wege a { display: flex; align-items: center; gap: 14px; min-height: 54px; text-decoration: none; }
+.kontakt__wege a > span:last-child { display: grid; font-size: 0.9375rem; color: var(--text-2); line-height: 1.35; font-variant-numeric: tabular-nums; }
+.kontakt__wege strong { color: var(--kalk); font-size: 1rem; }
+.kontakt__wege a:hover strong { color: var(--kupfer-hell); }
+.kreis { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--kupfer); display: grid; place-items: center; color: var(--kupfer); }
+.kreis svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: no-preference) { .kreis { transition: transform .4s var(--gleiten); } .kontakt__wege a:hover .kreis { transform: scale(1.06); } }
+
+.formular { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; padding: clamp(16px, 2.5vw, 32px); }
+.formular__raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.feld--breit { grid-column: 1 / -1; }
+@media (max-width: 599px) { .feld--wahl { grid-column: 1 / -1; } }
+@media (max-width: 339px) { .formular__raster { grid-template-columns: minmax(0, 1fr); } }
+.feld { display: grid; gap: 6px; min-width: 0; align-content: end; }
+.feld label { font-size: 0.875rem; font-weight: 600; color: var(--kalk); }
+.feld label span { font-weight: 400; color: var(--text-2); }
+.feld input, .feld textarea { width: 100%; min-height: 50px; padding: 12px 14px; background: var(--tief); color: var(--kalk); border: 1px solid var(--feldrand); border-radius: 3px; }
+.feld textarea { resize: vertical; min-height: 96px; }
+.formular select { height: 50px; padding-left: 12px; }
+.formular__knopf { width: 100%; }
+.formular__hinweis { margin: 12px 0 0; font-size: 0.8125rem; color: var(--text-2); line-height: 1.5; }
+
+
+/* Handy kompakter */
+@media (max-width: 559px) {
+  .bestand, .leistungen, .ablauf { padding-top: 48px; }
+  .kontakt { margin-top: 48px; padding: 40px 0; }
+  .kontakt__wege { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .kontakt__wege a { flex-direction: column; justify-content: center; gap: 6px; min-height: 84px; padding: 8px 4px; border: 1px solid var(--linie); border-radius: 4px; text-align: center; }
+  .kontakt__wege a > span:last-child { font-size: 0.75rem; }
+  .kontakt__wege a > span:last-child > :not(strong) { display: none; }
+  .kontakt__wege strong { font-size: 0.875rem; }
+  .kreis { width: 40px; height: 40px; }
+  .feld textarea { min-height: 84px; }
+}

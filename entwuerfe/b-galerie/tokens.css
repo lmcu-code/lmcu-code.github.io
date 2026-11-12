@@ -1,0 +1,38 @@
+:root {
+  color-scheme: light;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2rem, 3.2vw + 0.5rem, 3.5rem); --text-display: clamp(2.25rem, min(7.2vw, 12svh), 7rem);
+  --text-section: clamp(2rem, 2.9vw + 0.75rem, 3.75rem); --text-title: clamp(1.25rem, 0.6vw + 0.95rem, 1.5rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --text-preis: clamp(1.75rem, 1.4vw + 1rem, 2.375rem); --text-preis-gross: clamp(2.5rem, 2.6vw + 1rem, 3.5rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+
+  /* Wand: kühles Galerieweiß, zum Anthrazit des Logos hin getönt (kein Creme) */
+  --color-paper: oklch(94.2% 0.004 260); --color-paper-2: oklch(90.5% 0.005 260); --color-paper-3: oklch(86.5% 0.006 260);
+  /* Schrift auf der Wand: Anthrazit aus LOGO.md */
+  --color-ink: #141416; --color-ink-2: oklch(36% 0.008 286); --color-muted: oklch(44% 0.008 286);
+  --color-rule: oklch(79% 0.006 270);
+  /* Kupfer aus LOGO.md: nur als Linie. Dunkel auf heller Wand, hell auf dunklem Rahmen, Mitte für Linien, die beides kreuzen */
+  --color-accent: #7f5230; --color-accent-ink: #f2f0eb; --color-focus: #7f5230;
+  --color-accent-hell: #c08a5c; --color-accent-mitte: oklch(54% 0.085 58);
+  /* Rahmen, Sockel, Schilder: Anthrazit, Schrift darauf Kalkweiß aus LOGO.md */
+  --color-frame: #141416; --color-frame-2: oklch(25% 0.005 286); --color-frame-3: oklch(31% 0.006 286);
+  --color-frame-ink: #f2f0eb; --color-frame-ink-2: oklch(80% 0.007 88); --color-frame-rule: oklch(62% 0.007 88);
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif; --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-body);
+  --radius-card: 0px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.02em;
+
+  /* Maße des Rahmens */
+  --rahmen: 12px; --rahmen-unten: 12px; --kopf: 64px; --leiste: 64px; --bild-rahmen: 8px; --feld: 48px; --unter-bild: 0px;
+  --bild-hoehe: clamp(9.5rem, 16vw, 15rem);
+  --breit: 125%; --normal: 100%;
+  --leicht: 200; --text: 400; --schwer: 800;
+}
+@media (max-width: 40rem) {
+  :root { --rahmen: 0px; --rahmen-unten: 64px; --kopf: 56px; --bild-rahmen: 6px; --unter-bild: calc(var(--space-xl) + var(--space-md)); --text-display: clamp(1.5rem, 7.8vw, 4.5rem); --text-display-s: clamp(1.625rem, 7.4vw, 2rem); --text-section: clamp(1.5rem, 8vw, 2rem); }
+}

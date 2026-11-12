@@ -1,0 +1,56 @@
+:root {
+  color-scheme: dark;
+
+  /* Abstand: 4-px-Raster */
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+
+  /* Schriftgrade: wenige, weit auseinander */
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem;
+  --text-lead: clamp(1.0625rem, 0.3vw + 0.95rem, 1.25rem);
+  --text-title: clamp(1.375rem, 0.7vw + 1.05rem, 1.75rem);
+  --text-section: clamp(1.75rem, 2.7vw + 0.55rem, 3rem);
+  --text-display: clamp(2rem, 5.9vw, 5.5rem);
+  --text-preis: clamp(2rem, 1.4vw + 1.5rem, 2.75rem);
+  --text-ruf: clamp(1.75rem, 5.2vw, 4.75rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms; --dur-linie: 800ms;
+
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+
+  /* Der Raum: Anthrazit aus dem Logo (LOGO.md), Stufen zur selben Farbrichtung getönt */
+  --color-paper: #141416;
+  --color-nacht: oklch(15.5% 0.004 286);
+  --color-paper-2: oklch(22.5% 0.005 286);
+  --color-paper-3: oklch(26.5% 0.006 286);
+  --color-rule: oklch(33% 0.006 286);
+  --color-kante: oklch(60% 0.008 88);
+  --color-ink: #f2f0eb;
+  --color-ink-2: oklch(83% 0.008 88);
+  --color-muted: oklch(71% 0.008 88);
+
+  /* Das Licht: Kupfer aus dem Logo, einziges Signal */
+  --color-accent: #c08a5c; --color-accent-ink: #141416; --color-focus: #c08a5c;
+
+  /* Das Blatt: Kalkweiß aus dem Logo (LOGO.md), Kupfer dunkel für hellen Grund */
+  --color-blatt: #f2f0eb;
+  --color-blatt-2: oklch(90.5% 0.008 88);
+  --color-blatt-ink: #141416;
+  --color-blatt-ink-2: oklch(40% 0.006 286);
+  --color-blatt-rule: oklch(78% 0.008 88);
+  --color-blatt-kante: oklch(52% 0.008 88);
+  --color-blatt-accent: #7f5230;
+
+  --color-error: oklch(72% 0.15 27); --color-success: oklch(76% 0.13 150);
+
+  --font-display: "Zalando Sans Expanded", "Arial Nova", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Zalando Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: var(--font-display);
+
+  --weight-fein: 200; --weight-text: 400; --weight-schwer: 800;
+  --tracking-display: -0.015em;
+
+  --radius-card: 0px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --kopf-hoehe: 80px; --feld-hoehe: 52px; --leiste-hoehe: 64px; --punkt: 28px;
+}

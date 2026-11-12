@@ -1,0 +1,11 @@
+/* Impressum und Datenschutz */
+.recht { padding: clamp(40px, 6vw, 88px) 0 clamp(56px, 8vw, 112px); background: linear-gradient(180deg, var(--ton-0b0b0d), var(--anthrazit)); }
+.recht__innen { max-width: calc(72ch + 2 * var(--rand)); }
+.recht .h2 { margin-bottom: 20px; }
+.recht h2:not(.h2) { margin: 32px 0 8px; font-size: 1.125rem; font-weight: 700; font-stretch: 110%; color: var(--kalk); }
+.recht p { color: var(--text); }
+.recht a { color: var(--kalk); text-decoration-color: var(--kupfer); text-underline-offset: 3px; }
+.recht__hinweis { padding: 12px 16px; border: 1px solid var(--kupfer); border-left-width: 3px; color: var(--kalk) !important; background: var(--flaeche); }
+.recht__zurueck { margin-top: 40px; }
+.recht .zurueck { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--text); text-decoration: none; font-weight: 600; }
+.recht .zurueck svg { width: 18px; height: 18px; color: var(--kupfer); }

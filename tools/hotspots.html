@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Hotspot-Editor · KMC Motors</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/basis.css">
+<style>
+  /* Werkzeug, nicht Teil der Website. Nutzt die Tokens aus basis.css. */
+  body { padding-bottom: 0; }
+  .wz { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 16px var(--rand) 32px; max-width: 1600px; margin-inline: auto; }
+  @media (min-width: 1000px) { .wz { grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr); align-items: start; } }
+  .wz h1 { font-size: 1.5rem; font-stretch: 115%; margin-bottom: 4px; }
+  .wz h2 { font-size: 1rem; font-stretch: 110%; margin: 0 0 8px; }
+  .wz p { margin: 0 0 8px; color: var(--text); font-size: 0.9375rem; }
+  .flaeche { background: var(--flaeche); border: 1px solid var(--linie); border-radius: 4px; padding: 14px; }
+  .buehne3d { position: relative; height: min(70vh, 640px); background: radial-gradient(ellipse at 50% 60%, var(--ton-2a2a2f), var(--ton-151517) 70%); border: 1px solid var(--linie); border-radius: 4px; }
+  model-viewer { width: 100%; height: 100%; background: transparent; --poster-color: transparent; }
+  .reihe { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin-bottom: 10px; }
+  label { display: grid; gap: 4px; font-size: 0.8125rem; font-weight: 600; color: var(--kalk); }
+  input, select, textarea { min-height: 44px; padding: 8px 10px; background: var(--tief); color: var(--kalk); border: 1px solid var(--feldrand); border-radius: 3px; font-size: 0.9375rem; }
+  textarea { width: 100%; min-height: 220px; font-family: ui-monospace, monospace; font-size: 0.8125rem; }
+  .breit { flex: 1 1 200px; }
+  .knopf { min-height: 44px; padding: 0 16px; font-size: 0.875rem; }
+  .liste li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--linie); font-size: 0.875rem; }
+  .liste li.aktiv { color: var(--kalk); }
+  .nr { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--kupfer); color: var(--anthrazit); font-weight: 700; font-size: 0.75rem; }
+  .hs { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--kalk); background: var(--kupfer); color: var(--anthrazit); font-weight: 700; font-size: 0.75rem; padding: 0; cursor: pointer; }
+  .hs.zustand { border-radius: 3px; }
+  .hinweis { font-size: 0.8125rem; color: var(--text-2); }
+  .status { min-height: 1.4em; font-size: 0.875rem; color: var(--kupfer); }
+</style>
+<script>
+  // Decoder-Orte VOR dem Laden von model-viewer setzen (sonst holt er sie von fremden Servern).
+  (function () {
+    var v = new URL('../assets/vendor/model-viewer/', document.baseURI).href;
+    self.ModelViewerElement = self.ModelViewerElement || {};
+    self.ModelViewerElement.meshoptDecoderLocation = v + 'meshopt_decoder.js';
+    self.ModelViewerElement.dracoDecoderLocation = v + 'draco/';
+    self.ModelViewerElement.ktx2TranscoderLocation = v + 'basis/';
+    self.ModelViewerElement.lottieLoaderLocation = v + 'nicht-benutzt.js';
+  })();
+</script>
+<script type="module" src="../assets/vendor/model-viewer/model-viewer.min.js"></script>
+</head>
+<body>
+<main class="wz">
+  <div>
+    <h1>Hotspot-Editor</h1>
+    <p>Modell wählen, dann auf eine Stelle am Auto klicken. Name und Text eintragen, die Kamera auf die Nahaufnahme stellen und „Kamera übernehmen“ drücken. Am Ende das JSON in <code>cars.json</code> beim Fahrzeug unter <code>"hotspots"</code> einsetzen.</p>
+    <div class="reihe">
+      <label class="breit">Fahrzeug aus cars.json
+        <select id="auto"></select>
+      </label>
+      <label class="breit">Oder eigene GLB-Datei
+        <input id="datei" type="file" accept=".glb,.gltf">
+      </label>
+    </div>
+    <div class="buehne3d"><model-viewer id="mv" camera-controls touch-action="pan-y" interaction-prompt="none" min-camera-orbit="auto auto 0.2m" min-field-of-view="5deg" environment-image="legacy" exposure="0.8" tone-mapping="aces" shadow-intensity="1" alt="3D-Modell zum Setzen von Hotspots"></model-viewer></div>
+    <p class="status" id="status" role="status"></p>
+    <p class="hinweis">Tipp: Erst klicken, dann mit Maus oder Fingern zur Nahaufnahme drehen und zoomen, dann „Kamera übernehmen“. Mit „Gesamtansicht übernehmen“ wird die Startansicht für das Fahrzeug gespeichert.</p>
+  </div>
+
+  <div class="flaeche">
+    <h2>Hotspot bearbeiten</h2>
+    <div class="reihe">
+      <label class="breit">Name (z. B. Felge vorne links)<input id="f-label"></label>
+      <label>Art
+        <select id="f-kind"><option value="ausstattung">Ausstattung</option><option value="zustand">Zustand</option></select>
+      </label>
+    </div>
+    <div class="reihe"><label class="breit">Text (beantwortet eine Kauffrage)<input id="f-text" placeholder="19″ Leichtmetall, Sommerreifen, Profil 6 mm"></label></div>
+    <div class="reihe">
+      <label class="breit">Position<input id="f-pos" readonly></label>
+      <label class="breit">Normale<input id="f-nor" readonly></label>
+    </div>
+    <div class="reihe"><label class="breit">Kamera (Nahaufnahme)<input id="f-cam" readonly></label></div>
+    <div class="reihe">
+      <button class="knopf knopf--linie" type="button" id="kamera">Kamera übernehmen</button>
+      <button class="knopf knopf--voll" type="button" id="speichern">Hotspot speichern</button>
+      <button class="knopf knopf--linie" type="button" id="neu">Neu</button>
+    </div>
+    <h2>Hotspots</h2>
+    <ol class="liste" id="liste"></ol>
+    <div class="reihe" style="margin-top:12px">
+      <button class="knopf knopf--linie" type="button" id="gesamt">Gesamtansicht übernehmen</button>
+    </div>
+    <h2>JSON für cars.json</h2>
+    <textarea id="json" spellcheck="false" aria-label="JSON für cars.json"></textarea>
+    <div class="reihe" style="margin-top:8px">
+      <button class="knopf knopf--voll" type="button" id="kopieren">Kopieren</button>
+      <button class="knopf knopf--linie" type="button" id="laden">Herunterladen</button>
+    </div>
+  </div>
+</main>
+<script type="module">
+  const $ = (id) => document.getElementById(id);
+  const mv = $('mv');
+  const zustand = { hotspots: [], kamera: null, aktiv: -1, entwurf: null };
+  const runden = (n, s = 3) => Number(n.toFixed(s));
+  const vec = (v) => `${runden(v.x)}m ${runden(v.y)}m ${runden(v.z)}m`;
+  const nor = (v) => `${runden(v.x)} ${runden(v.y)} ${runden(v.z)}`;
+  const id = (t) => t.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'stelle';
+  const status = (t) => { $('status').textContent = t; };
+
+  // Fahrzeuge aus cars.json anbieten
+  let autos = [];
+  try { autos = (await (await fetch('../cars.json', { cache: 'no-store' })).json()).cars || []; } catch { status('cars.json ließ sich nicht laden. Bitte über den Vorschau-Server öffnen (npm run vorschau).'); }
+  $('auto').innerHTML = '<option value="">Bitte wählen</option>' + autos.map((a, i) => `<option value="${i}">${a.model}${a.media?.glb ? '' : ' (kein 3D-Modell)'}</option>`).join('');
+  $('auto').addEventListener('change', () => {
+    const a = autos[$('auto').value];
+    if (!a) return;
+    zustand.hotspots = structuredClone(a.hotspots || []);
+    zustand.kamera = a.camera || null;
+    if (a.camera) { mv.cameraOrbit = a.camera.orbit; mv.cameraTarget = a.camera.target; mv.fieldOfView = a.camera.fov; }
+    if (a.media?.glb) { mv.src = '../' + a.media.glb; status('Modell wird geladen …'); }
+    else status('Dieses Fahrzeug hat noch kein 3D-Modell. Eigene GLB-Datei wählen.');
+    zeichne();
+  });
+  $('datei').addEventListener('change', () => {
+    const f = $('datei').files[0];
+    if (f) { mv.src = URL.createObjectURL(f); status(`Lade ${f.name} …`); }
+  });
+  mv.addEventListener('load', () => status('Modell geladen. Auf eine Stelle am Auto klicken.'));
+  mv.addEventListener('error', () => status('Modell ließ sich nicht laden.'));
+
+  // Klick auf das Modell setzt einen Hotspot (Ziehen zum Drehen zählt nicht als Klick)
+  let unten = null;
+  mv.addEventListener('pointerdown', (e) => { unten = { x: e.clientX, y: e.clientY }; });
+  mv.addEventListener('pointerup', (e) => {
+    if (!unten || Math.hypot(e.clientX - unten.x, e.clientY - unten.y) > 4) return;
+    if (e.target.closest && e.target.closest('.hs')) return;
+    // model-viewer 4.4 erwartet Koordinaten im Fenster (clientX/clientY)
+    const treffer = mv.positionAndNormalFromPoint(e.clientX, e.clientY);
+    if (!treffer) return status('Kein Treffer: bitte direkt auf das Auto klicken.');
+    $('f-pos').value = vec(treffer.position);
+    $('f-nor').value = nor(treffer.normal);
+    zustand.entwurf = { position: vec(treffer.position), normal: nor(treffer.normal) };
+    zeichneMarke();
+    status('Stelle gesetzt. Name und Text eintragen, Kamera einstellen, speichern.');
+    $('f-label').focus();
+  });
+
+  const kameraJetzt = () => {
+    const o = mv.getCameraOrbit(), t = mv.getCameraTarget();
+    return { target: vec(t), orbit: `${runden(o.theta * 180 / Math.PI, 1)}deg ${runden(o.phi * 180 / Math.PI, 1)}deg ${runden(o.radius, 2)}m`, fov: `${runden(mv.getFieldOfView(), 1)}deg` };
+  };
+  $('kamera').addEventListener('click', () => { const k = kameraJetzt(); $('f-cam').value = JSON.stringify(k); status('Kamera übernommen.'); });
+  $('gesamt').addEventListener('click', () => { zustand.kamera = kameraJetzt(); zeichne(); status('Gesamtansicht übernommen (Feld "camera" beim Fahrzeug).'); });
+
+  $('speichern').addEventListener('click', () => {
+    const label = $('f-label').value.trim();
+    if (!label) return status('Bitte einen Namen eintragen.');
+    const pos = $('f-pos').value || zustand.hotspots[zustand.aktiv]?.position;
+    if (!pos) return status('Bitte zuerst auf das Auto klicken.');
+    const h = {
+      id: zustand.aktiv >= 0 ? zustand.hotspots[zustand.aktiv].id : id(label),
+      kind: $('f-kind').value, label, text: $('f-text').value.trim(),
+      position: pos, normal: $('f-nor').value || zustand.hotspots[zustand.aktiv]?.normal || '0 1 0',
+      camera: $('f-cam').value ? JSON.parse($('f-cam').value) : (zustand.hotspots[zustand.aktiv]?.camera || { target: pos, orbit: kameraJetzt().orbit, fov: '28deg' }),
+    };
+    const alt = zustand.aktiv >= 0 ? zustand.hotspots[zustand.aktiv] : {};
+    for (const k of ['poster', 'where', 'spinFrame', 'photo']) if (alt[k] !== undefined) h[k] = alt[k];
+    if (zustand.aktiv >= 0) zustand.hotspots[zustand.aktiv] = h; else zustand.hotspots.push(h);
+    leeren(); zeichne(); status(`Gespeichert: ${label}`);
+  });
+  $('neu').addEventListener('click', () => { leeren(); zeichne(); });
+  function leeren() { zustand.aktiv = -1; zustand.entwurf = null; for (const f of ['f-label', 'f-text', 'f-pos', 'f-nor', 'f-cam']) $(f).value = ''; $('f-kind').value = 'ausstattung'; }
+
+  function bearbeite(i) {
+    const h = zustand.hotspots[i]; zustand.aktiv = i;
+    $('f-label').value = h.label || ''; $('f-text').value = h.text || ''; $('f-kind').value = h.kind || 'ausstattung';
+    $('f-pos').value = h.position || ''; $('f-nor').value = h.normal || ''; $('f-cam').value = h.camera ? JSON.stringify(h.camera) : '';
+    if (h.camera) { mv.cameraTarget = h.camera.target; mv.cameraOrbit = h.camera.orbit; mv.fieldOfView = h.camera.fov; }
+    zeichne();
+  }
+
+  function zeichneMarke() {
+    mv.querySelector('[slot="hotspot-entwurf"]')?.remove();
+    if (!zustand.entwurf) return;
+    const b = document.createElement('button');
+    b.slot = 'hotspot-entwurf'; b.className = 'hs'; b.textContent = '+'; b.dataset.position = zustand.entwurf.position; b.dataset.normal = zustand.entwurf.normal; b.setAttribute('aria-label', 'Neue Stelle');
+    mv.append(b);
+  }
+  function zeichne() {
+    for (const b of mv.querySelectorAll('.hs:not([slot="hotspot-entwurf"])')) b.remove();
+    zustand.hotspots.forEach((h, i) => {
+      if (!h.position) return;
+      const b = document.createElement('button');
+      b.slot = `hotspot-${i}`; b.className = `hs${h.kind === 'zustand' ? ' zustand' : ''}`; b.textContent = i + 1;
+      b.dataset.position = h.position; if (h.normal) b.dataset.normal = h.normal;
+      b.setAttribute('aria-label', `${i + 1}. ${h.label}`);
+      b.addEventListener('click', () => bearbeite(i));
+      mv.append(b);
+    });
+    zeichneMarke();
+    $('liste').innerHTML = '';
+    zustand.hotspots.forEach((h, i) => {
+      const li = document.createElement('li'); if (i === zustand.aktiv) li.className = 'aktiv';
+      li.innerHTML = `<span class="nr">${i + 1}</span><span><strong>${h.label}</strong><br>${h.text || ''}</span>`;
+      const knoepfe = document.createElement('span');
+      const ed = document.createElement('button'); ed.type = 'button'; ed.className = 'knopf knopf--linie'; ed.textContent = 'Bearbeiten'; ed.addEventListener('click', () => bearbeite(i));
+      const weg = document.createElement('button'); weg.type = 'button'; weg.className = 'knopf knopf--linie'; weg.textContent = 'Löschen'; weg.addEventListener('click', () => { zustand.hotspots.splice(i, 1); leeren(); zeichne(); });
+      knoepfe.append(ed, weg); li.append(knoepfe); $('liste').append(li);
+    });
+    const ausgabe = { hotspots: zustand.hotspots };
+    if (zustand.kamera) ausgabe.camera = zustand.kamera;
+    $('json').value = JSON.stringify(ausgabe, null, 2);
+  }
+  $('kopieren').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('json').value); status('In die Zwischenablage kopiert.'); } catch { $('json').select(); status('Bitte mit Strg+C kopieren.'); } });
+  $('laden').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([$('json').value], { type: 'application/json' }));
+    a.download = 'hotspots.json'; a.click();
+  });
+  zeichne();
+</script>
+</body>
+</html>
