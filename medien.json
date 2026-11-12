@@ -1,0 +1,341 @@
+{
+ "_hinweis": "Verzeichnis aller Dateien unter assets/ mit Bildmaßen [Breite, Höhe]. Wird von build.mjs erzeugt und vom Editor gepflegt.",
+ "dateien": {
+  "assets/3d/demo-auto.glb": 0,
+  "assets/3d/spin/demo-00.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-01.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-02.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-03.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-04.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-05.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-06.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-07.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-08.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-09.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-10.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-11.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-12.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-13.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-14.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-15.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-16.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-17.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-18.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-19.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-20.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-21.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-22.webp": [
+   1200,
+   525
+  ],
+  "assets/3d/spin/demo-23.webp": [
+   1200,
+   525
+  ],
+  "assets/apple-touch-icon.png": [
+   180,
+   180
+  ],
+  "assets/bilder/felge-1400.webp": [
+   1400,
+   1050
+  ],
+  "assets/bilder/felge-800.webp": [
+   800,
+   600
+  ],
+  "assets/bilder/heck-1400.webp": [
+   1400,
+   649
+  ],
+  "assets/bilder/heck-800.webp": [
+   800,
+   371
+  ],
+  "assets/bilder/hero-auto-1400.webp": [
+   1400,
+   616
+  ],
+  "assets/bilder/hero-auto-2000.webp": [
+   2000,
+   881
+  ],
+  "assets/bilder/hero-auto-800.webp": [
+   800,
+   352
+  ],
+  "assets/bilder/karte-gesamt-480.webp": [
+   480,
+   220
+  ],
+  "assets/bilder/karte-gesamt-800.webp": [
+   800,
+   367
+  ],
+  "assets/bilder/karte-heck-480.webp": [
+   480,
+   223
+  ],
+  "assets/bilder/karte-heck-800.webp": [
+   800,
+   372
+  ],
+  "assets/bilder/karte-seite-480.webp": [
+   480,
+   141
+  ],
+  "assets/bilder/karte-seite-800.webp": [
+   800,
+   234
+  ],
+  "assets/bilder/mini-felge-240.webp": [
+   240,
+   180
+  ],
+  "assets/bilder/mini-heck-240.webp": [
+   240,
+   111
+  ],
+  "assets/bilder/mini-seite-240.webp": [
+   240,
+   69
+  ],
+  "assets/bilder/mini-vorn-240.webp": [
+   240,
+   106
+  ],
+  "assets/bilder/raum-1344.webp": [
+   1344,
+   300
+  ],
+  "assets/bilder/schritt-1-480.webp": [
+   480,
+   269
+  ],
+  "assets/bilder/schritt-1-800.webp": [
+   800,
+   448
+  ],
+  "assets/bilder/schritt-2-480.webp": [
+   480,
+   269
+  ],
+  "assets/bilder/schritt-2-800.webp": [
+   800,
+   448
+  ],
+  "assets/bilder/schritt-3-480.webp": [
+   480,
+   269
+  ],
+  "assets/bilder/schritt-3-800.webp": [
+   800,
+   448
+  ],
+  "assets/bilder/schritt-4-480.webp": [
+   480,
+   269
+  ],
+  "assets/bilder/schritt-4-800.webp": [
+   800,
+   448
+  ],
+  "assets/bilder/seite-1400.webp": [
+   1400,
+   403
+  ],
+  "assets/bilder/seite-2000.webp": [
+   2000,
+   576
+  ],
+  "assets/bilder/seite-800.webp": [
+   800,
+   230
+  ],
+  "assets/css/basis.css": 0,
+  "assets/css/fahrzeug.css": 0,
+  "assets/css/recht.css": 0,
+  "assets/css/start.css": 0,
+  "assets/favicon-32.png": [
+   32,
+   32
+  ],
+  "assets/favicon.svg": 0,
+  "assets/fonts/LICENSE-archivo.txt": 0,
+  "assets/fonts/LICENSE-bodoni-moda.txt": 0,
+  "assets/fonts/LICENSE-cinzel.txt": 0,
+  "assets/fonts/LICENSE-fraunces.txt": 0,
+  "assets/fonts/LICENSE-hanken-grotesk.txt": 0,
+  "assets/fonts/LICENSE-marcellus.txt": 0,
+  "assets/fonts/LICENSE-playfair-display.txt": 0,
+  "assets/fonts/LICENSE-zalando-sans-expanded.txt": 0,
+  "assets/fonts/archivo-latin-ext.woff2": 0,
+  "assets/fonts/archivo.woff2": 0,
+  "assets/fonts/bodoni-moda.woff2": 0,
+  "assets/fonts/cinzel.woff2": 0,
+  "assets/fonts/fraunces.woff2": 0,
+  "assets/fonts/hanken-grotesk.woff2": 0,
+  "assets/fonts/marcellus.woff2": 0,
+  "assets/fonts/playfair-display.woff2": 0,
+  "assets/fonts/zalando-sans-expanded.woff2": 0,
+  "assets/js/app.js": 0,
+  "assets/js/fahrzeug.js": 0,
+  "assets/logo/LOGO.md": 0,
+  "assets/logo/kmc-logo-2000.png": [
+   2000,
+   567
+  ],
+  "assets/logo/kmc-logo-dunkel.svg": 0,
+  "assets/logo/kmc-logo-hell-2000.png": [
+   2000,
+   567
+  ],
+  "assets/logo/kmc-logo-hell.svg": 0,
+  "assets/logo/kmc-logo-weiss.svg": 0,
+  "assets/logo/kmc-logo.svg": 0,
+  "assets/logo/kmc-schriftzug.svg": 0,
+  "assets/logo/kmc-zeichen-kupfer.svg": 0,
+  "assets/logo/kmc-zeichen.svg": 0,
+  "assets/media/ablauf-1-besichtigung-800.webp": [
+   800,
+   448
+  ],
+  "assets/media/ablauf-1-besichtigung.webp": [
+   1344,
+   752
+  ],
+  "assets/media/ablauf-2-probefahrt-800.webp": [
+   800,
+   448
+  ],
+  "assets/media/ablauf-2-probefahrt.webp": [
+   1344,
+   752
+  ],
+  "assets/media/ablauf-3-vertrag-800.webp": [
+   800,
+   448
+  ],
+  "assets/media/ablauf-3-vertrag.webp": [
+   1344,
+   752
+  ],
+  "assets/media/ablauf-4-uebergabe-800.webp": [
+   800,
+   448
+  ],
+  "assets/media/ablauf-4-uebergabe.webp": [
+   1344,
+   752
+  ],
+  "assets/media/detail-karosserie-800.webp": [
+   800,
+   343
+  ],
+  "assets/media/detail-karosserie.webp": [
+   1344,
+   576
+  ],
+  "assets/media/detail-leder-800.webp": [
+   800,
+   343
+  ],
+  "assets/media/detail-leder.webp": [
+   1344,
+   576
+  ],
+  "assets/media/hero-breit-800.webp": [
+   800,
+   448
+  ],
+  "assets/media/hero-breit.webp": [
+   1344,
+   752
+  ],
+  "assets/media/hero-hoch-480.webp": [
+   480,
+   858
+  ],
+  "assets/media/hero-hoch.webp": [
+   752,
+   1344
+  ],
+  "assets/og.png": [
+   1200,
+   630
+  ],
+  "assets/vendor/model-viewer/LICENSE-meshoptimizer.md": 0,
+  "assets/vendor/model-viewer/LICENSE-model-viewer.txt": 0,
+  "assets/vendor/model-viewer/LICENSE-three.txt": 0,
+  "assets/vendor/model-viewer/draco/draco_decoder.wasm": 0,
+  "assets/vendor/model-viewer/draco/draco_wasm_wrapper.js": 0,
+  "assets/vendor/model-viewer/meshopt_decoder.js": 0,
+  "assets/vendor/model-viewer/model-viewer.min.js": 0
+ }
+}

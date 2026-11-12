@@ -1,0 +1,146 @@
+{
+  "_hinweis": "Alles Bearbeitbare außer Fahrzeugen und Texten. Wird vom Editor (editor/) gepflegt. Quelle der Betriebsdaten: Faktenblatt vom 11.11.2026; E-Mail, WhatsApp und Inhaber aus dem Impressum-Text des Auftraggebers (bitte bestätigen).",
+  "domain": "https://lmcu-code.github.io",
+  "betrieb": {
+    "name": "Autohaus KMC Motors Köln",
+    "kurz": "KMC Motors",
+    "strasse": "Escherstr. 129",
+    "plz": "50739",
+    "ort": "Köln",
+    "land": "DE",
+    "telefon": "0221 2927347513",
+    "telefonLink": "+492212927347513",
+    "whatsapp": "0151 21181898",
+    "whatsappLink": "4915121181898",
+    "email": "kmcmotors@t-online.de",
+    "inhaber": "Kaan Kömürcü",
+    "mobilede": "https://home.mobile.de/AUTOHAUSKMCMOTORSKOELN",
+    "karte": "https://www.openstreetmap.org/search?query=Escherstr.%20129%2C%2050739%20K%C3%B6ln",
+    "oeffnungszeiten": [
+      {
+        "tage": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "von": "10:00",
+        "bis": "18:00"
+      },
+      {
+        "tage": [
+          "Saturday"
+        ],
+        "von": "10:00",
+        "bis": "16:00"
+      }
+    ],
+    "sprachen": [
+      "de",
+      "tr",
+      "en"
+    ]
+  },
+  "offen": {
+    "rechtsform": "",
+    "ustId": "",
+    "register": "",
+    "hoster": ""
+  },
+  "sprachen": {
+    "de": {
+      "freigegeben": true,
+      "name": "Deutsch"
+    },
+    "tr": {
+      "freigegeben": false,
+      "name": "Türkçe"
+    },
+    "en": {
+      "freigegeben": false,
+      "name": "English"
+    }
+  },
+  "seo": {
+    "indexieren": false,
+    "bild": "assets/og.png"
+  },
+  "startseite": {
+    "abschnitte": [
+      {
+        "id": "held",
+        "sichtbar": true
+      },
+      {
+        "id": "werte",
+        "sichtbar": true
+      },
+      {
+        "id": "bestand",
+        "sichtbar": true
+      },
+      {
+        "id": "leistungen",
+        "sichtbar": true
+      },
+      {
+        "id": "kontakt",
+        "sichtbar": true
+      }
+    ],
+    "ablaufZeigen": true
+  },
+  "bilder": {
+    "held": {
+      "src": "assets/bilder/hero-auto-1400.webp",
+      "fokus": "50% 50%",
+      "punkte": true
+    },
+    "raum": {
+      "src": "assets/bilder/raum-1344.webp"
+    },
+    "schritte": [
+      "assets/bilder/schritt-1-480.webp",
+      "assets/bilder/schritt-2-480.webp",
+      "assets/bilder/schritt-3-480.webp",
+      "assets/bilder/schritt-4-480.webp"
+    ]
+  },
+  "riese": "KMC",
+  "design": {
+    "farben": {
+      "akzent": "#c08a5c",
+      "grund": "#141416",
+      "ueberschrift": "#f2f0eb",
+      "text": "#cfc7b9",
+      "nebentext": "#a39a8c"
+    },
+    "schriften": {
+      "breit": "archivo",
+      "ziffer": "bodoni-moda",
+      "marke": "cinzel"
+    },
+    "schriftgroesse": 1,
+    "abstand": 1
+  },
+  "animation": {
+    "an": true,
+    "staerke": "normal",
+    "tempo": 1,
+    "heroAuftritt": true,
+    "schimmer": true,
+    "blitz": true,
+    "zaehlen": true,
+    "effekte": {
+      "werte": "von-unten",
+      "bestand": "von-unten",
+      "leistungen": "von-unten",
+      "kontakt": "von-unten"
+    }
+  },
+  "veroeffentlichung": {
+    "repo": "lmcu-code/lmcu-code.github.io",
+    "branch": "main"
+  }
+}

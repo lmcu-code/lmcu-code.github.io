@@ -144,7 +144,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: clip; -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; font-size: calc(100% * var(--skala, 1)); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   margin: 0;
@@ -273,8 +273,12 @@ strong { color: var(--kalk); }
 
 /* Gestaffeltes Einblenden beim Scrollen: nur mit JS und nur ohne reduce (app.js setzt .zeigen) */
 @media (prefers-reduced-motion: no-preference) {
-  .js-bereit .zeigen:not(.ist-da) { opacity: 0; transform: translateY(18px); }
-  .js-bereit .zeigen { transition: opacity .6s var(--weich) var(--verz, 0ms), transform .7s var(--gleiten) var(--verz, 0ms); }
+  .js-bereit .zeigen:not(.ist-da) { opacity: 0; transform: translateY(var(--weg, 18px)); }
+  .js-bereit [data-effekt="einblenden"] .zeigen:not(.ist-da) { transform: none; }
+  .js-bereit [data-effekt="zoom"] .zeigen:not(.ist-da) { transform: scale(.94); }
+  .js-bereit [data-effekt="maske"] .zeigen:not(.ist-da) { opacity: 1; transform: none; clip-path: inset(0 0 100% 0); }
+  .js-bereit [data-effekt="keiner"] .zeigen:not(.ist-da) { opacity: 1; transform: none; }
+  .js-bereit .zeigen { transition: opacity calc(.6s * var(--tempo, 1)) var(--weich) var(--verz, 0ms), transform calc(.7s * var(--tempo, 1)) var(--gleiten) var(--verz, 0ms), clip-path calc(.8s * var(--tempo, 1)) var(--gleiten) var(--verz, 0ms); }
 }
 
 /* Seitenwechsel: Cross-Document View Transitions */
@@ -324,3 +328,9 @@ strong { color: var(--kalk); }
 .knopf:active { transform: translateY(1px); }
 button:disabled, .knopf[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
 @media (max-width: 379px) { .fuss__raster { grid-template-columns: minmax(0, 1fr); } }
+
+/* Einstellungen aus dem Editor (konfiguration.json → animation), reduzierte Bewegung hat immer Vorrang */
+html[data-anim="aus"] *, html[data-anim="aus"] *::before, html[data-anim="aus"] *::after { animation: none !important; transition: none !important; }
+html[data-hero="aus"] .held *, html[data-hero="aus"] .held::before, html[data-hero="aus"] .held *::before, html[data-hero="aus"] .held *::after { animation: none !important; }
+html[data-schimmer="aus"] .held__glanz { display: none; }
+html[data-blitz="aus"] .held__blitz { display: none; }

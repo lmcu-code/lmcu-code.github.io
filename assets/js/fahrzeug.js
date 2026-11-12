@@ -6,7 +6,7 @@
   if (!datenEl || !buehne) return;
   const d = JSON.parse(datenEl.textContent);
   const T = d.texte;
-  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.anim === "aus";
   const drei = buehne.querySelector(".drei");
   const startKnopf = buehne.querySelector(".buehne__knopf");
   const stellen = [...document.querySelectorAll(".stellen__liste li[data-stelle]")];
@@ -78,7 +78,7 @@
     const status = el("p", { class: "drei__status", role: "status", text: T.lade3d });
     drei.replaceChildren(status);
     // Decoder-Orte VOR dem Laden setzen, sonst holt model-viewer sie von fremden Servern.
-    const v = new URL(d.basis + "assets/vendor/model-viewer/", location.href).href;
+    const v = new URL(d.basis + "assets/vendor/model-viewer/", document.baseURI).href;
     self.ModelViewerElement = self.ModelViewerElement || {};
     self.ModelViewerElement.meshoptDecoderLocation = v + "meshopt_decoder.js";
     self.ModelViewerElement.dracoDecoderLocation = v + "draco/";

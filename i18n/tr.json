@@ -1,0 +1,385 @@
+{
+  "_status": "ENTWURF: muss von einer türkischen Muttersprachlerin oder einem Muttersprachler geprüft werden. Freischalten in konfiguration.json (sprachen.tr.freigegeben).",
+  "lang": "tr",
+  "meta": {
+    "titel_start": "KMC Motors Köln · Escherstraße'de ikinci el araçlar",
+    "beschreibung_start": "Autohaus KMC Motors Köln, {strasse}: ikinci el araçlar, isteğe bağlı DEKRA mührü, 24 aya kadar garanti, ekspertiz, geçici plakalar, TÜV ve egzoz muayenesi. {sprachen}.",
+    "titel_fahrzeug": "{model} · {beispiel}KMC Motors Köln",
+    "beschreibung_fahrzeug": "{beispiel}{model}, ilk tescil {year}, {power}, {km}, {fuel}, {gearbox}, {price}. Autohaus KMC Motors Köln, {strasse}.",
+    "beispiel_titel": "Örnek araç · ",
+    "beispiel_text": "Örnek araç: ",
+    "titel_impressum": "Künye · KMC Motors Köln",
+    "titel_datenschutz": "Gizlilik · KMC Motors Köln"
+  },
+  "allgemein": {
+    "sprung": "İçeriğe geç",
+    "logo_start": "KMC Motors, ana sayfaya",
+    "menue": "Menü",
+    "nav_haupt": "Ana menü",
+    "nav_bestand": "Araçlar",
+    "nav_leistungen": "Hizmetler",
+    "nav_kontakt": "İletişim",
+    "nav_ablauf": "Süreç",
+    "anfragen": "Bilgi al",
+    "anrufen": "Ara",
+    "anrufen_nummer": "Ara: {telefon}",
+    "whatsapp": "WhatsApp",
+    "email": "E-posta",
+    "schnell": "Hızlı iletişim",
+    "folgt": "eklenecek",
+    "folgen": "eklenecek",
+    "beispielfahrzeug": "Örnek araç",
+    "demo_modell": "Demo model",
+    "demo_hinweis": "Demo model, satıştaki araç değildir",
+    "mwst_folgt": "KDV bilgisi",
+    "mobilede": "mobile.de'de KMC Motors",
+    "wa_frage": "Merhaba KMC Motors, bir sorum var.",
+    "wa_fahrzeug": "Merhaba KMC Motors, {model}{beispiel} ile ilgileniyorum, {price}, araç numarası {id}. Ne zaman görebilirim?",
+    "wa_beispiel": " (örnek araç)",
+    "mail_betreff": "Talep {model} ({id})",
+    "zurueck_bestand": "Araçlara dön",
+    "zurueck_start": "Ana sayfaya dön",
+    "sprachwahl": "Dil",
+    "logo_alt": "KMC Motors",
+    "zahlwoerter": [
+      "Sıfır",
+      "Bir",
+      "İki",
+      "Üç",
+      "Dört",
+      "Beş",
+      "Altı",
+      "Yedi",
+      "Sekiz",
+      "Dokuz",
+      "On"
+    ],
+    "liste_und": " ve ",
+    "liste_oder": " veya "
+  },
+  "held": {
+    "kennung": "Escherstraße 129, Köln",
+    "titel_1": "Köln'de ikinci el araç",
+    "titel_2": "24 aya kadar",
+    "titel_3": "garantili",
+    "satz": "İnceleme, test sürüşü, satış sözleşmesi ve teslim tek yerde. İsteğe bağlı DEKRA mührü. {sprachen_und} konuşuyoruz.",
+    "knopf_bestand": "Araçları gör",
+    "knopf_besichtigung": "İnceleme randevusu",
+    "auto_alt": "Stüdyo ışığında önden çapraz görünen koyu renk spor araba (demo model)",
+    "punkte": "Demo model üzerinde işaretli noktalar",
+    "punkt_scheinwerfer": "Far",
+    "punkt_felge": "Jant",
+    "punkt_innenraum": "İç mekân",
+    "so_zeigen": "Her aracı böyle gösteriyoruz",
+    "raute": "K"
+  },
+  "suche": {
+    "label": "Araçları filtrele",
+    "marke": "Marka",
+    "kraftstoff": "Yakıt",
+    "preis": "En fazla fiyat",
+    "sortierung": "Sıralama",
+    "alle": "Tümü",
+    "beliebig": "Fark etmez",
+    "sort_standard": "Standart",
+    "sort_preis": "En ucuz",
+    "sort_preis_ab": "En pahalı",
+    "sort_km": "En az km",
+    "sort_jahr": "En yeni",
+    "knopf": "Ara",
+    "treffer_alle": "{n} aracın tümü seçiminize uyuyor.",
+    "treffer_einer": "{gesamt} araçtan 1 tanesi seçiminize uyuyor.",
+    "treffer_mehrere": "{gesamt} araçtan {n} tanesi seçiminize uyuyor.",
+    "treffer_keiner": "Seçiminize uyan araç yok. Tüm stok mobile.de'de, ya da bize doğrudan sorun."
+  },
+  "werte": {
+    "label": "Bir bakışta",
+    "garantie_wert": "ay",
+    "garantie_bis": "en fazla",
+    "garantie_titel": "Garanti",
+    "garantie_klein": "ikinci el araçlar için, koşullar",
+    "dekra_wert": "DEKRA",
+    "dekra_titel": "İsteğe bağlı mühür",
+    "dekra_klein": "araç durum raporu ile",
+    "sprachen_wert": "dil",
+    "sprachen_titel": "{sprachen}",
+    "sprachen_klein": "telefonda ve yerinde",
+    "zeiten_wert": "{tage_kurz}",
+    "zeiten_titel": "açık",
+    "zeiten_klein": "{zeiten}"
+  },
+  "bestand": {
+    "kennung": "Araçlar",
+    "titel_1": "Stoktaki",
+    "titel_2": "araçlar",
+    "status_beispiel": "{n} örnek araç, demo model ile gösteriliyor. Gerçek stok mobile.de'de.",
+    "status": "Stokta {n} araç.",
+    "details": "Ayrıntılar",
+    "details_aria": "Ayrıntılar: {model}",
+    "dekra_tag": "İsteğe bağlı DEKRA mührü",
+    "dekra_tag_ja": "DEKRA mührü",
+    "garantie_tag": "24 aya kadar garanti",
+    "garantie_tag_monate": "{n} ay garanti",
+    "foto_folgt": "Fotoğraf eklenecek",
+    "leer": "Henüz araç eklenmedi. Stokumuz mobile.de’de."
+  },
+  "leistungen": {
+    "kennung": "Hizmetler ve süreç",
+    "titel_1": "Satıştan",
+    "titel_2": "fazlası",
+    "intro": "Muayene, ekspertiz, plaka ve TÜV, hepsi Escherstraße'de.",
+    "knopf": "Hizmet hakkında sor",
+    "liste": [
+      {
+        "icon": "i-siegel",
+        "titel": "DEKRA mührü ve garanti",
+        "kurz": "Bağımsız kontrol, 24 aya kadar garanti",
+        "text": "Araç durum raporlu DEKRA mührü: görsel ve teknik durumun bağımsız kontrolü, isteğe bağlı. 24 aya kadar ikinci el araç garantisi, koşullar <em class=\"platzhalter\">eklenecek</em>."
+      },
+      {
+        "icon": "i-gutachten",
+        "titel": "Ekspertiz ve kaza hasarı",
+        "kurz": "Bilirkişi raporu, sigortayla tüm işlemler",
+        "text": "Bilirkişi raporu: hasar tutarı, değer kaybı, kalan değer. Karşı tarafın sigortasıyla tüm süreç."
+      },
+      {
+        "icon": "i-kennzeichen",
+        "titel": "Geçici plakalar",
+        "kurz": "Kısa süreli en fazla 5 gün, ihracat 14 gün ile 1 yıl",
+        "text": "Transfer, muayene ve test sürüşü için kısa süreli plaka, en fazla 5 gün. Yurt dışı için ihracat plakası, 14 gün ile 1 yıl."
+      },
+      {
+        "icon": "i-tuev",
+        "titel": "TÜV ve egzoz muayenesi",
+        "kurz": "Genel muayene ve egzoz muayenesi",
+        "text": "Aracınız için genel muayene (TÜV) ve egzoz muayenesi (AU). Randevu için sormanız yeterli."
+      }
+    ],
+    "ablauf_titel": "Satın alma süreci",
+    "ablauf_hinweis": "Atmosfer görselleri, stoktaki araçlar değildir",
+    "schritte": [
+      {
+        "bild": "schritt-1",
+        "titel": "İnceleme",
+        "text": "Escherstraße 129'da",
+        "alt": "Bir galerinin avlusunda bir station vagona doğru yürüyen iki kişi"
+      },
+      {
+        "bild": "schritt-2",
+        "titel": "Test sürüşü",
+        "text": "isteğe bağlı kısa süreli plaka ile",
+        "alt": "Akşam alacakaranlığında Köln'de bir köprüden geçen sedan"
+      },
+      {
+        "bild": "schritt-3",
+        "titel": "Sözleşme",
+        "text": "isteğe bağlı DEKRA mührü ve garanti ile",
+        "alt": "Yanında araba anahtarı olan bir sözleşmeyi imzalayan el"
+      },
+      {
+        "bild": "schritt-4",
+        "titel": "Teslim",
+        "text": "yurt dışı için ihracat plakası ile",
+        "alt": "Elden ele verilen araba anahtarı"
+      }
+    ]
+  },
+  "kontakt": {
+    "kennung": "İletişim",
+    "titel_1": "Bizi",
+    "titel_2": "ziyaret edin",
+    "intro": "Ya da arayın, WhatsApp'tan yazın veya formu kullanın. {sprachen_oder}.",
+    "adresse": "Adres",
+    "karte": "Haritada gör",
+    "zeiten": "Çalışma saatleri",
+    "f_name": "Adınız",
+    "f_tel": "Telefon",
+    "f_freiwillig": "(isteğe bağlı)",
+    "f_fahrzeug": "Araç",
+    "f_offen": "Henüz belli değil",
+    "f_anliegen": "Konu",
+    "f_anliegen_liste": [
+      "İnceleme",
+      "Test sürüşü",
+      "DEKRA mührü ve garanti",
+      "Ekspertiz",
+      "Plaka",
+      "TÜV ve egzoz"
+    ],
+    "f_anliegen_kurz": [
+      "İnceleme",
+      "Test sürüşü",
+      "DEKRA",
+      "Ekspertiz",
+      "Plaka",
+      "TÜV"
+    ],
+    "f_nachricht": "Mesaj",
+    "f_senden": "Mesaj gönder",
+    "f_senden_wa": "WhatsApp ile gönder",
+    "f_hinweis": "Düğme metninizle WhatsApp'ı açar, mesajı siz gönderirsiniz. JavaScript yoksa e-posta programınız açılır. Bu site hiçbir şey kaydetmez.",
+    "f_wa_start": "Merhaba KMC Motors,"
+  },
+  "fuss": {
+    "adresse": "Adres",
+    "zeiten": "Çalışma saatleri",
+    "leistungen": "Hizmetler",
+    "mehr": "Daha fazla",
+    "impressum": "Künye (Almanca)",
+    "datenschutz": "Gizlilik (Almanca)",
+    "entwurf": "Künye ve gizlilik metni yayına almadan önce hukuken kontrol ettirilmelidir.",
+    "namensnennung": "3D demo model: Car Concept, © 2024 Darmstadt Graphics Group GmbH, model ve dokular Eric Chadwick, CC BY 4.0, düzenlendi.",
+    "stimmung": "Süreç bölümündeki görseller yapay zekâ ile üretilmiş atmosfer görselleridir."
+  },
+  "fahrzeug": {
+    "id": "Araç numarası {id}",
+    "per_whatsapp": "WhatsApp ile sor",
+    "ansichten": "Aracın görünümleri",
+    "ansicht_waehlen": "Görünüm seç",
+    "stellen_seite": "Bu görünümde işaretli noktalar",
+    "beispiele": "Tüm etiketler örnektir.",
+    "in_3d": "3D olarak gör",
+    "in_3d_klein": "Döndür, yakınlaştır, noktalara dokun",
+    "lade_3d": "3D görünüm yükleniyor …",
+    "fehler_3d": "3D görünüm yüklenemedi. İşte görseller.",
+    "gesamtansicht": "Genel görünüm",
+    "schliessen_3d": "Görsellere dön",
+    "bedienung_3d": "Tek parmak veya fareyle döndürün, iki parmak veya fare tekerleğiyle yakınlaştırın. Noktalar aşağıda liste olarak da var.",
+    "alt_3d": "Döndürülebilir 3D model. {demo}",
+    "in_360": "360° gör",
+    "in_360_klein": "Kaydırın veya ok tuşlarını kullanın",
+    "lade_360": "360° görünüm yükleniyor …",
+    "bedienung_360": "Kaydırarak, sürükleyerek veya ok tuşlarıyla döndürün.",
+    "ansicht_360": "360° görünüm, görsel {n} / {gesamt}",
+    "foto_folgt": "Fotoğraf eklenecek",
+    "eckdaten": "Temel bilgiler",
+    "erstzulassung": "İlk tescil",
+    "leistung": "Güç",
+    "laufleistung": "Kilometre",
+    "kraftstoff": "Yakıt",
+    "getriebe": "Şanzıman",
+    "marke": "Marka",
+    "modell": "Model",
+    "preis": "Fiyat",
+    "stellen_titel": "Araç üzerinde {n} nokta",
+    "stellen_intro": "Alıcıların önceden bilmek istedikleri, doğrudan araç üzerinde. Donanım ve durum, kusurlar dahil.",
+    "stellen_beispiel": "Buradaki tüm bilgiler örnektir.",
+    "stellen_3d": "Bir noktaya dokunun, kamera oraya gider.",
+    "art_ausstattung": "Donanım",
+    "art_zustand": "Durum",
+    "in_seitenansicht": "Yan görünümde",
+    "datenblatt": "Araç bilgileri",
+    "tabelle": "Ruhsat (Zulassungsbescheinigung Teil I) alan kodlarıyla araç bilgileri",
+    "vertrauen": "Kontrol ve garanti",
+    "dekra": "DEKRA mührü",
+    "dekra_wunsch": "isteğe bağlı",
+    "dekra_ja": "araç durum raporu ile",
+    "garantie": "24 aya kadar garanti",
+    "garantie_monate": "{n} ay garanti",
+    "garantie_bed": "Koşullar",
+    "bericht": "Durum raporu",
+    "bericht_link": "PDF olarak gör",
+    "probefahrt": "Test sürüşü",
+    "probefahrt_text": "isteğe bağlı kısa süreli plaka ile",
+    "anfrage_kennung": "Talep",
+    "anfrage_titel": "Bu aracı görün",
+    "anfrage_text": "WhatsApp mesajı hazır: model, fiyat, araç numarası. Siz gönderirsiniz. Deutsch, Türkçe, English.",
+    "whatsapp_nummer": "WhatsApp: {nummer}",
+    "email_schreiben": "E-posta yaz",
+    "inserat": "mobile.de ilanı",
+    "zeigen": "Göster",
+    "im_bild": "“{bild}” görselinde"
+  },
+  "recht": {
+    "pruefen": "Taslak: yayına almadan önce hukuken kontrol ettirin.",
+    "offen": "eklenecek",
+    "impressum_kennung": "§ 5 DDG",
+    "datenschutz_kennung": "KVKK / DSGVO",
+    "raute": "§",
+    "impressum": [
+      {
+        "titel": "Anbieter",
+        "text": "{name}<br>Inhaber: {inhaber}<br>Rechtsform: {rechtsform}<br>{strasse}<br>{plz} {ort}"
+      },
+      {
+        "titel": "Kontakt",
+        "text": "Telefon: {telefon_link}<br>WhatsApp: {whatsapp_link}<br>E-Mail: {email_link}"
+      },
+      {
+        "titel": "Umsatzsteuer-ID",
+        "text": "Umsatzsteuer-Identifikationsnummer nach § 27 a Umsatzsteuergesetz: {ust_id}"
+      },
+      {
+        "titel": "Registereintrag",
+        "text": "{register} (nur falls vorhanden)"
+      },
+      {
+        "titel": "Verbraucherstreitbeilegung",
+        "text": "Angabe, ob das Autohaus an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilnimmt: {offen}"
+      },
+      {
+        "titel": "Bilder und 3D-Modell",
+        "text": "Die Fahrzeugbilder zeigen ein frei lizenziertes Demo-Modell, nicht die angebotenen Fahrzeuge. 3D-Demo-Modell: Car Concept, © 2024 Darmstadt Graphics Group GmbH, Modell und Texturen von Eric Chadwick, CC BY 4.0, bearbeitet. Quelle: Khronos glTF Sample Assets. Die Bilder im Ablauf und im Hintergrund des Hero sind KI-generierte Stimmungsbilder und zeigen keine Fahrzeuge aus dem Bestand."
+      }
+    ],
+    "datenschutz": [
+      {
+        "titel": "Kurz gesagt",
+        "text": "Diese Website setzt keine Cookies, nutzt keine Analyse- oder Werbedienste und lädt beim Aufruf nichts von fremden Servern. Schriften, Bilder, Skripte und die 3D-Ansicht kommen vom eigenen Server. Daten an Dritte gehen nur, wenn Sie selbst einen Link zu WhatsApp, zu Ihrem E-Mail-Programm, zu mobile.de oder zur Karte anklicken."
+      },
+      {
+        "titel": "Verantwortlicher",
+        "text": "{name}, {strasse}, {plz} {ort}, vertreten durch den Inhaber (Name im <a href=\"impressum.html\">Impressum</a>)<br>Telefon {telefon}, E-Mail {email_link}"
+      },
+      {
+        "titel": "Hosting und Server-Logfiles",
+        "text": "Hoster: {hoster}. Beim Aufruf speichert der Server technisch notwendige Angaben (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browserkennung) in Logdateien. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer Betrieb). Speicherdauer: {offen}."
+      },
+      {
+        "titel": "Keine Cookies, kein Tracking",
+        "text": "Die Seite setzt keine Cookies und speichert nichts in Ihrem Browser. Es gibt keine Reichweitenmessung und keine eingebetteten Inhalte Dritter."
+      },
+      {
+        "titel": "Kontakt per Telefon, E-Mail und WhatsApp",
+        "text": "Das Formular auf der Startseite verschickt nichts über diese Website. Der Knopf öffnet WhatsApp mit Ihrem Text, ohne JavaScript Ihr E-Mail-Programm; Sie senden selbst ab. Bei WhatsApp verarbeitet zusätzlich WhatsApp Ireland Limited (Meta) Daten nach eigenen Bedingungen. Wir verwenden Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO), und löschen sie, wenn sie dafür nicht mehr nötig sind und keine Aufbewahrungspflicht besteht."
+      },
+      {
+        "titel": "Links zu mobile.de und zur Karte",
+        "text": "Die Links zu mobile.de und OpenStreetMap führen auf fremde Seiten. Erst beim Klick gelten dort deren Datenschutzbestimmungen."
+      },
+      {
+        "titel": "3D-Ansicht",
+        "text": "Die 3D-Ansicht lädt erst, wenn Sie „In 3D ansehen“ wählen. Bibliothek (model-viewer) und Modell liegen auf diesem Server; es werden keine Daten an Dritte übertragen."
+      },
+      {
+        "titel": "Ihre Rechte",
+        "text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Sie können sich bei einer Aufsichtsbehörde beschweren, zum Beispiel bei der Landesbeauftragten für Datenschutz und Informationsfreiheit Nordrhein-Westfalen."
+      }
+    ]
+  },
+  "zeiten": {
+    "tage": [
+      "Pazartesi",
+      "Salı",
+      "Çarşamba",
+      "Perşembe",
+      "Cuma",
+      "Cumartesi",
+      "Pazar"
+    ],
+    "tage_kurz": [
+      "Pzt",
+      "Sal",
+      "Çar",
+      "Per",
+      "Cum",
+      "Cmt",
+      "Paz"
+    ],
+    "bereich": "{von}–{bis}",
+    "zeile": "{tage} {von}–{bis}",
+    "geschlossen": "{tage} ve resmî tatillerde kapalı",
+    "nur_feiertags": "Resmî tatillerde kapalı",
+    "format": "24h"
+  }
+}

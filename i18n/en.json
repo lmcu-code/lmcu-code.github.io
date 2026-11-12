@@ -1,0 +1,385 @@
+{
+  "_status": "ENTWURF: maschinennah übersetzt, muss von einer Muttersprachlerin oder einem Muttersprachler geprüft werden. Freischalten in konfiguration.json (sprachen.en.freigegeben).",
+  "lang": "en",
+  "meta": {
+    "titel_start": "KMC Motors Cologne · Used cars on Escherstraße",
+    "beschreibung_start": "Autohaus KMC Motors Köln, {strasse}: used cars, DEKRA seal on request, warranty up to 24 months, vehicle appraisals, transfer plates, MOT and emissions test. {sprachen}.",
+    "titel_fahrzeug": "{model} · {beispiel}KMC Motors Cologne",
+    "beschreibung_fahrzeug": "{beispiel}{model}, first registered {year}, {power}, {km}, {fuel}, {gearbox}, {price}. Autohaus KMC Motors Köln, {strasse}.",
+    "beispiel_titel": "Sample vehicle · ",
+    "beispiel_text": "Sample vehicle: ",
+    "titel_impressum": "Legal notice · KMC Motors Cologne",
+    "titel_datenschutz": "Privacy · KMC Motors Cologne"
+  },
+  "allgemein": {
+    "sprung": "Skip to content",
+    "logo_start": "KMC Motors, to the home page",
+    "menue": "Menu",
+    "nav_haupt": "Main navigation",
+    "nav_bestand": "Vehicles",
+    "nav_leistungen": "Services",
+    "nav_kontakt": "Contact",
+    "nav_ablauf": "How it works",
+    "anfragen": "Enquire",
+    "anrufen": "Call",
+    "anrufen_nummer": "Call: {telefon}",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "schnell": "Quick contact",
+    "folgt": "to follow",
+    "folgen": "to follow",
+    "beispielfahrzeug": "Sample vehicle",
+    "demo_modell": "Demo model",
+    "demo_hinweis": "Demo model, not the vehicle on offer",
+    "mwst_folgt": "VAT information",
+    "mobilede": "KMC Motors on mobile.de",
+    "wa_frage": "Hello KMC Motors, I have a question.",
+    "wa_fahrzeug": "Hello KMC Motors, I am interested in the {model}{beispiel}, {price}, vehicle ID {id}. When can I see it?",
+    "wa_beispiel": " (sample vehicle)",
+    "mail_betreff": "Enquiry {model} ({id})",
+    "zurueck_bestand": "Back to vehicles",
+    "zurueck_start": "Back to the home page",
+    "sprachwahl": "Language",
+    "logo_alt": "KMC Motors",
+    "zahlwoerter": [
+      "Zero",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten"
+    ],
+    "liste_und": " and ",
+    "liste_oder": " or "
+  },
+  "held": {
+    "kennung": "Escherstraße 129, Cologne",
+    "titel_1": "Used cars in Cologne",
+    "titel_2": "with a warranty",
+    "titel_3": "of up to 24 months",
+    "satz": "Viewing, test drive, purchase contract and handover in one place. DEKRA seal on request. We speak {sprachen_und}.",
+    "knopf_bestand": "See vehicles",
+    "knopf_besichtigung": "Book a viewing",
+    "auto_alt": "Dark sports car seen from the front three-quarter in studio light (demo model)",
+    "punkte": "Labelled points on the demo model",
+    "punkt_scheinwerfer": "Headlight",
+    "punkt_felge": "Wheel",
+    "punkt_innenraum": "Interior",
+    "so_zeigen": "How we show every vehicle",
+    "raute": "K"
+  },
+  "suche": {
+    "label": "Filter vehicles",
+    "marke": "Make",
+    "kraftstoff": "Fuel",
+    "preis": "Price up to",
+    "sortierung": "Sort by",
+    "alle": "All",
+    "beliebig": "Any",
+    "sort_standard": "Default",
+    "sort_preis": "Lowest price",
+    "sort_preis_ab": "Highest price",
+    "sort_km": "Lowest mileage",
+    "sort_jahr": "Newest",
+    "knopf": "Search",
+    "treffer_alle": "All {n} vehicles match your selection.",
+    "treffer_einer": "1 of {gesamt} vehicles matches your selection.",
+    "treffer_mehrere": "{n} of {gesamt} vehicles match your selection.",
+    "treffer_keiner": "No vehicle matches your selection. See the full stock on mobile.de, or ask us directly."
+  },
+  "werte": {
+    "label": "At a glance",
+    "garantie_wert": "months",
+    "garantie_bis": "up to",
+    "garantie_titel": "Warranty",
+    "garantie_klein": "for used cars, terms",
+    "dekra_wert": "DEKRA",
+    "dekra_titel": "Seal on request",
+    "dekra_klein": "with vehicle condition report",
+    "sprachen_wert": "languages",
+    "sprachen_titel": "{sprachen}",
+    "sprachen_klein": "on the phone and on site",
+    "zeiten_wert": "{tage_kurz}",
+    "zeiten_titel": "open",
+    "zeiten_klein": "{zeiten}"
+  },
+  "bestand": {
+    "kennung": "Vehicles",
+    "titel_1": "Vehicles",
+    "titel_2": "in stock",
+    "status_beispiel": "{n} sample vehicles, shown with a demo model. The real stock is on mobile.de.",
+    "status": "{n} vehicles in stock.",
+    "details": "See details",
+    "details_aria": "See details: {model}",
+    "dekra_tag": "DEKRA seal on request",
+    "dekra_tag_ja": "DEKRA seal",
+    "garantie_tag": "Warranty up to 24 months",
+    "garantie_tag_monate": "Warranty {n} months",
+    "foto_folgt": "Photo to follow",
+    "leer": "No vehicles listed yet. See our stock on mobile.de."
+  },
+  "leistungen": {
+    "kennung": "Services and process",
+    "titel_1": "More than",
+    "titel_2": "just sales",
+    "intro": "Inspection, appraisals, number plates and MOT, all on Escherstraße.",
+    "knopf": "Ask about a service",
+    "liste": [
+      {
+        "icon": "i-siegel",
+        "titel": "DEKRA seal &amp; warranty",
+        "kurz": "Independent inspection, warranty up to 24 months",
+        "text": "DEKRA seal with vehicle condition report: independent inspection of visual and technical condition, on request. Used car warranty of up to 24 months, terms <em class=\"platzhalter\">to follow</em>."
+      },
+      {
+        "icon": "i-gutachten",
+        "titel": "Appraisals &amp; accident damage",
+        "kurz": "Certified experts, claims handled with the insurer",
+        "text": "Appraisals by certified experts: amount of damage, loss in value, residual value. Complete handling with the other party's insurer."
+      },
+      {
+        "icon": "i-kennzeichen",
+        "titel": "Transfer number plates",
+        "kurz": "Short-term up to 5 days, export 14 days to 1 year",
+        "text": "Short-term plates for transfer, inspection and test drive, up to 5 days. Export plates for abroad, 14 days to 1 year."
+      },
+      {
+        "icon": "i-tuev",
+        "titel": "MOT &amp; emissions test",
+        "kurz": "Main inspection and emissions test",
+        "text": "Main inspection (TÜV) and emissions test (AU) for your vehicle. Just ask for an appointment."
+      }
+    ],
+    "ablauf_titel": "How buying works",
+    "ablauf_hinweis": "Mood images, not vehicles from our stock",
+    "schritte": [
+      {
+        "bild": "schritt-1",
+        "titel": "Viewing",
+        "text": "at Escherstraße 129",
+        "alt": "Two people walking towards an estate car in a dealership yard"
+      },
+      {
+        "bild": "schritt-2",
+        "titel": "Test drive",
+        "text": "with short-term plates on request",
+        "alt": "Saloon crossing a bridge in Cologne at dusk"
+      },
+      {
+        "bild": "schritt-3",
+        "titel": "Contract",
+        "text": "with DEKRA seal and warranty on request",
+        "alt": "Hand signing a contract next to a car key"
+      },
+      {
+        "bild": "schritt-4",
+        "titel": "Handover",
+        "text": "with export plates for abroad",
+        "alt": "Car key handed from one hand to another"
+      }
+    ]
+  },
+  "kontakt": {
+    "kennung": "Contact",
+    "titel_1": "Come and",
+    "titel_2": "visit us",
+    "intro": "Or call, write on WhatsApp or use the form. In {sprachen_oder}.",
+    "adresse": "Address",
+    "karte": "View on the map",
+    "zeiten": "Opening hours",
+    "f_name": "Your name",
+    "f_tel": "Phone",
+    "f_freiwillig": "(optional)",
+    "f_fahrzeug": "Vehicle",
+    "f_offen": "Not decided yet",
+    "f_anliegen": "Request",
+    "f_anliegen_liste": [
+      "Viewing",
+      "Test drive",
+      "DEKRA seal &amp; warranty",
+      "Appraisal",
+      "Number plates",
+      "MOT &amp; emissions"
+    ],
+    "f_anliegen_kurz": [
+      "Viewing",
+      "Test drive",
+      "DEKRA",
+      "Appraisal",
+      "Plates",
+      "MOT"
+    ],
+    "f_nachricht": "Message",
+    "f_senden": "Send message",
+    "f_senden_wa": "Send via WhatsApp",
+    "f_hinweis": "The button opens WhatsApp with your text, you send it yourself. Without JavaScript your email program opens. This site stores nothing.",
+    "f_wa_start": "Hello KMC Motors,"
+  },
+  "fuss": {
+    "adresse": "Address",
+    "zeiten": "Opening hours",
+    "leistungen": "Services",
+    "mehr": "More",
+    "impressum": "Legal notice (German)",
+    "datenschutz": "Privacy (German)",
+    "entwurf": "Have the legal notice and privacy policy reviewed before going live.",
+    "namensnennung": "3D demo model: Car Concept, © 2024 Darmstadt Graphics Group GmbH, model and textures by Eric Chadwick, CC BY 4.0, modified.",
+    "stimmung": "The images in the process section are AI-generated mood images."
+  },
+  "fahrzeug": {
+    "id": "Vehicle ID {id}",
+    "per_whatsapp": "Enquire on WhatsApp",
+    "ansichten": "Views of the vehicle",
+    "ansicht_waehlen": "Choose a view",
+    "stellen_seite": "Labelled points in this view",
+    "beispiele": "All labels are examples.",
+    "in_3d": "View in 3D",
+    "in_3d_klein": "Rotate, zoom, tap the points",
+    "lade_3d": "Loading 3D view …",
+    "fehler_3d": "The 3D view could not be loaded. Here are the images.",
+    "gesamtansicht": "Full view",
+    "schliessen_3d": "Back to images",
+    "bedienung_3d": "Rotate with one finger or the mouse, zoom with two fingers or the mouse wheel. The points are also listed below.",
+    "alt_3d": "Rotatable 3D model. {demo}",
+    "in_360": "View in 360°",
+    "in_360_klein": "Swipe or use arrow keys",
+    "lade_360": "Loading 360° view …",
+    "bedienung_360": "Swipe, drag or turn with the arrow keys.",
+    "ansicht_360": "360° view, image {n} of {gesamt}",
+    "foto_folgt": "Photo to follow",
+    "eckdaten": "Key data",
+    "erstzulassung": "First registration",
+    "leistung": "Power",
+    "laufleistung": "Mileage",
+    "kraftstoff": "Fuel",
+    "getriebe": "Gearbox",
+    "marke": "Make",
+    "modell": "Model",
+    "preis": "Price",
+    "stellen_titel": "{n} points on the vehicle",
+    "stellen_intro": "What buyers want to know beforehand, labelled right on the vehicle. Equipment and condition, including defects.",
+    "stellen_beispiel": "All details here are examples.",
+    "stellen_3d": "Tap a point and the camera moves there.",
+    "art_ausstattung": "Equipment",
+    "art_zustand": "Condition",
+    "in_seitenansicht": "In the side view",
+    "datenblatt": "Vehicle data",
+    "tabelle": "Vehicle data with field codes of the registration certificate part I",
+    "vertrauen": "Inspection and warranty",
+    "dekra": "DEKRA seal",
+    "dekra_wunsch": "on request",
+    "dekra_ja": "with vehicle condition report",
+    "garantie": "Warranty up to 24 months",
+    "garantie_monate": "Warranty {n} months",
+    "garantie_bed": "Terms",
+    "bericht": "Condition report",
+    "bericht_link": "view as PDF",
+    "probefahrt": "Test drive",
+    "probefahrt_text": "with short-term plates on request",
+    "anfrage_kennung": "Enquiry",
+    "anfrage_titel": "See this vehicle",
+    "anfrage_text": "The WhatsApp message is prepared: model, price, vehicle ID. You send it yourself. Deutsch, Türkçe, English.",
+    "whatsapp_nummer": "WhatsApp: {nummer}",
+    "email_schreiben": "Write an email",
+    "inserat": "Listing on mobile.de",
+    "zeigen": "Show",
+    "im_bild": "In the “{bild}” image"
+  },
+  "recht": {
+    "pruefen": "Draft: have it reviewed before going live.",
+    "offen": "to follow",
+    "impressum_kennung": "§ 5 DDG",
+    "datenschutz_kennung": "GDPR",
+    "raute": "§",
+    "impressum": [
+      {
+        "titel": "Anbieter",
+        "text": "{name}<br>Inhaber: {inhaber}<br>Rechtsform: {rechtsform}<br>{strasse}<br>{plz} {ort}"
+      },
+      {
+        "titel": "Kontakt",
+        "text": "Telefon: {telefon_link}<br>WhatsApp: {whatsapp_link}<br>E-Mail: {email_link}"
+      },
+      {
+        "titel": "Umsatzsteuer-ID",
+        "text": "Umsatzsteuer-Identifikationsnummer nach § 27 a Umsatzsteuergesetz: {ust_id}"
+      },
+      {
+        "titel": "Registereintrag",
+        "text": "{register} (nur falls vorhanden)"
+      },
+      {
+        "titel": "Verbraucherstreitbeilegung",
+        "text": "Angabe, ob das Autohaus an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilnimmt: {offen}"
+      },
+      {
+        "titel": "Bilder und 3D-Modell",
+        "text": "Die Fahrzeugbilder zeigen ein frei lizenziertes Demo-Modell, nicht die angebotenen Fahrzeuge. 3D-Demo-Modell: Car Concept, © 2024 Darmstadt Graphics Group GmbH, Modell und Texturen von Eric Chadwick, CC BY 4.0, bearbeitet. Quelle: Khronos glTF Sample Assets. Die Bilder im Ablauf und im Hintergrund des Hero sind KI-generierte Stimmungsbilder und zeigen keine Fahrzeuge aus dem Bestand."
+      }
+    ],
+    "datenschutz": [
+      {
+        "titel": "Kurz gesagt",
+        "text": "Diese Website setzt keine Cookies, nutzt keine Analyse- oder Werbedienste und lädt beim Aufruf nichts von fremden Servern. Schriften, Bilder, Skripte und die 3D-Ansicht kommen vom eigenen Server. Daten an Dritte gehen nur, wenn Sie selbst einen Link zu WhatsApp, zu Ihrem E-Mail-Programm, zu mobile.de oder zur Karte anklicken."
+      },
+      {
+        "titel": "Verantwortlicher",
+        "text": "{name}, {strasse}, {plz} {ort}, vertreten durch den Inhaber (Name im <a href=\"impressum.html\">Impressum</a>)<br>Telefon {telefon}, E-Mail {email_link}"
+      },
+      {
+        "titel": "Hosting und Server-Logfiles",
+        "text": "Hoster: {hoster}. Beim Aufruf speichert der Server technisch notwendige Angaben (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browserkennung) in Logdateien. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer Betrieb). Speicherdauer: {offen}."
+      },
+      {
+        "titel": "Keine Cookies, kein Tracking",
+        "text": "Die Seite setzt keine Cookies und speichert nichts in Ihrem Browser. Es gibt keine Reichweitenmessung und keine eingebetteten Inhalte Dritter."
+      },
+      {
+        "titel": "Kontakt per Telefon, E-Mail und WhatsApp",
+        "text": "Das Formular auf der Startseite verschickt nichts über diese Website. Der Knopf öffnet WhatsApp mit Ihrem Text, ohne JavaScript Ihr E-Mail-Programm; Sie senden selbst ab. Bei WhatsApp verarbeitet zusätzlich WhatsApp Ireland Limited (Meta) Daten nach eigenen Bedingungen. Wir verwenden Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO), und löschen sie, wenn sie dafür nicht mehr nötig sind und keine Aufbewahrungspflicht besteht."
+      },
+      {
+        "titel": "Links zu mobile.de und zur Karte",
+        "text": "Die Links zu mobile.de und OpenStreetMap führen auf fremde Seiten. Erst beim Klick gelten dort deren Datenschutzbestimmungen."
+      },
+      {
+        "titel": "3D-Ansicht",
+        "text": "Die 3D-Ansicht lädt erst, wenn Sie „In 3D ansehen“ wählen. Bibliothek (model-viewer) und Modell liegen auf diesem Server; es werden keine Daten an Dritte übertragen."
+      },
+      {
+        "titel": "Ihre Rechte",
+        "text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Sie können sich bei einer Aufsichtsbehörde beschweren, zum Beispiel bei der Landesbeauftragten für Datenschutz und Informationsfreiheit Nordrhein-Westfalen."
+      }
+    ]
+  },
+  "zeiten": {
+    "tage": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "tage_kurz": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "bereich": "{von} to {bis}",
+    "zeile": "{tage} {von} to {bis}",
+    "geschlossen": "Closed on {tage} and public holidays",
+    "nur_feiertags": "Closed on public holidays",
+    "format": "24h"
+  }
+}

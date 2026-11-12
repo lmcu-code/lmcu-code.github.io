@@ -121,26 +121,26 @@
 
 /* Ladefolge im Hero (nur ohne reduce; Endzustand ist der Grundzustand, ohne JS läuft sie genauso) */
 @media (prefers-reduced-motion: no-preference) {
-  .held__glanz::before { animation: glanz 1.7s var(--weich) .2s both; }
-  .held::before { animation: linie 1.5s var(--gleiten) .5s both; }
-  .held__bild { animation: auto-rein 1.2s var(--gleiten) .1s both; }
-  .held__scharf { animation: einblenden .9s var(--weich) .45s both; }
-  .held__unscharf { animation: unschaerfe 1.4s var(--weich) .1s both; }
-  .held__blitz { animation: blitz 1s var(--weich) 1.6s backwards; }
-  .held__kopf .kennung { animation: hoch .7s var(--gleiten) .4s both; }
-  .held__titel .maske > span { animation: maske .95s var(--gleiten) both; }
-  .held__titel .maske:nth-child(1) > span { animation-delay: .55s; }
-  .held__titel .maske:nth-child(2) > span { animation-delay: .7s; }
-  .held__titel .maske:nth-child(3) > span { animation-delay: .82s; }
-  .held__satz { animation: hoch .7s var(--gleiten) 1.05s both; }
-  .held__knoepfe { animation: hoch .7s var(--gleiten) 1.2s both; }
-  .suche { animation: hoch-kurz .7s var(--gleiten) 1.3s both; }
-  .held__demo { animation: einblenden .8s var(--weich) 1.6s both; }
-  .held__punkte li { animation: einblenden .6s var(--weich) both; }
-  .held__punkte li::after { animation: strich-x .6s var(--gleiten) both; animation-delay: inherit; }
-  .held__punkte li:nth-child(1) { animation-delay: 1.75s; }
-  .held__punkte li:nth-child(2) { animation-delay: 1.9s; }
-  .held__punkte li:nth-child(3) { animation-delay: 2.05s; }
+  .held__glanz::before { animation: glanz calc(1.7s * var(--tempo, 1)) var(--weich) calc(.2s * var(--tempo, 1)) both; }
+  .held::before { animation: linie calc(1.5s * var(--tempo, 1)) var(--gleiten) calc(.5s * var(--tempo, 1)) both; }
+  .held__bild { animation: auto-rein calc(1.2s * var(--tempo, 1)) var(--gleiten) calc(.1s * var(--tempo, 1)) both; }
+  .held__scharf { animation: einblenden calc(.9s * var(--tempo, 1)) var(--weich) calc(.45s * var(--tempo, 1)) both; }
+  .held__unscharf { animation: unschaerfe calc(1.4s * var(--tempo, 1)) var(--weich) calc(.1s * var(--tempo, 1)) both; }
+  .held__blitz { animation: blitz calc(1s * var(--tempo, 1)) var(--weich) calc(1.6s * var(--tempo, 1)) backwards; }
+  .held__kopf .kennung { animation: hoch calc(.7s * var(--tempo, 1)) var(--gleiten) calc(.4s * var(--tempo, 1)) both; }
+  .held__titel .maske > span { animation: maske calc(.95s * var(--tempo, 1)) var(--gleiten) both; }
+  .held__titel .maske:nth-child(1) > span { animation-delay: calc(.55s * var(--tempo, 1)); }
+  .held__titel .maske:nth-child(2) > span { animation-delay: calc(.7s * var(--tempo, 1)); }
+  .held__titel .maske:nth-child(3) > span { animation-delay: calc(.82s * var(--tempo, 1)); }
+  .held__satz { animation: hoch calc(.7s * var(--tempo, 1)) var(--gleiten) calc(1.05s * var(--tempo, 1)) both; }
+  .held__knoepfe { animation: hoch calc(.7s * var(--tempo, 1)) var(--gleiten) calc(1.2s * var(--tempo, 1)) both; }
+  .suche { animation: hoch-kurz calc(.7s * var(--tempo, 1)) var(--gleiten) calc(1.3s * var(--tempo, 1)) both; }
+  .held__demo { animation: einblenden calc(.8s * var(--tempo, 1)) var(--weich) calc(1.6s * var(--tempo, 1)) both; }
+  .held__punkte li { animation: einblenden calc(.6s * var(--tempo, 1)) var(--weich) both; }
+  .held__punkte li::after { animation: strich-x calc(.6s * var(--tempo, 1)) var(--gleiten) both; animation-delay: inherit; }
+  .held__punkte li:nth-child(1) { animation-delay: calc(1.75s * var(--tempo, 1)); }
+  .held__punkte li:nth-child(2) { animation-delay: calc(1.9s * var(--tempo, 1)); }
+  .held__punkte li:nth-child(3) { animation-delay: calc(2.05s * var(--tempo, 1)); }
 }
 @keyframes glanz { 0% { opacity: 0; transform: translateX(-120%) skewX(-18deg); } 15% { opacity: 1; } 85% { opacity: .9; } 100% { opacity: 0; transform: translateX(420%) skewX(-18deg); } }
 @keyframes linie { from { transform: rotate(58deg) scaleY(0); } to { transform: rotate(58deg) scaleY(1); } }
@@ -148,7 +148,7 @@
 @keyframes einblenden { from { opacity: 0; } }
 @keyframes unschaerfe { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes blitz { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.6); } 35% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 99.9% { opacity: 0; transform: translate(-50%, -50%) scale(1.15); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); } }
-@keyframes hoch { from { opacity: 0; transform: translateY(14px); } }
+@keyframes hoch { from { opacity: 0; transform: translateY(calc(var(--weg, 18px) * .78)); } }
 @keyframes hoch-kurz { from { opacity: 0; transform: translateY(8px); } }
 @keyframes maske { from { transform: translateY(108%); } }
 @keyframes strich-x { from { transform: scaleX(0); } }
@@ -202,7 +202,7 @@
 }
 
 /* ---------- Abschnitte ---------- */
-.bestand, .leistungen { padding: clamp(48px, 6vw, 88px) 0 0; }
+.bestand, .leistungen { padding: calc(clamp(48px, 6vw, 88px) * var(--abstand, 1)) 0 0; }
 .kopfzeile { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px; margin-bottom: 24px; }
 .mehr-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--kalk); font-weight: 600; font-size: 0.9375rem; }
 .mehr-link::after { bottom: 6px; }
@@ -328,7 +328,7 @@
 @media (max-width: 559px) { .band__text { padding-top: 36px; } .band__nr { font-size: 1.2rem; } .band__text span:last-child { font-size: 0.75rem; } }
 
 /* Kontakt */
-.kontakt { margin-top: clamp(48px, 6vw, 88px); padding: clamp(40px, 5vw, 72px) 0; background: linear-gradient(180deg, var(--tief), var(--ton-111113)); border-top: 1px solid var(--linie); }
+.kontakt { margin-top: calc(clamp(48px, 6vw, 88px) * var(--abstand, 1)); padding: calc(clamp(40px, 5vw, 72px) * var(--abstand, 1)) 0; background: linear-gradient(180deg, var(--tief), var(--ton-111113)); border-top: 1px solid var(--linie); }
 .kontakt__raster { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
 @media (min-width: 1000px) { .kontakt__raster { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; } }
 .kontakt__text .h2 { margin-bottom: 18px; }
@@ -362,8 +362,8 @@
 
 /* Handy kompakter */
 @media (max-width: 559px) {
-  .bestand, .leistungen { padding-top: 48px; }
-  .kontakt { margin-top: 48px; padding: 40px 0; }
+  .bestand, .leistungen { padding-top: calc(48px * var(--abstand, 1)); }
+  .kontakt { margin-top: calc(48px * var(--abstand, 1)); padding: calc(40px * var(--abstand, 1)) 0; }
   .kontakt__wege { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .kontakt__wege a { flex-direction: column; justify-content: center; gap: 6px; min-height: 84px; padding: 8px 4px; border: 1px solid var(--linie); border-radius: 4px; text-align: center; }
   .kontakt__wege a > span:last-child { font-size: 0.75rem; }
@@ -410,7 +410,7 @@
   .karte__bild { aspect-ratio: 16 / 9; padding: 24px 14px 18px; }
   .karte__text { padding: 16px 20px 6px; }
   .karte__tags { margin-bottom: 10px; }
-  .kontakt { padding: clamp(40px, 4.5vw, 64px) 0; }
+  .kontakt { padding: calc(clamp(40px, 4.5vw, 64px) * var(--abstand, 1)) 0; }
 }
 @media (max-width: 559px) {
   .leistungen__kopf .knopf { display: none; }

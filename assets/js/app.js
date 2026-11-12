@@ -1,6 +1,7 @@
 // KMC Motors: kleine Verbesserungen für alle Seiten. Ohne dieses Skript bleibt alles lesbar, sichtbar und bedienbar.
 (() => {
-  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const html = document.documentElement;
+  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches || html.dataset.anim === "aus";
 
   // 0. Teilbarer Link #<fahrzeug-id> auf der Startseite öffnet direkt die Fahrzeugseite
   const ziel = decodeURIComponent(location.hash.slice(1));
@@ -22,7 +23,7 @@
 
   // 2. Kennwerte zählen hoch (nur echte Zahlen)
   const zahlen = [...document.querySelectorAll("[data-zaehlen]")];
-  if (!ruhig && zahlen.length && "IntersectionObserver" in window) {
+  if (!ruhig && html.dataset.zaehlen !== "aus" && zahlen.length && "IntersectionObserver" in window) {
     const zaehle = (el) => {
       const zielZahl = Number(el.dataset.zaehlen), dauer = 900, t0 = performance.now();
       const schritt = (t) => {

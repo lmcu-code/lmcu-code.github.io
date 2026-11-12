@@ -50,7 +50,7 @@
 .buehne.mit-js .ansicht { display: none !important; }
 .buehne.mit-js .ansicht.ist-aktiv { display: grid !important; }
 @media (prefers-reduced-motion: no-preference) {
-  .buehne.mit-js.ist-gewechselt .ansicht.ist-aktiv { animation: ansicht-rein .7s var(--gleiten) both; }
+  .buehne.mit-js.ist-gewechselt .ansicht.ist-aktiv { animation: ansicht-rein calc(.7s * var(--tempo, 1)) var(--gleiten) both; }
 }
 @keyframes ansicht-rein { from { opacity: 0; transform: scale(1.035); } }
 
@@ -69,8 +69,8 @@
 }
 .punkt__nr::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--kupfer); opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .punkt__nr::after { animation: puls 1.3s var(--weich) calc(1.3s + var(--i, 0) * .35s) 2 both; }
-  .punkt { animation: einblenden .5s var(--weich) calc(.5s + var(--i, 0) * .35s) both; }
+  .punkt__nr::after { animation: puls calc(1.3s * var(--tempo, 1)) var(--weich) calc(1.3s + var(--i, 0) * .35s) 2 both; }
+  .punkt { animation: einblenden calc(.5s * var(--tempo, 1)) var(--weich) calc(.5s + var(--i, 0) * .35s) both; }
 }
 @keyframes puls { 0% { opacity: .9; transform: scale(.7); } 100% { opacity: 0; transform: scale(2.2); } }
 @keyframes einblenden { from { opacity: 0; } }
@@ -94,8 +94,8 @@
   .punkt__kasten strong { display: block; color: var(--kalk); font-family: var(--marke); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
 }
 @media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-  .punkt::before { animation: strich-y .6s var(--gleiten) calc(.7s + var(--i, 0) * .35s) both; }
-  .punkt__kasten { animation: kasten .55s var(--gleiten) calc(1.15s + var(--i, 0) * .35s) both; }
+  .punkt::before { animation: strich-y calc(.6s * var(--tempo, 1)) var(--gleiten) calc(.7s + var(--i, 0) * .35s) both; }
+  .punkt__kasten { animation: kasten calc(.55s * var(--tempo, 1)) var(--gleiten) calc(1.15s + var(--i, 0) * .35s) both; }
 }
 
 .buehne__leiste { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 24px; margin: 6px 0 16px; }
@@ -153,7 +153,7 @@
 .minis a[aria-current] { color: var(--kalk); border-color: var(--linie-hell); border-bottom-color: var(--kupfer); background: var(--flaeche-2); }
 
 /* Abschnittsköpfe mit großer Raute */
-.eckdaten, .stellen, .daten, .vertrauen, .anfrage { padding-top: clamp(56px, 7vw, 96px); }
+.eckdaten, .stellen, .daten, .vertrauen, .anfrage { padding-top: calc(clamp(56px, 7vw, 96px) * var(--abstand, 1)); }
 .abschnitt-kopf { display: grid; justify-items: center; text-align: center; margin-bottom: 32px; }
 .abschnitt-kopf p { max-width: 60ch; color: var(--text); margin: 12px 0 0; }
 .raute-gross { position: relative; width: 58px; height: 58px; display: grid; place-items: center; margin-bottom: 18px; }

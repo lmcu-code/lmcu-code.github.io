@@ -1,0 +1,385 @@
+{
+  "_status": "fertig",
+  "lang": "de",
+  "meta": {
+    "titel_start": "Autohaus KMC Motors Köln · Gebrauchtwagen in der Escherstraße",
+    "beschreibung_start": "Autohaus KMC Motors Köln, {strasse}: Gebrauchtwagen, DEKRA-Siegel auf Wunsch, Garantie bis zu 24 Monate, Kfz-Gutachten, Überführungskennzeichen, TÜV und AU. {sprachen}.",
+    "titel_fahrzeug": "{model} · {beispiel}KMC Motors Köln",
+    "beschreibung_fahrzeug": "{beispiel}{model}, Erstzulassung {year}, {power}, {km}, {fuel}, {gearbox}, {price}. Autohaus KMC Motors Köln, {strasse}.",
+    "beispiel_titel": "Beispielfahrzeug · ",
+    "beispiel_text": "Beispielfahrzeug: ",
+    "titel_impressum": "Impressum · KMC Motors Köln",
+    "titel_datenschutz": "Datenschutz · KMC Motors Köln"
+  },
+  "allgemein": {
+    "sprung": "Zum Inhalt springen",
+    "logo_start": "KMC Motors, zur Startseite",
+    "menue": "Menü",
+    "nav_haupt": "Hauptnavigation",
+    "nav_bestand": "Bestand",
+    "nav_leistungen": "Leistungen",
+    "nav_kontakt": "Kontakt",
+    "nav_ablauf": "Ablauf",
+    "anfragen": "Anfragen",
+    "anrufen": "Anrufen",
+    "anrufen_nummer": "Anrufen: {telefon}",
+    "whatsapp": "WhatsApp",
+    "email": "E-Mail",
+    "schnell": "Schnellkontakt",
+    "folgt": "folgt",
+    "folgen": "folgen",
+    "beispielfahrzeug": "Beispielfahrzeug",
+    "demo_modell": "Demo-Modell",
+    "demo_hinweis": "Demo-Modell, nicht das angebotene Fahrzeug",
+    "mwst_folgt": "MwSt.-Angabe",
+    "mobilede": "KMC Motors bei mobile.de",
+    "wa_frage": "Hallo KMC Motors, ich habe eine Frage.",
+    "wa_fahrzeug": "Hallo KMC Motors, ich interessiere mich für den {model}{beispiel}, {price}, Fahrzeug-ID {id}. Wann kann ich ihn ansehen?",
+    "wa_beispiel": " (Beispielfahrzeug)",
+    "mail_betreff": "Anfrage {model} ({id})",
+    "zurueck_bestand": "Zurück zum Bestand",
+    "zurueck_start": "Zurück zur Startseite",
+    "sprachwahl": "Sprache",
+    "logo_alt": "KMC Motors",
+    "zahlwoerter": [
+      "Null",
+      "Ein",
+      "Zwei",
+      "Drei",
+      "Vier",
+      "Fünf",
+      "Sechs",
+      "Sieben",
+      "Acht",
+      "Neun",
+      "Zehn"
+    ],
+    "liste_und": " und ",
+    "liste_oder": " oder "
+  },
+  "held": {
+    "kennung": "Escherstraße 129, Köln",
+    "titel_1": "Gebrauchtwagen in Köln",
+    "titel_2": "mit Garantie",
+    "titel_3": "bis 24 Monate",
+    "satz": "Besichtigung, Probefahrt, Kaufvertrag und Übergabe an einem Ort. Auf Wunsch mit DEKRA-Siegel. Wir sprechen {sprachen_und}.",
+    "knopf_bestand": "Bestand ansehen",
+    "knopf_besichtigung": "Besichtigung anfragen",
+    "auto_alt": "Dunkler Sportwagen von schräg vorn im Studiolicht (Demo-Modell)",
+    "punkte": "Beschriftete Stellen am Demo-Modell",
+    "punkt_scheinwerfer": "Scheinwerfer",
+    "punkt_felge": "Felge",
+    "punkt_innenraum": "Innenraum",
+    "so_zeigen": "So zeigen wir jedes Fahrzeug",
+    "raute": "K"
+  },
+  "suche": {
+    "label": "Fahrzeuge filtern",
+    "marke": "Marke",
+    "kraftstoff": "Kraftstoff",
+    "preis": "Preis bis",
+    "sortierung": "Sortierung",
+    "alle": "Alle",
+    "beliebig": "Beliebig",
+    "sort_standard": "Standard",
+    "sort_preis": "Günstigste",
+    "sort_preis_ab": "Teuerste",
+    "sort_km": "Wenigste km",
+    "sort_jahr": "Neueste",
+    "knopf": "Suchen",
+    "treffer_alle": "Alle {n} Fahrzeuge passen zu Ihrer Auswahl.",
+    "treffer_einer": "1 von {gesamt} Fahrzeugen passt zu Ihrer Auswahl.",
+    "treffer_mehrere": "{n} von {gesamt} Fahrzeugen passen zu Ihrer Auswahl.",
+    "treffer_keiner": "Kein Fahrzeug passt zu Ihrer Auswahl. Den ganzen Bestand finden Sie bei mobile.de, oder fragen Sie uns direkt."
+  },
+  "werte": {
+    "label": "Auf einen Blick",
+    "garantie_wert": "Monate",
+    "garantie_bis": "bis",
+    "garantie_titel": "Garantie",
+    "garantie_klein": "für Gebrauchtwagen, Bedingungen",
+    "dekra_wert": "DEKRA",
+    "dekra_titel": "Siegel auf Wunsch",
+    "dekra_klein": "mit Fahrzeug&shy;zustands&shy;bericht",
+    "sprachen_wert": "Sprachen",
+    "sprachen_titel": "{sprachen}",
+    "sprachen_klein": "am Telefon und vor Ort",
+    "zeiten_wert": "{tage_kurz}",
+    "zeiten_titel": "geöffnet",
+    "zeiten_klein": "{zeiten}"
+  },
+  "bestand": {
+    "kennung": "Bestand",
+    "titel_1": "Fahrzeuge",
+    "titel_2": "im Bestand",
+    "status_beispiel": "{n} Beispielfahrzeuge, abgebildet mit einem Demo-Modell. Den echten Bestand finden Sie bei mobile.de.",
+    "status": "{n} Fahrzeuge im Bestand.",
+    "details": "Details ansehen",
+    "details_aria": "Details ansehen: {model}",
+    "dekra_tag": "DEKRA-Siegel auf Wunsch",
+    "dekra_tag_ja": "DEKRA-Siegel",
+    "garantie_tag": "Garantie bis 24 Monate",
+    "garantie_tag_monate": "Garantie {n} Monate",
+    "foto_folgt": "Foto folgt",
+    "leer": "Noch keine Fahrzeuge eingetragen. Den Bestand finden Sie bei mobile.de."
+  },
+  "leistungen": {
+    "kennung": "Leistungen und Ablauf",
+    "titel_1": "Mehr als",
+    "titel_2": "der Verkauf",
+    "intro": "Prüfung, Gutachten, Kennzeichen und Hauptuntersuchung, alles in der Escherstraße.",
+    "knopf": "Leistung anfragen",
+    "liste": [
+      {
+        "icon": "i-siegel",
+        "titel": "DEKRA-Siegel &amp; Garantie",
+        "kurz": "Unabhängige Prüfung, Garantie bis zu 24 Monate",
+        "text": "DEKRA-Siegel mit Fahrzeugzustandsbericht: unabhängige Prüfung von optischem und technischem Zustand, auf Wunsch. Gebrauchtwagen-Garantie bis zu 24 Monate, Bedingungen <em class=\"platzhalter\">folgen</em>."
+      },
+      {
+        "icon": "i-gutachten",
+        "titel": "Kfz-Gutachten &amp; Unfallschaden",
+        "kurz": "Sachverständige, Abwicklung mit der Versicherung",
+        "text": "Gutachten durch Sachverständige: Schadenshöhe, Wertminderung, Restwert. Komplette Abwicklung mit der gegnerischen Versicherung."
+      },
+      {
+        "icon": "i-kennzeichen",
+        "titel": "Überführungs&shy;kennzeichen",
+        "kurz": "Kurzzeit höchstens 5 Tage, Export 14 Tage bis 1 Jahr",
+        "text": "Kurzzeitkennzeichen für Überführung, Prüfung und Probefahrt, höchstens 5 Tage. Exportkennzeichen fürs Ausland, 14 Tage bis 1 Jahr."
+      },
+      {
+        "icon": "i-tuev",
+        "titel": "TÜV &amp; AU",
+        "kurz": "Hauptuntersuchung und Abgasuntersuchung",
+        "text": "Hauptuntersuchung und Abgasuntersuchung für Ihr Fahrzeug. Termin einfach anfragen."
+      }
+    ],
+    "ablauf_titel": "Ablauf beim Kauf",
+    "ablauf_hinweis": "Stimmungsbilder, keine Fahrzeuge aus dem Bestand",
+    "schritte": [
+      {
+        "bild": "schritt-1",
+        "titel": "Besichtigung",
+        "text": "in der Escherstraße 129",
+        "alt": "Zwei Menschen gehen auf dem Hof eines Autohauses auf einen Kombi zu"
+      },
+      {
+        "bild": "schritt-2",
+        "titel": "Probefahrt",
+        "text": "auf Wunsch mit Kurzzeitkennzeichen",
+        "alt": "Limousine fährt in der Abenddämmerung über eine Brücke in Köln"
+      },
+      {
+        "bild": "schritt-3",
+        "titel": "Kaufvertrag",
+        "text": "auf Wunsch mit DEKRA-Siegel und Garantie",
+        "alt": "Hand unterschreibt einen Vertrag, daneben ein Autoschlüssel"
+      },
+      {
+        "bild": "schritt-4",
+        "titel": "Übergabe",
+        "text": "fürs Ausland mit Exportkennzeichen",
+        "alt": "Übergabe eines Autoschlüssels von Hand zu Hand"
+      }
+    ]
+  },
+  "kontakt": {
+    "kennung": "Kontakt",
+    "titel_1": "Kommen Sie",
+    "titel_2": "vorbei",
+    "intro": "Oder rufen Sie an, schreiben Sie per WhatsApp oder nutzen Sie das Formular. Auf {sprachen_oder}.",
+    "adresse": "Adresse",
+    "karte": "Auf der Karte ansehen",
+    "zeiten": "Öffnungszeiten",
+    "f_name": "Ihr Name",
+    "f_tel": "Telefon",
+    "f_freiwillig": "(freiwillig)",
+    "f_fahrzeug": "Fahrzeug",
+    "f_offen": "Noch offen",
+    "f_anliegen": "Anliegen",
+    "f_anliegen_liste": [
+      "Besichtigung",
+      "Probefahrt",
+      "DEKRA-Siegel &amp; Garantie",
+      "Kfz-Gutachten",
+      "Kennzeichen",
+      "TÜV &amp; AU"
+    ],
+    "f_nachricht": "Nachricht",
+    "f_senden": "Nachricht senden",
+    "f_senden_wa": "Per WhatsApp senden",
+    "f_hinweis": "Der Knopf öffnet WhatsApp mit Ihrem Text, Sie senden dort selbst ab. Ohne JavaScript öffnet sich Ihr E-Mail-Programm. Diese Seite speichert nichts.",
+    "f_wa_start": "Hallo KMC Motors,",
+    "f_anliegen_kurz": [
+      "Besichtigung",
+      "Probefahrt",
+      "DEKRA",
+      "Gutachten",
+      "Kennzeichen",
+      "TÜV, AU"
+    ]
+  },
+  "fuss": {
+    "adresse": "Adresse",
+    "zeiten": "Öffnungszeiten",
+    "leistungen": "Leistungen",
+    "mehr": "Mehr",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "entwurf": "Impressum und Datenschutz vor Livegang rechtlich prüfen lassen.",
+    "namensnennung": "3D-Demo-Modell: Car Concept, © 2024 Darmstadt Graphics Group GmbH, Modell und Texturen von Eric Chadwick, CC BY 4.0, bearbeitet.",
+    "stimmung": "Die Bilder im Ablauf sind KI-generierte Stimmungsbilder."
+  },
+  "fahrzeug": {
+    "id": "Fahrzeug-ID {id}",
+    "per_whatsapp": "Per WhatsApp anfragen",
+    "ansichten": "Ansichten des Fahrzeugs",
+    "ansicht_waehlen": "Ansicht wählen",
+    "stellen_seite": "Beschriftete Stellen in dieser Ansicht",
+    "beispiele": "Alle Beschriftungen sind Beispiele.",
+    "in_3d": "In 3D ansehen",
+    "in_3d_klein": "Drehen, zoomen, Stellen antippen",
+    "lade_3d": "3D-Ansicht wird geladen …",
+    "fehler_3d": "Die 3D-Ansicht ließ sich nicht laden. Hier sind die Bilder.",
+    "gesamtansicht": "Gesamtansicht",
+    "schliessen_3d": "Zurück zu den Bildern",
+    "bedienung_3d": "Mit einem Finger oder der Maus drehen, mit zwei Fingern oder dem Mausrad zoomen. Die Stellen sind auch als Liste darunter erreichbar.",
+    "alt_3d": "Drehbares 3D-Modell. {demo}",
+    "in_360": "360° ansehen",
+    "in_360_klein": "Wischen oder Pfeiltasten",
+    "lade_360": "360°-Ansicht wird geladen …",
+    "bedienung_360": "Wischen, ziehen oder mit den Pfeiltasten drehen.",
+    "ansicht_360": "360°-Ansicht, Bild {n} von {gesamt}",
+    "foto_folgt": "Foto folgt",
+    "eckdaten": "Eckdaten",
+    "erstzulassung": "Erstzulassung",
+    "leistung": "Leistung",
+    "laufleistung": "Laufleistung",
+    "kraftstoff": "Kraftstoff",
+    "getriebe": "Getriebe",
+    "marke": "Marke",
+    "modell": "Modell",
+    "preis": "Preis",
+    "stellen_titel": "{n} Stellen am Fahrzeug",
+    "stellen_intro": "Was Käufer vorher wissen wollen, direkt am Fahrzeug beschriftet. Ausstattung und Zustand, auch Mängel.",
+    "stellen_beispiel": "Alle Angaben hier sind Beispiele.",
+    "stellen_3d": "Tippen Sie auf eine Stelle, die Kamera fährt hin.",
+    "art_ausstattung": "Ausstattung",
+    "art_zustand": "Zustand",
+    "in_seitenansicht": "In der Seitenansicht",
+    "datenblatt": "Fahrzeugdaten",
+    "tabelle": "Fahrzeugdaten mit Feldcodes der Zulassungsbescheinigung Teil I",
+    "vertrauen": "Prüfung und Garantie",
+    "dekra": "DEKRA-Siegel",
+    "dekra_wunsch": "auf Wunsch",
+    "dekra_ja": "mit Fahrzeugzustandsbericht",
+    "garantie": "Garantie bis zu 24 Monate",
+    "garantie_monate": "Garantie {n} Monate",
+    "garantie_bed": "Bedingungen",
+    "bericht": "Zustandsbericht",
+    "bericht_link": "als PDF ansehen",
+    "probefahrt": "Probefahrt",
+    "probefahrt_text": "auf Wunsch mit Kurzzeitkennzeichen",
+    "anfrage_kennung": "Anfrage",
+    "anfrage_titel": "Dieses Fahrzeug ansehen",
+    "anfrage_text": "Die Nachricht mit Modell, Preis und Fahrzeug-ID ist vorbereitet. Sie senden selbst ab.",
+    "whatsapp_nummer": "WhatsApp: {nummer}",
+    "email_schreiben": "E-Mail schreiben",
+    "inserat": "Inserat bei mobile.de",
+    "zeigen": "Zeigen",
+    "im_bild": "Im Bild „{bild}“"
+  },
+  "recht": {
+    "pruefen": "Entwurf: vor Livegang rechtlich prüfen lassen.",
+    "offen": "Angabe folgt",
+    "impressum_kennung": "Angaben gemäß § 5 DDG",
+    "datenschutz_kennung": "DSGVO",
+    "raute": "§",
+    "impressum": [
+      {
+        "titel": "Anbieter",
+        "text": "{name}<br>Inhaber: {inhaber}<br>Rechtsform: {rechtsform}<br>{strasse}<br>{plz} {ort}"
+      },
+      {
+        "titel": "Kontakt",
+        "text": "Telefon: {telefon_link}<br>WhatsApp: {whatsapp_link}<br>E-Mail: {email_link}"
+      },
+      {
+        "titel": "Umsatzsteuer-ID",
+        "text": "Umsatzsteuer-Identifikationsnummer nach § 27 a Umsatzsteuergesetz: {ust_id}"
+      },
+      {
+        "titel": "Registereintrag",
+        "text": "{register} (nur falls vorhanden)"
+      },
+      {
+        "titel": "Verbraucherstreitbeilegung",
+        "text": "Angabe, ob das Autohaus an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilnimmt: {offen}"
+      },
+      {
+        "titel": "Bilder und 3D-Modell",
+        "text": "Die Fahrzeugbilder zeigen ein frei lizenziertes Demo-Modell, nicht die angebotenen Fahrzeuge. 3D-Demo-Modell: Car Concept, © 2024 Darmstadt Graphics Group GmbH, Modell und Texturen von Eric Chadwick, CC BY 4.0, bearbeitet. Quelle: Khronos glTF Sample Assets. Die Bilder im Ablauf und im Hintergrund des Hero sind KI-generierte Stimmungsbilder und zeigen keine Fahrzeuge aus dem Bestand."
+      }
+    ],
+    "datenschutz": [
+      {
+        "titel": "Kurz gesagt",
+        "text": "Diese Website setzt keine Cookies, nutzt keine Analyse- oder Werbedienste und lädt beim Aufruf nichts von fremden Servern. Schriften, Bilder, Skripte und die 3D-Ansicht kommen vom eigenen Server. Daten an Dritte gehen nur, wenn Sie selbst einen Link zu WhatsApp, zu Ihrem E-Mail-Programm, zu mobile.de oder zur Karte anklicken."
+      },
+      {
+        "titel": "Verantwortlicher",
+        "text": "{name}, {strasse}, {plz} {ort}, vertreten durch den Inhaber (Name im <a href=\"impressum.html\">Impressum</a>)<br>Telefon {telefon}, E-Mail {email_link}"
+      },
+      {
+        "titel": "Hosting und Server-Logfiles",
+        "text": "Hoster: {hoster}. Beim Aufruf speichert der Server technisch notwendige Angaben (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browserkennung) in Logdateien. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (sicherer Betrieb). Speicherdauer: {offen}."
+      },
+      {
+        "titel": "Keine Cookies, kein Tracking",
+        "text": "Die Seite setzt keine Cookies und speichert nichts in Ihrem Browser. Es gibt keine Reichweitenmessung und keine eingebetteten Inhalte Dritter."
+      },
+      {
+        "titel": "Kontakt per Telefon, E-Mail und WhatsApp",
+        "text": "Das Formular auf der Startseite verschickt nichts über diese Website. Der Knopf öffnet WhatsApp mit Ihrem Text, ohne JavaScript Ihr E-Mail-Programm; Sie senden selbst ab. Bei WhatsApp verarbeitet zusätzlich WhatsApp Ireland Limited (Meta) Daten nach eigenen Bedingungen. Wir verwenden Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO), und löschen sie, wenn sie dafür nicht mehr nötig sind und keine Aufbewahrungspflicht besteht."
+      },
+      {
+        "titel": "Links zu mobile.de und zur Karte",
+        "text": "Die Links zu mobile.de und OpenStreetMap führen auf fremde Seiten. Erst beim Klick gelten dort deren Datenschutzbestimmungen."
+      },
+      {
+        "titel": "3D-Ansicht",
+        "text": "Die 3D-Ansicht lädt erst, wenn Sie „In 3D ansehen“ wählen. Bibliothek (model-viewer) und Modell liegen auf diesem Server; es werden keine Daten an Dritte übertragen."
+      },
+      {
+        "titel": "Ihre Rechte",
+        "text": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Sie können sich bei einer Aufsichtsbehörde beschweren, zum Beispiel bei der Landesbeauftragten für Datenschutz und Informationsfreiheit Nordrhein-Westfalen."
+      }
+    ]
+  },
+  "zeiten": {
+    "tage": [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag",
+      "Sonntag"
+    ],
+    "tage_kurz": [
+      "Mo",
+      "Di",
+      "Mi",
+      "Do",
+      "Fr",
+      "Sa",
+      "So"
+    ],
+    "bereich": "{von} bis {bis}",
+    "zeile": "{tage} {von} bis {bis} Uhr",
+    "geschlossen": "{tage} und feiertags geschlossen",
+    "nur_feiertags": "Feiertags geschlossen",
+    "format": "kurz"
+  }
+}

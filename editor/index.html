@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0e0e10">
+<title>Website-Editor · KMC Motors</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<div class="app" id="app" data-zustand="laden">
+  <header class="kopf" role="banner">
+    <h1 class="nur-sr">Website-Editor für KMC Motors</h1>
+    <div class="kopf__marke">
+      <img src="../assets/logo/kmc-zeichen-kupfer.svg" alt="" width="44" height="18">
+      <span class="kopf__titel">Editor</span>
+    </div>
+    <nav class="kopf__seite" aria-label="Seite wählen">
+      <button class="seitenwahl" id="seitenwahl" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="seitenwahl__name" id="seitenname">Startseite</span><svg class="i" aria-hidden="true"><use href="#i-runter"/></svg></button>
+    </nav>
+    <div class="kopf__mitte">
+      <div class="geraete" role="radiogroup" aria-label="Gerät">
+        <button type="button" role="radio" class="geraet" data-geraet="390" aria-checked="false" data-tipp="Handy" data-kuerzel="1"><svg class="i" aria-hidden="true"><use href="#i-handy"/></svg><span class="nur-sr">Handy</span></button>
+        <button type="button" role="radio" class="geraet" data-geraet="768" aria-checked="false" data-tipp="Tablet" data-kuerzel="2"><svg class="i" aria-hidden="true"><use href="#i-tablet"/></svg><span class="nur-sr">Tablet</span></button>
+        <button type="button" role="radio" class="geraet" data-geraet="1440" aria-checked="true" data-tipp="Desktop" data-kuerzel="3"><svg class="i" aria-hidden="true"><use href="#i-desktop"/></svg><span class="nur-sr">Desktop</span></button>
+      </div>
+      <label class="zoom"><span class="nur-sr">Zoom</span>
+        <select id="zoom"><option value="fit">Anpassen</option><option value="0.5">50 %</option><option value="0.75">75 %</option><option value="1">100 %</option></select>
+      </label>
+    </div>
+    <div class="kopf__rechts">
+      <p class="status" id="status" role="status" aria-live="polite"><span class="status__punkt" aria-hidden="true"></span><span class="status__text">Lädt …</span></p>
+      <div class="knopfgruppe">
+        <button type="button" class="ik" id="rueck" data-tipp="Rückgängig" data-kuerzel="Strg Z" disabled><svg class="i" aria-hidden="true"><use href="#i-rueck"/></svg><span class="nur-sr">Rückgängig</span></button>
+        <button type="button" class="ik" id="vor" data-tipp="Wiederholen" data-kuerzel="Strg ⇧ Z" disabled><svg class="i" aria-hidden="true"><use href="#i-vor"/></svg><span class="nur-sr">Wiederholen</span></button>
+      </div>
+      <button type="button" class="ik nur-breit" id="hilfe" data-tipp="Einführung"><svg class="i" aria-hidden="true"><use href="#i-hilfe"/></svg><span class="nur-sr">Einführung</span></button>
+      <button type="button" class="knopf knopf--leise nur-breit" id="vorschau" data-tipp="Vorschau im neuen Tab" data-kuerzel="Strg P"><svg class="i" aria-hidden="true"><use href="#i-auge"/></svg>Vorschau</button>
+      <button type="button" class="knopf knopf--primaer" id="veroeffentlichen" data-kuerzel="Strg ⇧ P"><svg class="i" aria-hidden="true"><use href="#i-wolke"/></svg><span>Veröffentlichen</span></button>
+    </div>
+  </header>
+
+  <nav class="schiene" aria-label="Bereiche" id="schiene"></nav>
+
+  <aside class="links" id="links" aria-label="Bereich"></aside>
+
+  <main class="arbeit" id="arbeit" aria-label="Vorschau">
+    <div class="arbeit__flaeche" id="flaeche">
+      <div class="geraetrahmen" id="rahmen">
+        <div class="geraetrahmen__skelett" id="skelett" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <iframe id="vorschaurahmen" title="Vorschau der Website (zum Bearbeiten anklicken)"></iframe>
+      </div>
+    </div>
+    <div class="arbeit__leiste">
+      <button type="button" class="knopf knopf--leise klein" id="abspielen"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>Animation abspielen</button>
+    </div>
+  </main>
+
+  <aside class="rechts" id="rechts" aria-label="Eigenschaften"></aside>
+
+  <nav class="unten" aria-label="Bereiche (Handy)" id="unten"></nav>
+</div>
+<div class="schicht" id="schicht"></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="tipp" id="tipp" aria-hidden="true" hidden></div>
+<noscript><p class="ohne-js">Der Editor braucht JavaScript.</p></noscript>
+<script type="module" src="js/app.mjs"></script>
+</body>
+</html>

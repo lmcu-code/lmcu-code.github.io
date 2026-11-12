@@ -20,56 +20,141 @@
       "media": {
         "glb": "assets/3d/demo-auto.glb",
         "demo": true,
-        "poster": { "src": "assets/bilder/karte-seite-800.webp", "alt": "Demo-Modell in Seitenansicht" },
+        "poster": {
+          "src": "assets/bilder/karte-seite-800.webp",
+          "alt": "Demo-Modell in Seitenansicht"
+        },
         "spin": [],
         "gallery": [
-          { "src": "assets/bilder/hero-auto-1400.webp", "thumb": "assets/bilder/mini-vorn-240.webp", "label": "Vorn", "alt": "Demo-Modell von schräg vorn" },
-          { "src": "assets/bilder/seite-1400.webp", "thumb": "assets/bilder/mini-seite-240.webp", "label": "Seite", "alt": "Demo-Modell in Seitenansicht, Front nach links", "start": true, "hotspots": true },
-          { "src": "assets/bilder/heck-1400.webp", "thumb": "assets/bilder/mini-heck-240.webp", "label": "Heck", "alt": "Demo-Modell von schräg hinten" },
-          { "src": "assets/bilder/felge-1400.webp", "thumb": "assets/bilder/mini-felge-240.webp", "label": "Felge", "alt": "Nahaufnahme der Felge vorne links am Demo-Modell", "detail": true }
+          {
+            "src": "assets/bilder/hero-auto-1400.webp",
+            "thumb": "assets/bilder/mini-vorn-240.webp",
+            "label": "Vorn",
+            "alt": "Demo-Modell von schräg vorn"
+          },
+          {
+            "src": "assets/bilder/seite-1400.webp",
+            "thumb": "assets/bilder/mini-seite-240.webp",
+            "label": "Seite",
+            "alt": "Demo-Modell in Seitenansicht, Front nach links",
+            "start": true,
+            "hotspots": true
+          },
+          {
+            "src": "assets/bilder/heck-1400.webp",
+            "thumb": "assets/bilder/mini-heck-240.webp",
+            "label": "Heck",
+            "alt": "Demo-Modell von schräg hinten"
+          },
+          {
+            "src": "assets/bilder/felge-1400.webp",
+            "thumb": "assets/bilder/mini-felge-240.webp",
+            "label": "Felge",
+            "alt": "Nahaufnahme der Felge vorne links am Demo-Modell",
+            "detail": true
+          }
         ]
       },
-      "camera": { "orbit": "38deg 80deg 7m", "target": "0m 0.5m 0m", "fov": "26deg" },
+      "camera": {
+        "orbit": "38deg 80deg 7m",
+        "target": "0m 0.5m 0m",
+        "fov": "26deg"
+      },
       "hotspots": [
         {
-          "id": "felge-vl", "kind": "ausstattung", "label": "Felge vorne links",
+          "id": "felge-vl",
+          "kind": "ausstattung",
+          "label": "Felge vorne links",
           "text": "19″ Leichtmetall, Sommerreifen, Profil 6 mm",
-          "position": "1.048m 0.367m 1.536m", "normal": "0.856 -0.042 0.515",
-          "camera": { "target": "1.048m 0.367m 1.536m", "orbit": "62deg 82deg 1.7m", "fov": "28deg" },
-          "poster": { "x": 20.44, "y": 62.68, "line": 96, "side": "unten" },
-          "spinFrame": 4, "photo": ""
+          "position": "1.048m 0.367m 1.536m",
+          "normal": "0.856 -0.042 0.515",
+          "camera": {
+            "target": "1.048m 0.367m 1.536m",
+            "orbit": "62deg 82deg 1.7m",
+            "fov": "28deg"
+          },
+          "poster": {
+            "x": 20.44,
+            "y": 62.68,
+            "line": 96,
+            "side": "unten"
+          },
+          "spinFrame": 4,
+          "photo": ""
         },
         {
-          "id": "scheinwerfer", "kind": "ausstattung", "label": "Scheinwerfer",
+          "id": "scheinwerfer",
+          "kind": "ausstattung",
+          "label": "Scheinwerfer",
           "text": "LED-Scheinwerfer",
-          "position": "0.659m 0.652m 2.185m", "normal": "0.505 -0.291 0.813",
-          "camera": { "target": "0.659m 0.652m 2.185m", "orbit": "30deg 78deg 1.6m", "fov": "28deg" },
-          "poster": { "x": 9.04, "y": 40.38, "line": 110, "side": "oben" },
-          "spinFrame": 2, "photo": ""
+          "position": "0.659m 0.652m 2.185m",
+          "normal": "0.505 -0.291 0.813",
+          "camera": {
+            "target": "0.659m 0.652m 2.185m",
+            "orbit": "30deg 78deg 1.6m",
+            "fov": "28deg"
+          },
+          "poster": {
+            "x": 9.04,
+            "y": 40.38,
+            "line": 110,
+            "side": "oben"
+          },
+          "spinFrame": 2,
+          "photo": ""
         },
         {
-          "id": "innenraum", "kind": "ausstattung", "label": "Innenraum",
+          "id": "innenraum",
+          "kind": "ausstattung",
+          "label": "Innenraum",
           "text": "Ledersitze, Sitzheizung vorn",
-          "position": "0.823m 1.034m 0.044m", "normal": "0.654 0.756 0.026",
-          "camera": { "target": "0.4m 0.85m 0.05m", "orbit": "80deg 62deg 2.1m", "fov": "30deg" },
-          "poster": { "x": 53.04, "y": 12.59, "line": 74, "side": "oben" },
-          "spinFrame": 5, "photo": ""
+          "position": "0.823m 1.034m 0.044m",
+          "normal": "0.654 0.756 0.026",
+          "camera": {
+            "target": "0.4m 0.85m 0.05m",
+            "orbit": "80deg 62deg 2.1m",
+            "fov": "30deg"
+          },
+          "poster": {
+            "x": 53.04,
+            "y": 12.59,
+            "line": 74,
+            "side": "oben"
+          },
+          "spinFrame": 5,
+          "photo": ""
         },
         {
-          "id": "kofferraum", "kind": "ausstattung", "label": "Kofferraum",
+          "id": "kofferraum",
+          "kind": "ausstattung",
+          "label": "Kofferraum",
           "text": "440 Liter, keine Anhängerkupplung",
-          "position": "-0.149m 0.831m -1.858m", "normal": "-0.012 0.651 -0.759",
-          "camera": { "target": "0m 0.75m -1.7m", "orbit": "180deg 62deg 2.6m", "fov": "30deg" },
+          "position": "-0.149m 0.831m -1.858m",
+          "normal": "-0.012 0.651 -0.759",
+          "camera": {
+            "target": "0m 0.75m -1.7m",
+            "orbit": "180deg 62deg 2.6m",
+            "fov": "30deg"
+          },
           "where": "Am Heck",
-          "spinFrame": 12, "photo": ""
+          "spinFrame": 12,
+          "photo": ""
         },
         {
-          "id": "zustand-stossfaenger-hr", "kind": "zustand", "label": "Stoßfänger hinten rechts",
+          "id": "zustand-stossfaenger-hr",
+          "kind": "zustand",
+          "label": "Stoßfänger hinten rechts",
           "text": "Kratzer, 4 cm, siehe DEKRA-Zustandsbericht",
-          "position": "-0.920m 0.402m -1.850m", "normal": "-0.208 -0.077 -0.975",
-          "camera": { "target": "-0.920m 0.402m -1.850m", "orbit": "195deg 80deg 1.4m", "fov": "28deg" },
+          "position": "-0.920m 0.402m -1.850m",
+          "normal": "-0.208 -0.077 -0.975",
+          "camera": {
+            "target": "-0.920m 0.402m -1.850m",
+            "orbit": "195deg 80deg 1.4m",
+            "fov": "28deg"
+          },
           "where": "Am Heck",
-          "spinFrame": 13, "photo": ""
+          "spinFrame": 13,
+          "photo": ""
         }
       ]
     },
@@ -92,12 +177,26 @@
       "media": {
         "glb": "",
         "demo": true,
-        "poster": { "src": "assets/bilder/karte-gesamt-800.webp", "alt": "Demo-Modell von schräg vorn" },
+        "poster": {
+          "src": "assets/bilder/karte-gesamt-800.webp",
+          "alt": "Demo-Modell von schräg vorn"
+        },
         "spin": "assets/3d/spin/demo-{nn}.webp",
         "spinFrames": 24,
         "gallery": [
-          { "src": "assets/bilder/hero-auto-1400.webp", "thumb": "assets/bilder/mini-vorn-240.webp", "label": "Vorn", "alt": "Demo-Modell von schräg vorn", "start": true },
-          { "src": "assets/bilder/heck-1400.webp", "thumb": "assets/bilder/mini-heck-240.webp", "label": "Heck", "alt": "Demo-Modell von schräg hinten" }
+          {
+            "src": "assets/bilder/hero-auto-1400.webp",
+            "thumb": "assets/bilder/mini-vorn-240.webp",
+            "label": "Vorn",
+            "alt": "Demo-Modell von schräg vorn",
+            "start": true
+          },
+          {
+            "src": "assets/bilder/heck-1400.webp",
+            "thumb": "assets/bilder/mini-heck-240.webp",
+            "label": "Heck",
+            "alt": "Demo-Modell von schräg hinten"
+          }
         ]
       },
       "hotspots": []
@@ -121,11 +220,26 @@
       "media": {
         "glb": "",
         "demo": true,
-        "poster": { "src": "assets/bilder/karte-heck-800.webp", "alt": "Demo-Modell von schräg hinten" },
+        "poster": {
+          "src": "assets/bilder/karte-heck-800.webp",
+          "alt": "Demo-Modell von schräg hinten"
+        },
         "spin": [],
         "gallery": [
-          { "src": "assets/bilder/heck-1400.webp", "thumb": "assets/bilder/mini-heck-240.webp", "label": "Heck", "alt": "Demo-Modell von schräg hinten", "start": true },
-          { "src": "assets/bilder/felge-1400.webp", "thumb": "assets/bilder/mini-felge-240.webp", "label": "Felge", "alt": "Nahaufnahme einer Felge am Demo-Modell", "detail": true }
+          {
+            "src": "assets/bilder/heck-1400.webp",
+            "thumb": "assets/bilder/mini-heck-240.webp",
+            "label": "Heck",
+            "alt": "Demo-Modell von schräg hinten",
+            "start": true
+          },
+          {
+            "src": "assets/bilder/felge-1400.webp",
+            "thumb": "assets/bilder/mini-felge-240.webp",
+            "label": "Felge",
+            "alt": "Nahaufnahme einer Felge am Demo-Modell",
+            "detail": true
+          }
         ]
       },
       "hotspots": []
