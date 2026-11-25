@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const V = '1795641000';
+const V = '1795642000';
 // KMC Motors · Richtung A „Studio“: baut Startseite + Fahrzeugseiten aus cars.json und konfiguration.json.
 //   node bauen.mjs <repo-ordner> <ausgabe-ordner>
 import fs from 'node:fs';
@@ -199,13 +199,9 @@ ${oeffnung.map((o) => `<tr><th scope="row">${esc(o.label)}</th><td>${esc(o.zeit)
 <li><a href="mailto:${esc(B.email)}"><span class="direct__k">E-Mail</span><span class="direct__v">${esc(B.email)}</span></a></li>
 </ul>
 </div>
-<div class="map" data-karte="https://maps.google.com/maps?q=${adresseQ}&amp;z=17&amp;hl=de&amp;output=embed">
-<svg class="map__pin" viewBox="0 0 44 44" aria-hidden="true"><path d="M22 40s13-12.5 13-23a13 13 0 0 0-26 0c0 10.5 13 23 13 23z"/><circle cx="22" cy="17" r="4.5"/></svg>
-<div class="map__body">
-<p class="map__t">So finden Sie uns</p>
-<p>Interaktive Karte von Google Maps, zum Zoomen und Verschieben. Erst wenn Sie sie anzeigen, werden Daten an Google übertragen. Ihre Wahl merkt sich die Seite.</p>
-<div class="map__act"><button class="btn btn--lg" type="button" data-karte-laden>Karte anzeigen</button><a class="link" href="https://www.google.com/maps/dir/?api=1&amp;destination=${adresseQ}"><span>Route planen</span></a></div>
-</div>
+<div class="map map--live">
+<iframe src="https://maps.google.com/maps?q=${adresseQ}&amp;z=17&amp;hl=de&amp;output=embed" title="Karte: Standort ${esc(B.name)}, ${esc(strasseLang)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+<a class="btn map__route" href="https://www.google.com/maps/dir/?api=1&amp;destination=${adresseQ}">Route planen</a>
 </div>
 </div>
 </section>
