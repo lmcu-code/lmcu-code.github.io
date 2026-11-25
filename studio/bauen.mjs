@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const V = '1795614880';
+const V = '1795640000';
 // KMC Motors · Richtung A „Studio“: baut Startseite + Fahrzeugseiten aus cars.json und konfiguration.json.
 //   node bauen.mjs <repo-ordner> <ausgabe-ordner>
 import fs from 'node:fs';
@@ -59,7 +59,7 @@ function kopf(basis) {
   const h = basis ? `${basis}index.html` : '';
   return `<header class="top">
 <div class="wrap top__in">
-<a class="top__logo" href="${basis || './'}"><img src="${basis}assets/logo/2026/kmc-quer-weiss.svg" alt="KMC Motors Köln, zur Startseite" width="200" height="36"></a>
+<a class="top__logo" href="${basis || './'}"><img src="${basis}assets/logo/kmc-logo.svg" alt="KMC Motors Köln, zur Startseite" width="946" height="268"></a>
 <nav class="top__nav" aria-label="Hauptnavigation"><a href="${h}#bestand">Bestand</a><a href="${h}#leistungen">Leistungen</a><a href="${h}#ablauf">Ablauf</a><a href="${h}#kontakt">Kontakt</a></nav>
 <div class="top__act"><a class="top__tel" href="tel:${B.telefonLink}">${esc(B.telefon)}</a><a class="btn" href="${wa('Hallo KMC Motors, ich habe eine Frage.')}">Anfragen</a></div>
 </div>
@@ -69,7 +69,7 @@ function kopf(basis) {
 function fuss(basis) {
   return `<footer class="foot">
 <div class="wrap foot__in">
-<img src="${basis}assets/logo/2026/kmc-logo-weiss.svg" alt="KMC Motors Köln" width="130" height="90">
+<img src="${basis}assets/logo/kmc-logo.svg" alt="KMC Motors Köln" width="946" height="268">
 <p>${esc(B.name)} · Inhaber ${esc(B.inhaber)} · ${esc(B.strasse)}, ${esc(B.plz)} ${esc(B.ort)}</p>
 <nav class="foot__nav" aria-label="Rechtliches"><a href="${basis}impressum.html">Impressum</a><a href="${basis}datenschutz.html">Datenschutz</a><a href="${esc(B.mobilede)}">mobile.de</a></nav>
 </div>
@@ -88,7 +88,7 @@ const ezJahr = (a) => a.year;
 function karteOhneFoto(a) {
   const zeilen = [['Erstzulassung', a.year], ['Kilometerstand', a.km], ['Leistung', a.power], ['Kraftstoff', a.fuel], ['Getriebe', a.gearbox]].filter(([, v]) => v);
   return `<article class="car">
-<a class="car__img car__img--leer" href="fahrzeug/${slug(a.id)}/" tabindex="-1" aria-hidden="true"><img src="assets/logo/2026/kmc-symbol-weiss.svg" alt="" width="48" height="56"><span>Neu eingetroffen · Fotos folgen</span></a>
+<a class="car__img car__img--leer" href="fahrzeug/${slug(a.id)}/" tabindex="-1" aria-hidden="true"><img src="assets/logo/kmc-zeichen-kupfer.svg" alt="" width="946" height="182"><span>Neu eingetroffen · Fotos folgen</span></a>
 <p class="car__tag">${esc(a.make)} · EZ ${esc(a.year)}</p>
 <h3><a href="fahrzeug/${slug(a.id)}/">${esc(a.model)}</a></h3>
 <p class="car__price">${esc(a.price)}</p>
@@ -111,13 +111,22 @@ function karte(a) {
 </article>`;
 }
 
+const HELD_VIDEO = { src: 'assets/media/kmc-hero-loop.mp4', poster: 'assets/media/kmc-hero-poster.webp' };
+
 function held() {
   const h = autos.find((a) => a.hero) || autos.find((a) => a.img);
+  if (HELD_VIDEO && fs.existsSync(path.join(repo, HELD_VIDEO.src))) {
+    const cap = h ? `<figcaption><span>Gerade im Bestand</span><a href="fahrzeug/${slug(h.id)}/"><b>${esc(h.model)}</b> · ${esc(h.price)}</a></figcaption>` : '';
+    return `<figure class="stage stage--foto stage--video"><video src="${HELD_VIDEO.src}" poster="${HELD_VIDEO.poster}" autoplay muted loop playsinline preload="auto" aria-hidden="true" data-held-video></video>${cap}</figure>`;
+  }
   if (!h) return `<figure class="stage"><img src="assets/bilder/hero-auto-2000.webp" alt="Dunkler Sportwagen von schräg vorn im Studiolicht (Demo-Modell)" width="2000" height="881" fetchpriority="high"><figcaption><span>Demo-Modell</span><span>Hier steht später das Foto aus dem Bestand</span></figcaption></figure>`;
   return `<figure class="stage stage--foto"><img src="${h.heroBild || h.img}" alt="${esc(h.model)}${h.heroBild ? ' im Studio' : ', Foto aus dem Inserat'}" fetchpriority="high"><figcaption><span>Gerade im Bestand</span><a href="fahrzeug/${slug(h.id)}/"><b>${esc(h.model)}</b> · ${esc(h.price)}</a></figcaption></figure>`;
 }
 
 function startseite() {
+  const sortiert = [...autos.filter((a) => a.img || a.media?.poster || a.media?.gallery?.length), ...autos.filter((a) => !(a.img || a.media?.poster || a.media?.gallery?.length))];
+  const erste = sortiert.slice(0, 3);
+  const rest = sortiert.slice(3);
   const beispiele = autos.filter(istBeispiel).length;
   const hinweis = beispiele ? `<p class="sec__note">${beispiele === autos.length ? 'Beispielfahrzeuge, abgebildet mit einem Demo-Modell. Hier erscheinen später die echten Fahrzeuge aus dem Bestand.' : 'Einige Fahrzeuge sind Beispiele.'}</p>` : `<p class="sec__note">Eine Auswahl aus unserem Bestand. Alle Fahrzeuge und Fotos finden Sie bei mobile.de.</p>`;
   const body = `<main id="inhalt">
@@ -142,8 +151,12 @@ ${held()}
 <div class="sec__head"><h2 id="bestand-titel" class="h2">Im Bestand.</h2><a class="link" href="${esc(B.mobilede)}"><span>Ganzer Bestand bei mobile.de</span>${PFEIL}</a></div>
 ${hinweis}
 <div class="cars">
-${autos.map(karte).join('\n')}
+${erste.map(karte).join('\n')}
 </div>
+${rest.length ? `<div class="cars cars--mehr" id="mehr-fahrzeuge" hidden>
+${rest.map(karte).join('\n')}
+</div>
+<div class="mehr"><button class="btn btn--ghost btn--lg" type="button" aria-expanded="false" aria-controls="mehr-fahrzeuge" data-mehr data-zu="Weniger anzeigen" data-auf="Mehr anzeigen · ${rest.length} weitere Fahrzeuge">Mehr anzeigen · ${rest.length} weitere Fahrzeuge</button></div>` : ''}
 </div>
 </section>
 
@@ -207,7 +220,7 @@ ${oeffnung.map((o) => `<tr><th scope="row">${esc(o.label)}</th><td>${esc(o.zeit)
 
 function fahrzeugseite(a) {
   const basis = '../../';
-  const g = a.img ? [{ src: a.img, alt: `${a.model}, Foto aus dem Inserat`, ext: true }] : (a.media?.gallery || []).length ? a.media.gallery : a.media?.poster ? [a.media.poster] : [{ src: 'assets/logo/2026/kmc-symbol-weiss.svg', alt: 'Fotos folgen', leer: true }];
+  const g = a.img ? [{ src: a.img, alt: `${a.model}, Foto aus dem Inserat`, ext: true }] : (a.media?.gallery || []).length ? a.media.gallery : a.media?.poster ? [a.media.poster] : [{ src: 'assets/logo/kmc-zeichen-kupfer.svg', alt: 'Fotos folgen', leer: true }];
   const start = Math.max(0, g.findIndex((x) => x.start));
   const auf = (v) => (v == null || v === '' ? 'auf Anfrage' : v);
   const zeilen = [
