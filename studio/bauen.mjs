@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const V = '1795614880';
 // KMC Motors · Richtung A „Studio“: baut Startseite + Fahrzeugseiten aus cars.json und konfiguration.json.
 //   node bauen.mjs <repo-ordner> <ausgabe-ordner>
 import fs from 'node:fs';
@@ -38,7 +39,7 @@ function rahmen({ basis, titel, beschreibung, body, robots = 'noindex, nofollow'
 <link rel="icon" href="${basis}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${basis}assets/apple-touch-icon.png">
 <link rel="preload" href="${basis}assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${basis}assets/studio/studio.css">
+<link rel="stylesheet" href="${basis}assets/studio/studio.css?v=${V}">
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
@@ -48,7 +49,7 @@ ${body}
 ${fuss(basis)}
 </div>
 ${leiste()}
-<script src="${basis}assets/studio/studio.js" defer></script>
+<script src="${basis}assets/studio/studio.js?v=${V}" defer></script>
 </body>
 </html>
 `;
