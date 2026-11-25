@@ -1,0 +1,206 @@
+{
+ "cars": [
+  {
+   "id": "mercedes-benz-glc400d-4matic-amg-night-2021",
+   "sample": false,
+   "make": "Mercedes-Benz",
+   "model": "Mercedes-Benz GLC400d 4MATIC AMG Night",
+   "price": "37.850 €",
+   "vat": "",
+   "km": "95.000 km",
+   "year": "01/2021",
+   "power": "243 kW (330 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=53041267626016",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/83/83246de8-bc69-4737-9939-e0d619936bf0?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/83/83246de8-bc69-4737-9939-e0d619936bf0?rule=mo-640",
+   "ausstattung": [
+    "LED-Scheinwerfer",
+    "360°-Kamera",
+    "Head-up-Display",
+    "Spurhalteassistent",
+    "Panoramadach",
+    "20″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "land-rover-range-rover-sport-tdv6-hse-dynamic-2018",
+   "sample": false,
+   "make": "Land Rover",
+   "model": "Land Rover Range Rover Sport TDV6 HSE Dynamic",
+   "price": "40.850 €",
+   "vat": "",
+   "km": "52.000 km",
+   "year": "01/2018",
+   "power": "190 kW (258 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=53533581217728",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/e6/e6d7cf85-3673-4066-80ce-ffc2cb9d6795?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/e6/e6d7cf85-3673-4066-80ce-ffc2cb9d6795?rule=mo-640",
+   "ausstattung": [
+    "Panoramadach",
+    "22″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "audi-s6-tdi-2019",
+   "sample": false,
+   "make": "Audi",
+   "model": "Audi S6 TDI",
+   "price": "34.800 €",
+   "vat": "",
+   "km": "192.000 km",
+   "year": "12/2019",
+   "power": "257 kW (349 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=52922941094560",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/60/601e6a60-7b36-4b4f-b12c-0d01e760b8c9?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/60/601e6a60-7b36-4b4f-b12c-0d01e760b8c9?rule=mo-640",
+   "ausstattung": [
+    "S-Sportsitze",
+    "360°-Kamera",
+    "Bang & Olufsen Sound",
+    "Head-up-Display",
+    "Standheizung",
+    "Panoramadach"
+   ]
+  },
+  {
+   "id": "land-rover-range-rover-velar-d300-r-dynamic-2022",
+   "sample": false,
+   "make": "Land Rover",
+   "model": "Land Rover Range Rover Velar D300 R-Dynamic",
+   "price": "31.850 €",
+   "vat": "MwSt. ausweisbar",
+   "km": "120.000 km",
+   "year": "11/2022",
+   "power": "221 kW (300 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=53202637756512",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/c5/c57febd6-33e7-4a2c-8dd0-feb02ea1f486?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/c5/c57febd6-33e7-4a2c-8dd0-feb02ea1f486?rule=mo-640",
+   "ausstattung": [
+    "Vollausstattung",
+    "Panoramadach",
+    "22″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "maserati-levante-3-0d-q4-2016",
+   "sample": false,
+   "make": "Maserati",
+   "model": "Maserati Levante 3.0d Q4",
+   "price": "25.850 €",
+   "vat": "",
+   "km": "188.000 km",
+   "year": "10/2016",
+   "power": "202 kW (275 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=52936754608800",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/1a/1ac7067a-241e-473b-aec2-25787de4c726?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/1a/1ac7067a-241e-473b-aec2-25787de4c726?rule=mo-640",
+   "ausstattung": [
+    "360°-Kamera",
+    "Navigation",
+    "Spurhalteassistent",
+    "Leder",
+    "Skyhook-Fahrwerk",
+    "21″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "hyundai-i30-1-5-hybrid-dct-2023",
+   "sample": false,
+   "make": "Hyundai",
+   "model": "Hyundai i30 1.5 Hybrid DCT",
+   "price": "16.850 €",
+   "vat": "",
+   "km": "30.000 km",
+   "year": "07/2023",
+   "power": "118 kW (160 PS)",
+   "fuel": "Hybrid (Benzin/Elektro)",
+   "gearbox": "Doppelkupplung (DCT)",
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=52928510083360",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/98/98a4ced7-319e-4e13-bb54-cce21888cd54?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/98/98a4ced7-319e-4e13-bb54-cce21888cd54?rule=mo-640",
+   "ausstattung": [
+    "LED-Scheinwerfer",
+    "Rückfahrkamera",
+    "Spurhalteassistent",
+    "Sitzheizung",
+    "17″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "mercedes-benz-s350d-bluetec-4matic-amg-2011",
+   "sample": false,
+   "make": "Mercedes-Benz",
+   "model": "Mercedes-Benz S350d BlueTEC 4MATIC AMG",
+   "price": "10.850 €",
+   "vat": "",
+   "km": "393.000 km",
+   "year": "06/2011",
+   "power": "190 kW (258 PS)",
+   "fuel": "Diesel",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=52940875283072",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/d8/d8ffbb2f-e484-4474-949d-aa45d9dd5d6e?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/d8/d8ffbb2f-e484-4474-949d-aa45d9dd5d6e?rule=mo-640",
+   "ausstattung": [
+    "Rückfahrkamera",
+    "Spurhalteassistent",
+    "Harman Kardon Sound",
+    "Airmatic-Luftfederung",
+    "Schiebedach",
+    "19″ Leichtmetallfelgen"
+   ]
+  },
+  {
+   "id": "mercedes-benz-sprinter-308-cdi-automatik-2001",
+   "sample": false,
+   "make": "Mercedes-Benz",
+   "model": "Mercedes-Benz Sprinter 308 CDI Automatik",
+   "price": "23.850 €",
+   "vat": "",
+   "km": "182.000 km",
+   "year": "08/2001",
+   "power": "60 kW (82 PS)",
+   "fuel": "Diesel",
+   "gearbox": "Automatik",
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=53543946236224",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/0e/0e7048be-d8e9-4db7-8bbb-246c0427f912?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/0e/0e7048be-d8e9-4db7-8bbb-246c0427f912?rule=mo-640",
+   "ausstattung": [
+    "Imbisswagen-Ausbau",
+    "Verkaufswagen"
+   ]
+  },
+  {
+   "id": "opel-adam-1-0-jam-2014",
+   "sample": false,
+   "make": "Opel",
+   "model": "Opel Adam 1.0 Jam",
+   "price": "5.850 €",
+   "vat": "",
+   "km": "116.000 km",
+   "year": "11/2014",
+   "power": "66 kW (90 PS)",
+   "fuel": "Benzin",
+   "gearbox": null,
+   "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=53207401983712",
+   "img": "https://img.classistatic.de/api/v1/mo-prod/images/dc/dc04cc1e-5cda-45ae-8576-331cc4a54686?rule=mo-1600",
+   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/dc/dc04cc1e-5cda-45ae-8576-331cc4a54686?rule=mo-640",
+   "ausstattung": [
+    "Apple CarPlay",
+    "Navigation",
+    "Klimaanlage",
+    "15″ Leichtmetallfelgen"
+   ]
+  }
+ ]
+}

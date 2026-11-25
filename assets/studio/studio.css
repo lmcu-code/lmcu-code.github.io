@@ -1,0 +1,187 @@
+/* KMC Motors · Richtung A „Studio“ (elegant × Apple) */
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-display:swap;font-weight:100 900;src:url(../fonts/hanken-grotesk.woff2) format("woff2")}
+@font-face{font-family:"Red Hat Mono";font-style:normal;font-display:swap;font-weight:300 700;src:url(red-hat-mono.woff2) format("woff2")}
+:root{--paper:#FFFFFF;--mist:#F1F1EF;--ink:#111213;--muted:#55585D;--line:#E2E2DF;--stage:#ECECE9;--night:#0B0B0C;--snow:#F3F3F1;--dimlight:#A3A6AB;--mono:"Red Hat Mono",ui-monospace,"SFMono-Regular",Menlo,monospace}
+*{box-sizing:border-box}
+html{hyphens:manual;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--ink)}a:hover{color:#3A3C40}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:50;background:var(--ink);color:#fff;padding:10px 16px}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.dark :focus-visible{outline-color:var(--snow)}
+.ico{width:16px;height:16px;flex:none}
+.ico path{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:square}
+/* Kopf */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.is-scrolled{border-bottom-color:var(--line)}
+.top__in{display:flex;align-items:center;justify-content:space-between;gap:32px;height:76px}
+.top__logo img{width:148px}
+.top__nav{display:flex;gap:36px}
+.top__nav a{text-decoration:none;font-size:15px;font-weight:500}
+.top__act{display:flex;align-items:center;gap:24px}
+.top__tel{font-family:var(--mono);font-size:14px;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;background:var(--ink);color:#FFFFFF;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:background .15s}
+.btn:hover{background:#2E3034;color:#FFFFFF}
+.btn--lg{min-height:56px;padding:0 30px;font-size:16px}
+.btn--light{background:var(--snow);color:#000000}
+.btn--light:hover{background:#FFFFFF;color:#000000}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;font-size:16px;min-height:44px}
+.link span{border-bottom:1.5px solid currentColor;padding-bottom:2px}
+/* Held */
+.hero__grid{padding:56px 0 48px}
+.hero__row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 56px;margin-top:40px}
+.hero__h{margin:0;font-size:clamp(40px,8.4vw,112px);line-height:.94;letter-spacing:-.048em;font-weight:200}
+.hero__h b{display:block;font-weight:800}
+.hero__row p{margin:0;max-width:540px;font-size:19px;line-height:1.5;color:var(--muted);text-wrap:pretty}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px}
+.stage{position:relative;margin:0 auto;max-width:1440px;background:radial-gradient(120% 90% at 50% 110%,#D9D9D5 0%,var(--stage) 55%,#F4F4F2 100%);aspect-ratio:1672/780;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.stage img{width:84%;max-width:1180px;height:auto;filter:drop-shadow(0 28px 22px rgba(0,0,0,.18));transform:translateY(3%)}
+.stage figcaption{position:absolute;left:28px;right:28px;bottom:22px;display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.claim{margin:72px 0 0;max-width:1040px;font-size:clamp(24px,3vw,40px);line-height:1.22;letter-spacing:-.022em;font-weight:300;text-wrap:pretty}
+.claim b{font-weight:700}
+/* Abschnitte */
+.sec{padding:128px 0;scroll-margin-top:60px}
+.sec--mist{background:var(--mist)}
+.h2{margin:0;font-size:clamp(44px,6vw,88px);line-height:.95;letter-spacing:-.045em;font-weight:800}
+.h2 i{font-style:normal;font-weight:200}
+.sec__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 32px}
+.sec__note{margin:20px 0 0;color:var(--muted);font-size:16px}
+/* Bestand */
+.cars{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:64px 32px;margin-top:56px}
+.car__img{display:flex;align-items:center;justify-content:center;background:var(--mist);aspect-ratio:3/2;overflow:hidden;padding:8%}
+.car__img img{width:100%;height:auto;filter:drop-shadow(0 14px 12px rgba(0,0,0,.16));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.car:hover .car__img img{transform:scale(1.04)}
+.car__tag{margin:22px 0 6px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.car h3{margin:0;min-height:2.2em;font-size:27px;line-height:1.1;letter-spacing:-.025em;font-weight:700}
+.car h3 a{text-decoration:none}
+.car__price{margin:10px 0 22px;font-size:36px;line-height:1;font-weight:300;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.spec{margin:0;border-top:1px solid var(--line)}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.spec dt{color:var(--muted);font-size:15px}
+.spec dd{margin:0;font-family:var(--mono);font-size:15px}
+.car__act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:24px}
+/* Leistungen */
+.svc{list-style:none;margin:56px 0 0;padding:0}
+.svc li{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:16px 56px;align-items:baseline;padding:30px 0;border-top:1px solid #DCDCD8}
+.svc li:last-child{border-bottom:1px solid #DCDCD8}
+.svc__t{margin:0;font-size:clamp(30px,4.3vw,62px);line-height:1.02;letter-spacing:-.04em;font-weight:200;text-wrap:balance}
+.svc__t b{font-weight:800}
+.svc__d{margin:0;color:var(--muted);font-size:16px;line-height:1.55;text-wrap:pretty}
+/* Ablauf */
+.steps{list-style:none;margin:64px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.steps li{position:relative;padding:34px 28px 0 0}
+.steps li::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;background:var(--ink)}
+.steps__k{display:block;font-size:30px;line-height:1.1;letter-spacing:-.03em;font-weight:700}
+.steps__d{display:block;margin-top:8px;color:var(--muted);font-size:16px}
+/* Kontakt */
+.dark{background:var(--night);color:var(--snow);padding:128px 0;scroll-margin-top:60px}
+.dark a{color:var(--snow)}
+.dark__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:stretch}
+.addr{margin:0;font-size:clamp(44px,6vw,88px);line-height:.95;letter-spacing:-.045em;font-weight:200}
+.addr b{display:block;font-weight:800}
+.hours{margin-top:44px;border-collapse:collapse;font-size:17px}
+.hours th{text-align:left;font-weight:400;color:var(--dimlight);padding:8px 40px 8px 0}
+.hours td{font-family:var(--mono);padding:8px 0}
+.direct{list-style:none;margin:48px 0 0;padding:0;border-top:1px solid #2C2D30}
+.direct a{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:20px 0;border-bottom:1px solid #2C2D30;text-decoration:none}
+.direct a:hover .direct__k{text-decoration:underline}
+.direct__k{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.direct__v{font-family:var(--mono);font-size:15px;color:var(--dimlight)}
+.map{position:relative;background:#161618;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:40px;min-height:440px;overflow:hidden}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.05)}
+.map__pin{width:44px;height:44px;color:var(--snow)}
+.map__pin path,.map__pin circle{fill:none;stroke:currentColor;stroke-width:1.6}
+.map__body{display:flex;flex-direction:column;gap:16px}
+.map__t{margin:0;font-size:28px;font-weight:700;letter-spacing:-.02em}
+.map p{margin:0;color:var(--dimlight);font-size:15px;max-width:360px}
+.map__act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:8px}
+/* Fuß */
+.foot{padding:40px 0 56px}
+.foot__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;font-size:14px;color:var(--muted)}
+.foot__in p{margin:0}
+.foot__in img{width:116px}
+.foot__nav{display:flex;flex-wrap:wrap;gap:8px 28px}
+.foot__nav a{color:var(--muted)}
+/* Echte Fotos */
+.car__img--foto{padding:0;background:#1A1B1D}
+.car__img--foto img{height:100%;object-fit:cover;filter:none}
+.stage--foto{aspect-ratio:16/7;background:#111}
+.stage--foto img{width:100%;max-width:none;height:100%;object-fit:cover;object-position:50% 62%;filter:none;transform:none;animation:kb 18s ease-out both}
+.stage--foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55))}
+.stage--foto figcaption{z-index:1;color:#E8E8E5;align-items:flex-end}
+.stage--foto figcaption a{color:#fff;text-decoration:none;font-family:"Hanken Grotesk",sans-serif;font-size:17px}
+.stage--foto figcaption a b{font-weight:700}
+@keyframes kb{from{transform:scale(1.06)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.stage--foto img{animation:none}}
+.dp__stage--foto{padding:0;background:#111;aspect-ratio:4/3}
+.dp__stage--foto img{width:100%;height:100%;object-fit:cover;filter:none}
+/* Fahrzeugseite */
+.dp{padding:24px 0 112px}
+.dp__back{margin:0 0 20px}
+.dp__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:start}
+.dp__media{position:sticky;top:100px}
+.dp__stage{margin:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 90% at 50% 110%,#D9D9D5 0%,var(--stage) 55%,#F4F4F2 100%);aspect-ratio:4/3;padding:6%}
+.dp__stage img{width:100%;filter:drop-shadow(0 22px 18px rgba(0,0,0,.18))}
+.dp__thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:10px}
+.dp__thumbs button{display:flex;flex-direction:column;gap:6px;align-items:stretch;background:var(--mist);border:1px solid transparent;padding:8px;cursor:pointer;font:inherit;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.dp__thumbs button[aria-current="true"]{border-color:var(--ink);color:var(--ink)}
+.dp__thumbs img{aspect-ratio:3/2;object-fit:contain;width:100%}
+.dp__demo{margin:14px 0 0;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.dp__h{margin:0;font-size:clamp(36px,4.4vw,60px);line-height:1;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+.dp__price{margin:16px 0 28px;font-size:clamp(40px,4vw,56px);line-height:1;font-weight:200;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.sheet{width:100%;margin-top:40px;border-collapse:collapse;border-top:2px solid var(--ink)}
+.sheet caption{text-align:left;font-family:var(--mono);font-size:13px;color:var(--muted);padding-bottom:10px}
+.sheet th,.sheet td{padding:13px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.sheet th{text-align:left;font-weight:400;color:var(--muted);font-size:15px}
+.sheet td{text-align:right;font-family:var(--mono);font-size:15px}
+.sheet__c{display:inline-block;min-width:44px;font-family:var(--mono);font-size:12px;color:#8A8D92}
+.dp__h2{margin:48px 0 0;font-size:24px;letter-spacing:-.02em}
+.dp__list{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.dp__list li{display:flex;justify-content:space-between;gap:24px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.dp__list span{color:var(--muted);text-align:right}
+.dp__fine{margin:32px 0 0;font-size:13px;color:var(--muted)}
+/* Handy-Leiste */
+.dock{display:none}
+@media (max-width:980px){
+ .top__nav{display:none}
+ .dark__grid,.svc li,.dp__grid{grid-template-columns:minmax(0,1fr)}
+ .hero__grid{padding-top:40px}
+ .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}
+ .dp__media{position:static}
+}
+@media (max-width:600px){
+ .wrap{padding:0 20px}
+ .top__in{height:64px}
+ .top__logo img{width:124px}
+ .top__tel{display:none}
+ .top .btn{min-height:42px;padding:0 18px}
+ .hero__grid{padding:32px 0 32px}
+ .hero__row{margin-top:24px}
+ .hero__row p{font-size:17px}
+ .hero__cta .btn{width:100%}
+ .sec,.dark{padding:88px 0}
+ .steps{grid-template-columns:minmax(0,1fr);border-top:0;border-left:2px solid var(--ink);row-gap:36px}
+ .steps li{padding:0 0 0 24px}
+ .steps li::before{top:6px;left:-8px}
+ .stage{aspect-ratio:4/3}
+ .stage--foto{aspect-ratio:4/3}
+ .stage--foto figcaption{font-size:12px}
+ .stage--foto figcaption a{font-size:15px}
+ .stage img{width:108%;max-width:none}
+ .stage figcaption{left:16px;right:16px;bottom:12px;flex-direction:column;gap:0;font-size:11px}
+ .claim{margin-top:48px}
+ .car h3{min-height:0}
+ .map{padding:28px;min-height:340px}
+ .direct__k{font-size:24px}
+ .hours th{padding-right:20px}
+ .page{padding-bottom:72px}
+ .dock{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--ink);padding-bottom:env(safe-area-inset-bottom)}
+ .dock a{display:flex;align-items:center;justify-content:center;min-height:60px;color:#fff;font-weight:600;text-decoration:none;font-size:16px}
+ .dock a+a{border-left:1px solid #2E3034}
+ .sheet th{font-size:14px}
+}

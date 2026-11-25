@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KMC Cockpit</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B090A">
+<style>
+@font-face{font-family:"Hanken Grotesk";font-display:swap;font-weight:100 900;src:url(fonts/hanken-grotesk.woff2) format("woff2")}
+@font-face{font-family:"Red Hat Mono";font-display:swap;font-weight:300 700;src:url(fonts/red-hat-mono.woff2) format("woff2")}
+:root{
+ --bg:#0B090A;--panel:#141113;--panel2:#1A1618;--panel3:#221D20;--line:#2A2427;--line2:#3B3337;
+ --ink:#F4F0F0;--muted:#A99FA3;--dim:#7E7579;
+ --red:#D7192A;--red2:#F23A4C;--redbg:rgba(215,25,42,.13);--ok:#4DBA7F;--okbg:rgba(77,186,127,.12);--warn:#EAA43C;--warnbg:rgba(234,164,60,.12);
+ --mono:"Red Hat Mono",ui-monospace,Menlo,monospace;--r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(55% 45% at 100% 0%,rgba(215,25,42,.24),transparent 70%),radial-gradient(45% 40% at 0% 100%,rgba(215,25,42,.13),transparent 70%)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red2);outline-offset:2px}
+.mono{font-family:var(--mono)}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+svg.i.s{width:15px;height:15px}
+[hidden]{display:none!important}
+.app{position:relative;display:grid;grid-template-columns:256px minmax(0,1fr) 330px;height:100vh;height:100dvh;max-width:1680px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line);background:rgba(11,9,10,.7)}
+.app.wide{grid-template-columns:256px minmax(0,1fr)}
+.app.wide .rail{display:none}
+.side{display:flex;flex-direction:column;gap:18px;padding:20px 14px;border-right:1px solid var(--line);overflow:auto;scrollbar-width:none}
+.who{display:flex;align-items:center;gap:12px;padding:0 6px}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#46363C,#1B1517);display:grid;place-items:center;font-weight:700;font-size:13px;border:1px solid var(--line2);flex:none;line-height:1;color:var(--ink)}
+.who b{display:block;font-size:15px}
+.who span{font-size:12px;color:var(--muted)}
+.search{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:0 10px 0 12px;height:40px;color:var(--muted);width:100%;text-align:left}
+.search span{flex:1}
+.search kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:5px;padding:1px 6px;color:var(--dim)}
+.nav h4{margin:0 0 6px 10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;height:38px;padding:0 12px;border:0;border-radius:9px;background:none;color:var(--muted);text-align:left;font-size:14.5px;transition:background .15s,color .15s}
+.nav button:hover{background:var(--panel);color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--red);color:#fff;box-shadow:0 10px 26px -12px rgba(215,25,42,.9)}
+.badge{margin-left:auto;background:var(--redbg);color:var(--red2);font-size:11px;font-weight:700;border-radius:20px;padding:1px 8px;line-height:18px}
+.nav button[aria-current="page"] .badge{background:rgba(255,255,255,.22);color:#fff}
+.brand{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 8px 0;border-top:1px solid var(--line);color:var(--dim);font-size:11px}
+.brand img{width:92px}
+.main{display:flex;flex-direction:column;min-width:0;overflow:auto}
+.bar{flex:none;position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;height:64px;padding:0 26px;border-bottom:1px solid var(--line);background:rgba(11,9,10,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.crumb{font-size:14px;color:var(--muted);white-space:nowrap}.crumb b{color:var(--ink);font-weight:500}
+.live{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:3px 10px;white-space:nowrap}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:puls 2s infinite}
+@keyframes puls{0%{box-shadow:0 0 0 0 rgba(77,186,127,.6)}70%{box-shadow:0 0 0 7px rgba(77,186,127,0)}100%{box-shadow:0 0 0 0 rgba(77,186,127,0)}}
+.bar__act{margin-left:auto;display:flex;gap:8px;align-items:center}
+.iconbtn{width:38px;height:38px;border-radius:10px;border:1px solid transparent;background:none;color:var(--muted);display:grid;place-items:center;position:relative;flex:none}
+.iconbtn:hover{border-color:var(--line);color:var(--ink)}
+.dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--red2)}
+.view{padding:26px;display:none}
+.view.on{display:block;animation:rein .35s ease both}
+@keyframes rein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 20px}
+.vh h1{margin:0;font-size:28px;font-weight:600;letter-spacing:-.015em}
+.vh p{margin:4px 0 0;color:var(--muted);font-size:14px;max-width:660px}
+.vh .acts{display:flex;gap:8px;flex-wrap:wrap}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.card h3{margin:0;font-size:16.5px;font-weight:600}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:0;background:var(--red);color:#fff;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .1s}
+.btn:hover{background:var(--red2)}
+.btn:active{transform:scale(.98)}
+.btn--ghost{background:rgba(255,255,255,.02);border:1px solid var(--line2);color:var(--ink)}
+.btn--ghost:hover{background:var(--panel3)}
+.btn--sm{height:32px;padding:0 11px;font-size:13px;border-radius:8px}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px}
+.seg button{border:0;background:none;color:var(--muted);height:28px;padding:0 11px;border-radius:7px;font-size:12.5px}
+.seg button[aria-pressed="true"]{background:var(--panel3);color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;border-radius:20px;padding:2px 10px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap;line-height:20px}
+.pill.red{border-color:rgba(242,58,76,.45);color:var(--red2);background:var(--redbg)}
+.pill.ok{border-color:rgba(77,186,127,.4);color:var(--ok);background:var(--okbg)}
+.pill.warn{border-color:rgba(234,164,60,.4);color:var(--warn);background:var(--warnbg)}
+.up{color:var(--ok)}.down{color:var(--red2)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{position:relative;overflow:hidden;min-height:138px;transition:border-color .2s,transform .2s}
+.kpi[data-go]{cursor:pointer}
+.kpi[data-go]:hover{border-color:var(--line2);transform:translateY(-2px)}
+.kpi small{display:block;color:var(--muted);font-size:13.5px}
+.kpi .v{display:block;margin-top:10px;font-size:31px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .d{display:block;margin-top:4px;font-size:12.5px;color:var(--muted);position:relative;z-index:1}
+.kpi .d svg{vertical-align:-3px;margin-right:4px}
+.kpi--g .d{padding-right:84px}
+.kpi svg.spark{position:absolute;left:0;right:0;bottom:0;width:100%;height:48px}
+.gauge{position:absolute;right:14px;bottom:12px;width:78px;height:78px}
+.g2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;margin-top:14px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-content:start}
+.g2>*,.g3>*{min-width:0}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-bottom:6px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.chart svg{width:100%;height:auto;display:block}
+.draw{stroke-dasharray:2400;stroke-dashoffset:2400;animation:zieh 1.4s .1s ease-out forwards}
+@keyframes zieh{to{stroke-dashoffset:0}}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:12px;color:var(--muted);font-weight:500;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl tbody tr.click{cursor:pointer}
+.tbl tbody tr:hover td{background:rgba(255,255,255,.025)}
+.scroll{overflow-x:auto}
+.thumb{width:56px;height:42px;border-radius:7px;object-fit:cover;background:var(--panel3);margin-right:12px;flex:none}
+.cell{display:flex;align-items:center;min-width:0}
+.cell b{font-weight:500;display:block}
+.cell span{display:block;font-size:12px;color:var(--dim)}
+.feat{padding:0;overflow:hidden;position:relative}
+.feat__img{position:relative;height:236px;overflow:hidden;background:#120D0F}
+.feat__img img{width:100%;height:100%;object-fit:cover;transform:scale(1.03);transition:transform 6s ease}
+.feat:hover .feat__img img{transform:scale(1.1)}
+.feat__img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,9,10,0) 40%,#161214),radial-gradient(80% 60% at 50% 120%,rgba(215,25,42,.5),transparent 70%)}
+.feat__img .pill{position:absolute;left:14px;top:14px;z-index:1;background:rgba(40,8,12,.75);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.feat__b{padding:0 18px 18px;margin-top:-24px;position:relative}
+.feat__t{margin:0;font-size:20px;font-weight:600;line-height:1.2}
+.feat__p{display:flex;justify-content:space-between;align-items:center;margin:10px 0 12px}
+.feat__p b{font-size:27px;font-weight:600}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:13px;color:var(--muted);margin:0 0 14px}
+.facts b{color:var(--ink);font-weight:500}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.row2 .pill{justify-content:center;padding:6px}
+.rail{border-left:1px solid var(--line);padding:20px 18px;overflow:auto;display:flex;flex-direction:column;gap:26px}
+.rail h2{margin:0 0 12px;font-size:16.5px;font-weight:600}
+.rail-m{display:none}
+.note{display:flex;gap:12px;padding:8px 0;border:0;background:none;text-align:left;width:100%;color:inherit}
+.note:hover b{color:#fff;text-decoration:underline}
+.note .ic{width:34px;height:34px;border-radius:50%;background:var(--redbg);color:var(--red2);display:grid;place-items:center;flex:none}
+.note .ic.ok{background:var(--okbg);color:var(--ok)}
+.note .ic.warn{background:var(--warnbg);color:var(--warn)}
+.note b{display:block;font-size:14px;font-weight:500}
+.note span{font-size:12px;color:var(--dim)}
+.lead{display:flex;align-items:center;gap:12px;padding:10px 0;border:0;border-bottom:1px solid var(--line);background:none;width:100%;text-align:left;color:inherit}
+.lead:last-child{border-bottom:0}
+.lead .avatar{width:34px;height:34px;font-size:12px}
+.lead .t{min-width:0;flex:1}
+.lead b{display:block;font-size:14px;font-weight:500}
+.lead .t span{display:block;font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.count{background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px}
+.termin{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.termin:last-child{border-bottom:0}
+.termin time{font-family:var(--mono);font-size:12.5px;color:var(--red2);min-width:62px}
+.termin b{display:block;font-size:14px;font-weight:500}.termin span{font-size:12px;color:var(--dim)}
+.tasks{display:grid;gap:8px}
+.task{display:flex;align-items:center;gap:14px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;transition:opacity .3s;width:100%;color:inherit;text-align:left}
+.task input[type=checkbox]{width:20px;height:20px;accent-color:var(--red);flex:none}
+.task .t{flex:1;min-width:0}
+.task b{display:block;font-weight:500;font-size:14px}.task span{font-size:12px;color:var(--dim)}
+.task.done{opacity:.45}.task.done b{text-decoration:line-through}
+button.task:hover{border-color:var(--line2)}
+.board{display:grid;grid-template-columns:repeat(5,minmax(232px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}
+.col{background:rgba(255,255,255,.018);border:1px solid var(--line);border-radius:var(--r);padding:12px;min-height:430px;transition:background .15s,border-color .15s}
+.col.over{border-color:var(--red);background:var(--redbg)}
+.col h3{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 12px;font-size:13px;font-weight:600;color:var(--muted)}
+.col h3 span{font-family:var(--mono);color:var(--dim)}
+.tick{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px;color:inherit;transition:border-color .15s,transform .15s}
+.tick:hover{border-color:var(--line2);transform:translateY(-1px)}
+.tick.hot{border-left:3px solid var(--red)}
+.tick .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.tick b{font-size:14px;font-weight:600}
+.tick time{font-family:var(--mono);font-size:11px;color:var(--dim);white-space:nowrap}
+.tick p{margin:6px 0 10px;font-size:13px;color:var(--muted)}
+.tick .meta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;font-size:11.5px;color:var(--dim)}
+.tick .meta>span:first-child{flex:1 1 100%}
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:14px}
+.vcar{padding:0;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+.vcar:hover{border-color:var(--line2);transform:translateY(-2px)}
+.vcar__img{position:relative;aspect-ratio:4/3;background:var(--panel3);overflow:hidden}
+.vcar__img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.vcar:hover .vcar__img img{transform:scale(1.05)}
+.vcar__img .pill{position:absolute;left:10px;top:10px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);background:rgba(11,9,10,.65)}
+.vcar__img .pill.ok{background:rgba(16,40,26,.78)}.vcar__img .pill.warn{background:rgba(50,34,10,.8)}.vcar__img .pill.red{background:rgba(60,10,16,.8)}
+.nofoto{display:grid;place-items:center;align-content:center;gap:6px;height:100%;color:var(--dim);font-family:var(--mono);font-size:12px;text-align:center;padding:20px;border:1.5px dashed var(--line2);border-radius:var(--r) var(--r) 0 0}
+.vcar__b{padding:14px}
+.vcar__b b{display:block;font-size:15px;font-weight:600;line-height:1.25;min-height:2.5em}
+.vcar__p{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.vcar__p strong{font-size:20px;font-weight:600}
+.vcar__m{display:flex;gap:12px;margin-top:10px;font-size:12px;color:var(--dim);flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.filters input{height:36px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:0 12px;min-width:220px}
+.drawer{position:fixed;inset:0;z-index:40;visibility:hidden;transition:visibility 0s .3s}
+.drawer.on{visibility:visible;transition:none}
+.drawer__bg{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .25s}
+.drawer.on .drawer__bg{opacity:1}
+.drawer__p{position:absolute;right:0;top:0;bottom:0;width:min(560px,100%);background:var(--panel);border-left:1px solid var(--line2);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.drawer.on .drawer__p{transform:none}
+.drawer__p.wide{width:min(860px,100%)}
+.drawer__h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer__h h2{margin:0;font-size:20px}
+.drawer__h p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.drawer__b{padding:20px 22px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}
+.drawer__f{display:flex;gap:10px;flex-wrap:wrap;padding:16px 22px;border-top:1px solid var(--line)}
+.msg{max-width:86%;padding:11px 14px;border-radius:14px;font-size:14px;white-space:pre-line}
+.msg.in{background:var(--panel2);border:1px solid var(--line);border-top-left-radius:4px}
+.msg.out{align-self:flex-end;background:#2A1418;border:1px solid rgba(215,25,42,.35);border-top-right-radius:4px}
+.msg small{display:block;margin-top:6px;font-size:11px;color:var(--dim)}
+.draft{border:1px dashed var(--line2);border-radius:12px;padding:12px}
+.draft label{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:8px}
+.draft textarea{width:100%;min-height:236px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px;resize:vertical;line-height:1.5}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:9px 18px;font-size:14px;margin:0}
+.kv dt{color:var(--muted)}.kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.bigimg{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;background:var(--panel3)}
+.form{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+.drop{border:1.5px dashed var(--line2);border-radius:14px;padding:22px;text-align:center;color:var(--muted);cursor:pointer;display:block;transition:.15s}
+.drop:hover,.drop.over{border-color:var(--red);color:var(--ink);background:var(--redbg)}
+.drop input{display:none}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-top:12px}
+.thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.f label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+.f input,.f select,.f textarea{width:100%;height:42px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:0 12px}
+.f textarea{height:auto;min-height:130px;padding:10px 12px;line-height:1.5}
+.f.full{grid-column:1/-1}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--red);outline:0}
+.checks{list-style:none;margin:10px 0 0;padding:0;font-size:13px}
+.checks li{display:flex;gap:8px;padding:5px 0;color:var(--muted)}
+.checks li.ok{color:var(--ok)}
+.prev{margin-top:12px;border-radius:12px;overflow:hidden;background:#fff;color:#111}
+.prev__img{aspect-ratio:4/3;background:#ECECE9;display:flex;align-items:center;justify-content:center}
+.prev__img img{width:100%;height:100%;object-fit:cover}
+.prev__b{padding:14px}
+.prev__b small{font-family:var(--mono);font-size:11px;color:#666}
+.prev__b h4{margin:4px 0;font-size:18px}
+.prev__b p{margin:0;font-size:24px;font-weight:300}
+.kanal{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kanal:last-child{border-bottom:0}
+.kanal input{width:18px;height:18px;accent-color:var(--red)}
+.doc{background:#fff;color:#141414;border-radius:6px;padding:44px 48px;font-size:12.5px;line-height:1.5;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.doc h2{margin:0;font-size:22px;letter-spacing:-.01em}
+.doc .kopf{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:28px}
+.doc .kopf img{width:150px}
+.doc .abs{font-size:10px;color:#666;border-bottom:1px solid #ddd;padding-bottom:3px;margin-bottom:6px}
+.doc table{width:100%;border-collapse:collapse;margin:18px 0}
+.doc th{text-align:left;border-bottom:1.5px solid #141414;padding:7px 4px;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.doc td{border-bottom:1px solid #e3e3e3;padding:8px 4px;vertical-align:top}
+.doc .r{text-align:right}
+.doc .sum td{border:0;font-weight:700;font-size:14px}
+.doc .hint{background:#f4f4f2;padding:10px 12px;border-radius:4px;font-size:11.5px}
+.doc .fuss{margin-top:30px;padding-top:10px;border-top:1px solid #ddd;font-size:10px;color:#666;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.doc .sign{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:44px}
+.doc .sign div{border-top:1px solid #141414;padding-top:6px;font-size:11px;color:#444}
+.doc .muster{font-family:var(--mono);font-size:10px;color:#B5121F;margin-bottom:14px}
+.doc ol{padding-left:18px;margin:6px 0}
+.pal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-start;justify-content:center;padding-top:12vh;background:rgba(0,0,0,.55)}
+.pal.on{display:flex}
+.pal__box{width:min(620px,92vw);background:var(--panel);border:1px solid var(--line2);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.pal__box input{width:100%;height:56px;border:0;border-bottom:1px solid var(--line);background:none;padding:0 20px;font-size:17px;outline:0}
+.pal__list{max-height:50vh;overflow:auto;padding:6px}
+.pal__list button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:0;border-radius:9px;background:none;text-align:left;color:var(--ink)}
+.pal__list button:hover,.pal__list button.act{background:var(--panel3)}
+.pal__list small{margin-left:auto;color:var(--dim);font-size:12px;white-space:nowrap}
+.pal__list img{width:40px;height:30px;border-radius:5px;object-fit:cover}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#fff;color:#111;border-radius:12px;padding:12px 18px;font-weight:600;font-size:14px;box-shadow:0 14px 40px rgba(0,0,0,.5);transition:.25s;z-index:70;pointer-events:none;max-width:92vw;display:flex;gap:10px;align-items:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.toast svg{color:#1F9A5B}
+.bars{display:grid;gap:12px}
+.barrow{display:grid;grid-template-columns:118px 1fr 96px;gap:12px;align-items:center;font-size:13px}
+.barrow>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{height:8px;border-radius:5px;background:var(--panel3);overflow:hidden}
+.track i{display:block;height:100%;background:linear-gradient(90deg,#8E0F1A,var(--red2));border-radius:5px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.track i.grau{background:linear-gradient(90deg,#3B3337,#7E7579)}
+.barrow>span:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tabs,.more{display:none}
+@media (prefers-reduced-motion:reduce){.view.on{animation:none}.live i{animation:none}.draw{animation:none;stroke-dashoffset:0}.drawer__p{transition:none}}
+@media print{
+ body{overflow:visible;background:#fff}body::before{display:none}
+ .app,.toast,.pal,.tabs,.more{display:none!important}
+ .drawer{position:static;visibility:visible}.drawer__bg,.drawer__h,.drawer__f{display:none}
+ .drawer__p{position:static;transform:none;width:auto;border:0;background:#fff}
+ .drawer__b{padding:0;overflow:visible}
+ .doc{box-shadow:none;padding:0}
+}
+@media (max-width:1320px){.app{grid-template-columns:228px minmax(0,1fr)}.rail{display:none}.app.wide{grid-template-columns:228px minmax(0,1fr)}.rail-m{display:block}}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.g2,.form{grid-template-columns:minmax(0,1fr)}.g3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+ body{overflow:auto}
+ .app,.app.wide{display:block;height:auto;border:0}
+ .side{display:none}
+ .main{overflow:visible;padding-bottom:90px}
+ .bar{padding:0 12px;gap:8px}
+ .crumb span{display:none}
+ .live{display:none}
+ #searchMobile{display:grid!important}
+ .view{padding:16px}
+ .vh h1{font-size:24px}
+ .kpis{gap:10px}
+ .kpi{min-height:122px;padding:14px}
+ .kpi .v{font-size:22px}
+ .kpi .d{font-size:11.5px}
+ .kpi--g .d{padding-right:56px}
+ .gauge{width:54px;height:54px;right:10px;bottom:10px}
+ .fields{grid-template-columns:1fr}
+ .board{grid-template-columns:repeat(5,84vw);scroll-snap-type:x mandatory}
+ .col{scroll-snap-align:start;min-height:0}
+ .barrow{grid-template-columns:88px 1fr 76px}
+ .task .pill{display:none}
+ .task{gap:10px;padding:12px}
+ .doc{padding:22px 18px;font-size:11.5px}
+ .doc .kopf{flex-direction:column}
+ .doc .fuss{grid-template-columns:1fr}
+ .tabs{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(20,17,19,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+ .tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;height:62px;justify-content:center;border:0;background:none;color:var(--muted);font-size:10.5px;position:relative}
+ .tabs button[aria-current="page"]{color:var(--red2)}
+ .tabs .badge{position:absolute;top:7px;left:calc(50% + 5px);background:var(--red);color:#fff;font-size:10px;padding:0 5px;line-height:16px;margin:0}
+ .more.on{display:block;position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.6)}
+ .more__p{position:absolute;left:0;right:0;bottom:0;max-height:80vh;overflow:auto;background:var(--panel);border-top:1px solid var(--line2);border-radius:18px 18px 0 0;padding:14px 14px calc(76px + env(safe-area-inset-bottom));display:grid;gap:12px}
+ .more__p .nav button{height:46px;font-size:15.5px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D7192A" stop-opacity=".38"/><stop offset="1" stop-color="#D7192A" stop-opacity="0"/></linearGradient></defs>
+ <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+ <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13h5l2 3h4l2-3h5M5 5h14l2 8v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6z"/></symbol>
+ <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16v2M19 16v2M3 16h18v-4l-2-5H5l-2 5zM3 12h18M7 14h.01M17 14h.01"/></symbol>
+ <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/></symbol>
+ <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4"/></symbol>
+ <symbol id="i-euro" viewBox="0 0 24 24"><path d="M17 6.5A7 7 0 1 0 17 17.5M4 10h9M4 14h9"/></symbol>
+ <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6M9 16h3"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 3.5a4 4 0 0 1 0 7.5M22 21a7 7 0 0 0-4-6.3"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+ <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></symbol>
+ <symbol id="i-globe" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/></symbol>
+ <symbol id="i-search" viewBox="0 0 24 24"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4"/></symbol>
+ <symbol id="i-up" viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-7M14 8h6v6"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+ <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></symbol>
+ <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+ <symbol id="i-key" viewBox="0 0 24 24"><path d="M15 9a3 3 0 1 0 0 .01M13 11l-9 9M7 17l2 2M9 15l2 2"/></symbol>
+ <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></symbol>
+ <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"/></symbol>
+ <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></symbol>
+ <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h4l2-3h4l2 3h4v13H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></symbol>
+ <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+ <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z"/></symbol>
+</svg>
+
+<div class="app" id="app">
+<aside class="side" aria-label="Navigation">
+ <div class="who"><div class="avatar">KK</div><div><b>Kaan Kömürcü</b><span>KMC Motors · Inhaber</span></div></div>
+ <button class="search" data-pal><svg class="i"><use href="#i-search"/></svg><span>Suchen</span><kbd>⌘K</kbd></button>
+ <div id="navs" style="display:grid;gap:16px"></div>
+ <div class="brand"><img src="img/kmc-logo-weiss.svg" alt="KMC Motors"><span class="mono">Cockpit</span></div>
+</aside>
+
+<div class="main" id="main">
+ <header class="bar">
+  <button class="iconbtn" data-pal aria-label="Suchen" style="display:none" id="searchMobile"><svg class="i"><use href="#i-search"/></svg></button>
+  <span class="crumb"><span>Cockpit / </span><b id="crumb">Übersicht</b></span>
+  <span class="live"><i></i>Website · mobile.de · WhatsApp verbunden</span>
+  <div class="bar__act">
+   <button class="iconbtn" aria-label="Benachrichtigungen" data-go="uebersicht"><svg class="i"><use href="#i-bell"/></svg><span class="dot"></span></button>
+   <button class="btn btn--sm" data-go="inserat"><svg class="i s"><use href="#i-plus"/></svg>Inserat</button>
+  </div>
+ </header>
+
+ <section class="view" id="v-uebersicht">
+  <div class="vh"><div><h1 id="gruss">Guten Tag, Kaan.</h1><p id="heute"></p></div><div class="acts"><button class="btn btn--ghost btn--sm" data-go="auswertung"><svg class="i s"><use href="#i-chart"/></svg>Monatsbericht</button></div></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="g2">
+   <div class="stack">
+    <div class="card chart">
+     <div class="ch"><h3 id="ch-t">Umsatz und Gewinn</h3><div class="seg" role="group" aria-label="Diagramm wählen"><button aria-pressed="true" data-chart="umsatz">Umsatz</button><button aria-pressed="false" data-chart="anfragen">Anfragen</button></div></div>
+     <div class="legend" id="ch-l"></div>
+     <svg id="chart" viewBox="0 0 660 240" role="img" aria-label="Diagramm"></svg>
+    </div>
+    <div class="card">
+     <div class="ch"><h3>Heute erledigen</h3><button class="btn btn--ghost btn--sm" data-go="papier">Alle Aufgaben</button></div>
+     <div class="tasks" id="heute-tasks"></div>
+    </div>
+   </div>
+   <div class="stack">
+    <div class="card feat" id="feat"></div>
+    <div class="card rail-m"><h3 style="margin-bottom:8px">Braucht dich</h3><div id="leads-m"></div></div>
+    <div class="card">
+     <div class="ch"><h3>Standzeit-Ampel</h3><button class="btn btn--ghost btn--sm" data-go="bestand">Bestand</button></div>
+     <div class="bars" id="ampel"></div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section class="view" id="v-anfragen">
+  <div class="vh"><div><h1>Anfragen</h1><p>Website, mobile.de, WhatsApp und Instagram an einem Ort. Ziehen zum Verschieben, antippen zum Antworten. Rot heißt: braucht dich.</p></div><div class="acts"><button class="btn btn--ghost btn--sm" data-go="regeln"><svg class="i s"><use href="#i-bolt"/></svg>Auto-Antworten</button></div></div>
+  <div class="board" id="board"></div>
+ </section>
+
+ <section class="view" id="v-bestand">
+  <div class="vh"><div><h1>Bestand</h1><p>Was hier steht, steht automatisch auf der Website. Antippen für Kalkulation, Preis und Unterlagen.</p></div><div class="acts"><button class="btn" data-go="inserat"><svg class="i s"><use href="#i-plus"/></svg>Auto hinzufügen</button></div></div>
+  <div class="filters"><input type="search" id="b-such" placeholder="Marke, Modell …" aria-label="Bestand durchsuchen"><div class="seg" role="group" aria-label="Filter" id="b-filter"><button aria-pressed="true" data-f="alle">Alle</button><button aria-pressed="false" data-f="lang">Über 45 Tage</button><button aria-pressed="false" data-f="foto">Ohne Fotos</button></div></div>
+  <div class="fleet" id="fleet"></div>
+ </section>
+
+ <section class="view" id="v-inserat">
+  <div class="vh"><div><h1>Inserat anlegen</h1><p>Fotos rein, Daten rein. Die Beschreibung schreibt die KI, du gibst frei. Ein Klick, und das Auto steht auf der Website und als fertiges Paket für mobile.de bereit.</p></div></div>
+  <form class="form" id="form" novalidate>
+   <div class="card">
+    <label class="drop" id="drop"><input type="file" accept="image/*" multiple id="fotos"><svg class="i" style="width:30px;height:30px;margin:0 auto 8px;display:block"><use href="#i-camera"/></svg><b>Fotos hierher ziehen</b><br><span style="font-size:13px">oder antippen und direkt mit dem Handy fotografieren</span></label>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="fields">
+     <div class="f"><label for="f-marke">Marke *</label><select id="f-marke"><option value="">wählen</option><option>Audi</option><option>BMW</option><option>Hyundai</option><option>Land Rover</option><option>Maserati</option><option>Mercedes-Benz</option><option>Opel</option><option>Porsche</option><option>Skoda</option><option>Volkswagen</option></select></div>
+     <div class="f"><label for="f-modell">Modell und Ausstattungslinie *</label><input id="f-modell" placeholder="z. B. A6 Avant 45 TDI quattro"></div>
+     <div class="f"><label for="f-ez">Erstzulassung *</label><input id="f-ez" placeholder="MM/JJJJ"></div>
+     <div class="f"><label for="f-km">Kilometerstand *</label><input id="f-km" placeholder="z. B. 84.000" inputmode="numeric"></div>
+     <div class="f"><label for="f-ek">Einkaufspreis (€) · nur für dich</label><input id="f-ek" placeholder="z. B. 27.500" inputmode="numeric"></div>
+     <div class="f"><label for="f-preis">Verkaufspreis (€) *</label><input id="f-preis" placeholder="z. B. 32.900" inputmode="numeric"></div>
+     <div class="f"><label for="f-kw">Leistung (kW)</label><input id="f-kw" placeholder="z. B. 180" inputmode="numeric"></div>
+     <div class="f"><label for="f-kraft">Kraftstoff</label><select id="f-kraft"><option>Diesel</option><option>Benzin</option><option>Hybrid</option><option>Plug-in-Hybrid</option><option>Elektro</option></select></div>
+     <div class="f full"><label for="f-extra">Ausstattung, Mängel, Besonderheiten (Stichworte, mit Komma)</label><input id="f-extra" placeholder="z. B. Pano-Dach, AHK, Scheckheft, kleiner Kratzer hinten rechts"></div>
+     <div class="f full"><label for="f-text">Beschreibung</label><textarea id="f-text" placeholder="Tipp auf „Beschreibung schreiben“"></textarea></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button type="button" class="btn btn--ghost" id="ki"><svg class="i s"><use href="#i-bolt"/></svg>Beschreibung schreiben</button><button type="submit" class="btn"><svg class="i s"><use href="#i-send"/></svg>Veröffentlichen</button></div>
+   </div>
+   <div class="stack">
+    <div class="card"><h3>So sieht es auf der Website aus</h3>
+     <div class="prev"><div class="prev__img" id="p-img"><span style="font-family:var(--mono);font-size:12px;color:#777">Foto folgt</span></div><div class="prev__b"><small id="p-tag">Neu im Bestand</small><h4 id="p-t">Marke Modell</h4><p id="p-p">– €</p></div></div>
+    </div>
+    <div class="card"><h3>Wo es erscheint</h3>
+     <div style="margin-top:6px"><label class="kanal"><input type="checkbox" checked>Website · sofort</label><label class="kanal"><input type="checkbox" checked>mobile.de · fertiges Paket aus Text und Fotos</label><label class="kanal"><input type="checkbox">Instagram · Night Drop am Freitag</label></div>
+    </div>
+    <div class="card"><h3>Pflichtangaben</h3><ul class="checks" id="checks"></ul><p style="font-size:12px;color:var(--dim);margin:12px 0 0">Ohne Pflichtangaben geht nichts raus. Fotos werden nur am Hintergrund bearbeitet, nie am Auto.</p></div>
+   </div>
+  </form>
+ </section>
+
+ <section class="view" id="v-verkauf">
+  <div class="vh"><div><h1>Verkäufe</h1><p>Jeder Verkauf mit Einkauf, Kosten und echtem Gewinn. Kaufvertrag und Rechnung entstehen daraus mit einem Klick.</p></div><div class="acts"><button class="btn" id="neuVerkauf"><svg class="i s"><use href="#i-plus"/></svg>Verkauf erfassen</button></div></div>
+  <div class="kpis" id="vk-kpis"></div>
+  <div class="card" style="margin-top:14px;padding:6px 8px"><div class="scroll"><table class="tbl" style="min-width:880px"><thead><tr><th>Fahrzeug</th><th>Käufer</th><th>Datum</th><th class="r">Verkauf</th><th class="r">Einkauf + Kosten</th><th class="r">Gewinn</th><th>Zahlung</th><th></th></tr></thead><tbody id="verkauf"></tbody></table></div></div>
+ </section>
+
+ <section class="view" id="v-rechnungen">
+  <div class="vh"><div><h1>Rechnungen</h1><p>Alle Rechnungen an einem Ort. Offene werden automatisch erinnert, überfällige bekommen auf Knopfdruck eine Mahnung.</p></div><div class="acts"><button class="btn btn--ghost btn--sm" data-export><svg class="i s"><use href="#i-down"/></svg>Export für den Steuerberater</button></div></div>
+  <div class="kpis" id="re-kpis"></div>
+  <div class="card" style="margin-top:14px;padding:6px 8px"><div class="scroll"><table class="tbl" style="min-width:780px"><thead><tr><th>Nr.</th><th>Kunde</th><th>Fahrzeug</th><th>Datum</th><th class="r">Betrag</th><th>Status</th><th></th></tr></thead><tbody id="rechnungen"></tbody></table></div></div>
+ </section>
+
+ <section class="view" id="v-belege">
+  <div class="vh"><div><h1>Belege und Ausgaben</h1><p>Beleg fotografieren, fertig. Die KI liest Betrag, Datum und Lieferant aus und ordnet ihn dem richtigen Auto zu.</p></div><div class="acts"><label class="btn" style="cursor:pointer"><input type="file" accept="image/*,application/pdf" id="beleg" hidden><svg class="i s"><use href="#i-camera"/></svg>Beleg hochladen</label></div></div>
+  <div class="g3" id="be-sum"></div>
+  <div class="card" style="margin-top:14px;padding:6px 8px"><div class="scroll"><table class="tbl" style="min-width:740px"><thead><tr><th>Datum</th><th>Lieferant</th><th>Kategorie</th><th>Fahrzeug</th><th class="r">Betrag</th><th>Status</th></tr></thead><tbody id="belege"></tbody></table></div></div>
+ </section>
+
+ <section class="view" id="v-papier">
+  <div class="vh"><div><h1>Papierkram</h1><p>Zulassung, Abmeldung, HU, Export, Kaufverträge. Was ansteht, steht hier, mit Frist.</p></div></div>
+  <div class="g2" style="margin-top:0">
+   <div class="card"><div class="ch"><h3>Offen</h3><span class="pill red" id="p-offen"></span></div><div class="tasks" id="papier"></div></div>
+   <div class="stack">
+    <div class="card"><h3 style="margin-bottom:12px">Vorlagen</h3>
+     <div class="tasks">
+      <button class="task" data-vorlage="vertrag" data-fz="glc"><svg class="i"><use href="#i-pen"/></svg><div class="t"><b>Kaufvertrag Gebrauchtwagen</b><span>Privatkunde, Sachmängelhaftung 12 Monate</span></div></button>
+      <button class="task" data-vorlage="export" data-fz="velar"><svg class="i"><use href="#i-globe"/></svg><div class="t"><b>Kaufvertrag Export</b><span>mit Nachweis der Ausfuhr</span></div></button>
+      <button class="task" data-vorlage="inzahlung" data-fz="adam"><svg class="i"><use href="#i-key"/></svg><div class="t"><b>Ankauf / Inzahlungnahme</b><span>Ankaufvertrag mit Zustandsangaben</span></div></button>
+     </div>
+    </div>
+    <div class="card"><h3 style="margin-bottom:4px">Termine diese Woche</h3><div id="termine"></div></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="view" id="v-kunden">
+  <div class="vh"><div><h1>Kunden</h1><p>Jeder Käufer und jede Anfrage mit Verlauf. Nach dem Kauf geht automatisch die Bitte um eine Google-Bewertung raus.</p></div></div>
+  <div class="card" style="padding:6px 8px"><div class="scroll"><table class="tbl" style="min-width:740px"><thead><tr><th>Kunde</th><th>Kontakt über</th><th>Fahrzeug</th><th>Letzter Kontakt</th><th>Status</th></tr></thead><tbody id="kunden"></tbody></table></div></div>
+ </section>
+
+ <section class="view" id="v-auswertung">
+  <div class="vh"><div><h1>Auswertung November</h1><p>Woher die Kunden kommen, was verdient wird, was zu lange steht. Dazu der Export für den Steuerberater.</p></div><div class="acts"><button class="btn" data-export><svg class="i s"><use href="#i-down"/></svg>Export für den Steuerberater</button></div></div>
+  <div class="kpis" id="au-kpis"></div>
+  <div class="g2">
+   <div class="card"><h3 style="margin-bottom:14px">Woher kommen die Anfragen?</h3><div class="bars" id="quellen"></div></div>
+   <div class="card"><h3 style="margin-bottom:14px">Gewinn pro Marke</h3><div class="bars" id="gewinn"></div></div>
+  </div>
+ </section>
+
+ <section class="view" id="v-regeln">
+  <div class="vh"><div><h1>Auto-Antworten</h1><p>Was rausgeht, ohne dass du etwas tust. Alles andere bleibt ein Entwurf, bis du auf Senden tippst.</p></div></div>
+  <div class="tasks" id="regeln"></div>
+ </section>
+</div>
+
+<aside class="rail" aria-label="Neuigkeiten">
+ <section><h2>Benachrichtigungen</h2><div id="notes"></div></section>
+ <section><h2>Braucht dich</h2><div id="leads"></div></section>
+ <section><h2>Heute</h2><div id="heute-t"></div></section>
+</aside>
+</div>
+
+<nav class="tabs" aria-label="Bereiche">
+ <button data-go="uebersicht"><svg class="i"><use href="#i-home"/></svg>Übersicht</button>
+ <button data-go="anfragen"><svg class="i"><use href="#i-inbox"/></svg>Anfragen<span class="badge" data-neu></span></button>
+ <button data-go="bestand"><svg class="i"><use href="#i-car"/></svg>Bestand</button>
+ <button data-go="verkauf"><svg class="i"><use href="#i-euro"/></svg>Verkäufe</button>
+ <button data-more><svg class="i"><use href="#i-menu"/></svg>Mehr</button>
+</nav>
+<div class="more" id="more"><div class="more__p" id="more-p"></div></div>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+ <div class="drawer__bg" data-close></div>
+ <div class="drawer__p" id="d-p" role="dialog" aria-modal="true" aria-labelledby="d-name">
+  <div class="drawer__h"><div><h2 id="d-name"></h2><p id="d-sub"></p></div><button class="iconbtn" data-close aria-label="Schließen"><svg class="i"><use href="#i-x"/></svg></button></div>
+  <div class="drawer__b" id="d-body"></div>
+  <div class="drawer__f" id="d-foot"></div>
+ </div>
+</div>
+<div class="pal" id="pal"><div class="pal__box" role="dialog" aria-label="Suche"><input id="pal-in" placeholder="Auto, Kunde, Rechnung oder Bereich …" autocomplete="off" aria-label="Suchbegriff"><div class="pal__list" id="pal-list"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const eur = (n, d = 0) => Number(n).toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }) + ' €';
+const fmt = (n) => Number(n).toLocaleString('de-DE');
+const ini = (n) => n.replace(/[^\p{L} ]/gu, '').split(' ').filter(Boolean).map((w) => w[0]).join('').slice(0, 2).toUpperCase() || '#';
+const ic = (id, c = '') => `<svg class="i ${c}"><use href="#${id}"/></svg>`;
+const IMG = (h, s = 640) => `https://img.classistatic.de/api/v1/mo-prod/images/${h}?rule=mo-${s}`;
+const bild = (a, s = 640) => a.foto || (a.img ? IMG(a.img, s) : '');
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const heuteStr = () => new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+const KMC = { name: 'Autohaus KMC Motors Köln', inhaber: 'Kaan Kömürcü', str: 'Escherstraße 129', ort: '50739 Köln', tel: '0221 2927347513', mail: 'kmcmotors@t-online.de' };
+
+// Bestand: echte Fahrzeuge von mobile.de. Einkauf, Kosten, Verkäufe, Kunden: Beispielzahlen für die Demo.
+const autos = [
+ { id: 'glc', m: 'Mercedes-Benz', t: 'GLC 400 d 4MATIC AMG Night', p: 37850, ek: 33200, km: 95000, ez: '01/2021', kw: '243 kW (330 PS)', f: 'Diesel', img: '83/83246de8-bc69-4737-9939-e0d619936bf0', tage: 9, a: 14, v: 1180, st: 'online', ad: '53041267626016' },
+ { id: 'rrs', m: 'Land Rover', t: 'Range Rover Sport TDV6 HSE Dynamic', p: 40850, ek: 35400, km: 52000, ez: '01/2018', kw: '190 kW (258 PS)', f: 'Diesel', img: 'e6/e6d7cf85-3673-4066-80ce-ffc2cb9d6795', tage: 22, a: 9, v: 860, st: 'online', ad: '53533581217728' },
+ { id: 's6', m: 'Audi', t: 'S6 TDI', p: 34800, ek: 30100, km: 192000, ez: '12/2019', kw: '257 kW (349 PS)', f: 'Diesel', img: '60/601e6a60-7b36-4b4f-b12c-0d01e760b8c9', tage: 51, a: 6, v: 940, st: 'online', ad: '52922941094560' },
+ { id: 'velar', m: 'Land Rover', t: 'Range Rover Velar D300 R-Dynamic', p: 31850, ek: 27300, km: 120000, ez: '11/2022', kw: '221 kW (300 PS)', f: 'Diesel', img: 'c5/c57febd6-33e7-4a2c-8dd0-feb02ea1f486', tage: 14, a: 11, v: 1020, st: 'reserviert', ad: '53202637756512', mwst: true },
+ { id: 'lev', m: 'Maserati', t: 'Levante 3.0d Q4', p: 25850, ek: 21900, km: 188000, ez: '10/2016', kw: '202 kW (275 PS)', f: 'Diesel', img: '1a/1ac7067a-241e-473b-aec2-25787de4c726', tage: 58, a: 5, v: 1340, st: 'Preis prüfen', ad: '52936754608800' },
+ { id: 'i30', m: 'Hyundai', t: 'i30 1.5 Hybrid DCT', p: 16850, ek: 14100, km: 30000, ez: '07/2023', kw: '118 kW (160 PS)', f: 'Hybrid', img: '98/98a4ced7-319e-4e13-bb54-cce21888cd54', tage: 18, a: 8, v: 610, st: 'online', ad: '52928510083360' },
+ { id: 's350', m: 'Mercedes-Benz', t: 'S 350 d BlueTEC 4MATIC AMG', p: 10850, ek: 8600, km: 393000, ez: '06/2011', kw: '190 kW (258 PS)', f: 'Diesel', img: 'd8/d8ffbb2f-e484-4474-949d-aa45d9dd5d6e', tage: 63, a: 4, v: 720, st: 'Preis prüfen', ad: '52940875283072' },
+ { id: 'spr', m: 'Mercedes-Benz', t: 'Sprinter 308 CDI Imbisswagen', p: 23850, ek: 19500, km: 182000, ez: '08/2001', kw: '60 kW (82 PS)', f: 'Diesel', img: '0e/0e7048be-d8e9-4db7-8bbb-246c0427f912', tage: 36, a: 3, v: 450, st: 'reserviert', ad: '53543946236224' },
+ { id: 'adam', m: 'Opel', t: 'Adam 1.0 Jam', p: 5850, ek: 4300, km: 116000, ez: '11/2014', kw: '66 kW (90 PS)', f: 'Benzin', img: 'dc/dc04cc1e-5cda-45ae-8576-331cc4a54686', tage: 11, a: 7, v: 530, st: 'online', ad: '53207401983712' },
+ { id: 'x5', m: 'BMW', t: 'X5 M50d', p: 21800, ek: 18200, km: 205000, ez: '09/2017', kw: '280 kW (381 PS)', f: 'Diesel', img: '', tage: 4, a: 2, v: 210, st: 'Fotos fehlen', ad: '55748689606624' },
+ { id: 'e200', m: 'Mercedes-Benz', t: 'E 200 d Avantgarde', p: 14850, ek: 12100, km: 190000, ez: '08/2018', kw: '110 kW (150 PS)', f: 'Diesel', img: '', tage: 6, a: 1, v: 180, st: 'Fotos fehlen', ad: '55739316282272', mwst: true },
+ { id: 's4', m: 'Audi', t: 'S4 4.2 V8 quattro', p: 7850, ek: 5600, km: 217000, ez: '05/2004', kw: '253 kW (344 PS)', f: 'Benzin', img: '', tage: 3, a: 3, v: 260, st: 'Fotos fehlen', ad: '55848530977120' },
+];
+const auto = (id) => autos.find((a) => a.id === id);
+const kosten = { glc: 640, rrs: 520, s6: 780, velar: 410, lev: 1250, i30: 190, s350: 860, spr: 380, adam: 240, x5: 0, e200: 0, s4: 0 };
+const verkauf = [
+ { id: 'v9', fz: 'VW Tiguan 2.0 TDI 4MOTION', fin: 'WVGZZZ5NZKW041…', kunde: 'Familie Aydın', d: '22.11.2026', vk: 23850, ek: 19200, k: 650, best: '25a', re: 'RE-2026-0148', st: 'bezahlt' },
+ { id: 'v8', fz: 'BMW 320d Touring', fin: 'WBA8K11080A6…', kunde: 'Elif Demir', d: '20.11.2026', vk: 19990, ek: 16100, k: 480, best: '25a', re: 'RE-2026-0147', st: 'offen' },
+ { id: 'v7', fz: 'Audi A4 Avant 2.0 TDI', fin: 'WAUZZZF4XKA0…', kunde: 'Michael Schulz', d: '18.11.2026', vk: 21450, ek: 17800, k: 520, best: '25a', re: 'RE-2026-0146', st: 'bezahlt' },
+ { id: 'v6', fz: 'Mercedes-Benz C 220 d T-Modell', fin: 'WDD2052141F7…', kunde: 'Peters Bau GmbH', d: '15.11.2026', vk: 24950, ek: 20900, k: 610, best: 'regel', re: 'RE-2026-0145', st: 'bezahlt' },
+ { id: 'v5', fz: 'Ford Focus Turnier 1.5 EcoBoost', fin: 'WF0PXXGCHPK1…', kunde: 'Thomas Weber', d: '13.11.2026', vk: 14490, ek: 11600, k: 390, best: '25a', re: 'RE-2026-0144', st: 'überfällig' },
+ { id: 'v4', fz: 'Skoda Octavia Combi 2.0 TDI', fin: 'TMBJJ7NE6K02…', kunde: 'Sarah Klein', d: '11.11.2026', vk: 18900, ek: 15300, k: 450, best: '25a', re: 'RE-2026-0143', st: 'bezahlt' },
+ { id: 'v3', fz: 'Mercedes-Benz GLE 350 d 4MATIC', fin: 'WDC1660241A8…', kunde: 'Ahmed Rashid', d: '07.11.2026', vk: 33850, ek: 28900, k: 300, best: '25a', re: 'RE-2026-0142', st: 'bezahlt' },
+ { id: 'v2', fz: 'Opel Corsa 1.4 Drive', fin: 'W0V0XEP68G42…', kunde: 'Jana Wolf', d: '05.11.2026', vk: 6850, ek: 4900, k: 280, best: '25a', re: 'RE-2026-0141', st: 'bezahlt' },
+ { id: 'v1', fz: 'VW Golf 7 1.5 TSI Highline', fin: 'WVWZZZAUZKW3…', kunde: 'Can Öztürk', d: '03.11.2026', vk: 17450, ek: 14200, k: 420, best: '25a', re: 'RE-2026-0140', st: 'bezahlt' },
+];
+const belege = [
+ { d: '24.11.2026', l: 'Glanzwerk Fahrzeugpflege', k: 'Aufbereitung', fz: 'GLC 400 d', b: 480 },
+ { d: '23.11.2026', l: 'Reifen Kemper Köln', k: 'Werkstatt', fz: 'Maserati Levante', b: 620 },
+ { d: '21.11.2026', l: 'TÜV Rheinland', k: 'HU / AU', fz: 'Hyundai i30', b: 139 },
+ { d: '20.11.2026', l: 'Stadt Köln · Zulassung', k: 'Zulassung', fz: 'BMW 320d (Kunde)', b: 42.6 },
+ { d: '18.11.2026', l: 'mobile.de GmbH', k: 'Werbung', fz: '–', b: 289 },
+ { d: '15.11.2026', l: 'Allianz · Händlerkennzeichen', k: 'Versicherung', fz: '–', b: 310 },
+ { d: '01.11.2026', l: 'Hofmiete Escherstraße', k: 'Miete', fz: '–', b: 2400 },
+ { d: '01.11.2026', l: 'RheinEnergie', k: 'Strom', fz: '–', b: 186 },
+];
+const SPALTEN = [['neu', 'Neu'], ['auto', 'Auto-Antwort raus'], ['termin', 'Termin'], ['vertrag', 'Kaufvertrag'], ['verkauft', 'Verkauft']];
+const anfragen = [
+ { id: 1, s: 'neu', name: 'Murat Yıldız', fz: 'glc', q: 'mobile.de', zeit: '14:12', hot: true, verlauf: [['in', 'Hallo, was ist der letzte Preis für den GLC 400d bei Barzahlung? Würde heute noch vorbeikommen.']], entwurf: 'Hallo Herr Yıldız,\n\ndanke für Ihre Anfrage zum GLC 400 d AMG Night. Über den Preis sprechen wir am besten direkt vor Ort, dann sehen Sie das Auto auch gleich. Heute sind wir bis 18 Uhr in der Escherstraße 129. Passt Ihnen 16:30 Uhr?\n\nViele Grüße\nKaan Kömürcü, KMC Motors' },
+ { id: 2, s: 'neu', name: '+49 176 4418…', fz: 'i30', q: 'WhatsApp', zeit: '13:48', hot: true, verlauf: [['in', 'Hallo, nehmt ihr meinen Corsa D von 2012 in Zahlung? 140.000 km. Und geht Finanzierung beim i30?']], entwurf: 'Hallo,\n\ndanke für Ihre Nachricht! Ja, wir schauen uns Ihren Corsa gerne an. Schicken Sie uns 3–4 Fotos (vorne, hinten, Innenraum, Tacho), dann bekommen Sie eine erste Einschätzung. Zur Finanzierung beim i30 melde ich mich heute noch persönlich.\n\nViele Grüße\nKMC Motors' },
+ { id: 3, s: 'neu', name: 'Ahmed Rashid', fz: 'velar', q: 'Website', zeit: '11:05', hot: true, sprache: 'Arabisch → übersetzt', verlauf: [['in', 'Ich interessiere mich für den Velar D300 für den Export nach Jordanien. Gibt es Exportkennzeichen und die Papiere für die Ausfuhr?']], entwurf: 'Hallo Herr Rashid,\n\nschön, wieder von Ihnen zu hören! Ja, Exportkennzeichen (14 Tage bis 1 Jahr) und alle Papiere für die Ausfuhr bereiten wir vor, genau wie beim GLE im November. Der Velar ist gerade reserviert. Soll ich Sie informieren, sobald er wieder frei ist?\n\nViele Grüße\nKaan Kömürcü' },
+ { id: 4, s: 'auto', name: 'Jonas Becker', fz: 'rrs', q: 'Instagram · Night Drop', zeit: 'gestern', verlauf: [['in', 'Ist der Range Rover Sport noch da? Probefahrt Samstag möglich?'], ['out', 'Hallo Jonas, der Range Rover Sport ist noch da. Wie wäre Samstag um 11:00 Uhr? Sag kurz Bescheid, dann tragen wir dich ein. (automatisch)']] },
+ { id: 5, s: 'auto', name: 'Sarah Neumann', fz: 'adam', q: 'Website', zeit: 'gestern', verlauf: [['in', 'Ist der Adam noch zu haben? Für meine Tochter, erstes Auto.'], ['out', 'Hallo Frau Neumann, danke für Ihre Anfrage! Der Adam ist noch da. Wir melden uns heute persönlich bei Ihnen. (Eingangsbestätigung, automatisch)']] },
+ { id: 6, s: 'termin', name: 'Kevin Hoffmann', fz: 's6', q: 'mobile.de', zeit: 'Do 17:30', verlauf: [['in', 'Donnerstag 17:30 passt mir.'], ['out', 'Perfekt, bis Donnerstag!']] },
+ { id: 7, s: 'termin', name: 'Dilara Şahin', fz: 'lev', q: 'WhatsApp', zeit: 'Sa 11:00', verlauf: [['in', 'Komme Samstag mit meinem Mann zur Probefahrt.']] },
+ { id: 8, s: 'vertrag', name: 'Imbiss Anatolia', fz: 'spr', q: 'Website', zeit: 'Fr 15:00', verlauf: [['in', 'Wir nehmen den Sprinter. Wann können wir unterschreiben?']] },
+ { id: 9, s: 'verkauft', name: 'Familie Aydın', fz: '', fzText: 'VW Tiguan', q: 'mobile.de', zeit: '22.11.', verlauf: [['out', 'Danke für Ihren Kauf! Über eine Google-Bewertung würden wir uns sehr freuen.']] },
+];
+const papier = [
+ { b: 'Mahnung Ford Focus · Thomas Weber', s: 'RE-2026-0144 seit 6 Tagen überfällig', k: 'red', go: 'rechnungen' },
+ { b: 'Kaufvertrag Sprinter · Imbiss Anatolia', s: 'Unterschrift Freitag 15:00', k: 'red', vorlage: 'spr' },
+ { b: 'Fotos machen: BMW X5, E 200 d, Audi S4', s: '3 Autos ohne Fotos, noch nicht auf der Website', k: 'warn', go: 'bestand' },
+ { b: 'Opel Corsa (Inzahlungnahme) abmelden', s: 'Zulassungsstelle Köln · bis Fr 28.11.', k: '' },
+ { b: 'Kennzeichen für Elif Demir abholen', s: 'BMW 320d · Zulassung beantragt', k: '' },
+ { b: 'Preis prüfen: Maserati Levante, S 350 d', s: 'über 55 Tage auf dem Hof', k: 'warn', go: 'bestand' },
+ { b: 'HU Audi S6 neu machen', s: 'fällig 01/2027 · vor dem Verkauf erledigen', k: '' },
+];
+const termine = [
+ ['16:30', 'Besichtigung · GLC 400 d', 'Murat Yıldız · vorgeschlagen', 'offen'],
+ ['Do 17:30', 'Probefahrt · Audi S6', 'Kevin Hoffmann · bestätigt', 'ok'],
+ ['Fr 15:00', 'Kaufvertrag · Sprinter', 'Imbiss Anatolia · bestätigt', 'ok'],
+ ['Sa 11:00', 'Probefahrt · Range Rover Sport', 'Jonas Becker · von Auto-Antwort vorgeschlagen', 'offen'],
+ ['Sa 11:00', 'Probefahrt · Maserati Levante', 'Dilara Şahin · bestätigt', 'ok'],
+];
+const regeln = [
+ ['Eingangsbestätigung', 'Jede neue Anfrage bekommt sofort eine Antwort, auch nachts und sonntags, in der Sprache des Kunden.', true],
+ ['Terminvorschlag', 'Fragt jemand nach Besichtigung oder Probefahrt, wird ein freier Termin vorgeschlagen. Du bestätigst mit einem Tipp.', true],
+ ['Zahlungserinnerung', '3 Tage nach Fälligkeit eine freundliche Erinnerung, danach liegt die Mahnung als Entwurf für dich bereit.', true],
+ ['Google-Bewertung nach dem Kauf', 'Zwei Tage nach der Übergabe eine kurze Nachricht mit Bewertungslink.', true],
+ ['Preis, Rabatt, Finanzierung, Unfallfragen', 'Nie automatisch. Die KI schreibt nur einen Entwurf, du tippst auf Senden.', false],
+];
+
+// Navigation
+const NAV = [
+ ['Betrieb', [['uebersicht', 'Übersicht', 'i-home'], ['anfragen', 'Anfragen', 'i-inbox', 'neu'], ['bestand', 'Bestand', 'i-car'], ['inserat', 'Inserat anlegen', 'i-plus']]],
+ ['Geld', [['verkauf', 'Verkäufe', 'i-euro'], ['rechnungen', 'Rechnungen', 'i-doc', 're'], ['belege', 'Belege', 'i-receipt']]],
+ ['Büro', [['papier', 'Papierkram', 'i-pen', 'pa'], ['kunden', 'Kunden', 'i-users'], ['auswertung', 'Auswertung', 'i-chart'], ['regeln', 'Auto-Antworten', 'i-bolt']]],
+];
+const TITEL = Object.fromEntries(NAV.flatMap(([, l]) => l.map(([k, t]) => [k, t])));
+const navHtml = NAV.map(([h, l]) => `<nav class="nav" aria-label="${h}"><h4>${h}</h4>${l.map(([k, t, i, b]) => `<button data-go="${k}">${ic(i)}${t}${b ? `<span class="badge" data-b="${b}"></span>` : ''}</button>`).join('')}</nav>`).join('') + `<nav class="nav" aria-label="Website"><button data-web>${ic('i-globe')}Website ansehen</button></nav>`;
+$('#navs').innerHTML = navHtml; $('#more-p').innerHTML = navHtml;
+const WIDE = new Set(['anfragen', 'inserat', 'verkauf', 'rechnungen', 'belege', 'kunden', 'bestand', 'auswertung']);
+function geh(v) {
+ if (!TITEL[v]) v = 'uebersicht';
+ $$('.view').forEach((x) => x.classList.toggle('on', x.id === 'v-' + v));
+ $$('[data-go]').forEach((b) => { if (b.dataset.go === v && b.closest('.nav,.tabs')) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+ $('#crumb').textContent = TITEL[v];
+ $('#app').classList.toggle('wide', WIDE.has(v));
+ $('#more').classList.remove('on');
+ $('#main').scrollTop = 0; window.scrollTo(0, 0);
+ if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
+ zaehleAlle($('#v-' + v));
+ if (v === 'uebersicht' || v === 'auswertung') setTimeout(balken, 80);
+ if (v === 'uebersicht') chart();
+}
+document.addEventListener('click', (e) => {
+ const b = e.target.closest('[data-go]'); if (b) { e.preventDefault(); geh(b.dataset.go); return; }
+ if (e.target.closest('[data-web]')) window.open('https://lmcu-code.github.io/', '_blank', 'noopener');
+ if (e.target.closest('[data-more]')) $('#more').classList.add('on');
+ else if (e.target.id === 'more') $('#more').classList.remove('on');
+});
+const toast = (t) => { const e = $('#toast'); e.innerHTML = ic('i-check') + '<span>' + esc(t) + '</span>'; e.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.remove('on'), 3000); };
+
+// Kennzahlen
+const umsatz = () => verkauf.reduce((s, v) => s + v.vk, 0);
+const gewinn = (v) => v.vk - v.ek - v.k;
+const rohertrag = () => verkauf.reduce((s, v) => s + gewinn(v), 0);
+const fix = () => belege.filter((b) => b.fz === '–').reduce((s, b) => s + b.b, 0);
+const standzeit = () => Math.round(autos.reduce((s, a) => s + a.tage, 0) / autos.length);
+const FORM = { eur: (n) => eur(Math.round(n)), int: (n) => fmt(Math.round(n)), tage: (n) => Math.round(n) + ' Tage', proz: (n) => Math.round(n) + ' %' };
+function zaehl(el, ziel, form) {
+ if (RM) { el.textContent = form(ziel); return; }
+ const t0 = performance.now(), dau = 1100;
+ const st = (t) => { const p = Math.min(1, (t - t0) / dau), e = 1 - Math.pow(1 - p, 3); el.textContent = form(ziel * e); if (p < 1) requestAnimationFrame(st); };
+ requestAnimationFrame(st);
+}
+const zaehleAlle = (root) => $$('[data-z]', root).forEach((el) => zaehl(el, +el.dataset.z, FORM[el.dataset.f]));
+const spark = (pts) => { const mx = Math.max(...pts), mn = Math.min(...pts), xs = (i) => i * 200 / (pts.length - 1), ys = (v) => 44 - (v - mn) / (mx - mn || 1) * 30; const d = pts.map((v, i) => `${i ? 'L' : 'M'}${xs(i).toFixed(1)} ${ys(v).toFixed(1)}`).join(' '); return `<svg class="spark" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true"><path d="${d} V48 H0Z" fill="url(#sg)"/><path d="${d}" fill="none" stroke="#D7192A" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`; };
+const kpi = (label, val, form, delta, pts, go, extra = '') => `<div class="card kpi"${go ? ` role="button" tabindex="0" data-go="${go}"` : ''}><small>${label}</small><span class="v" data-z="${val}" data-f="${form}">0</span><span class="d">${delta}</span>${pts ? spark(pts) : ''}${extra}</div>`;
+const up = (t) => `${ic('i-up', 's up')}<span class="up">${t}</span>`;
+function renderKpis() {
+ const n = verkauf.length, g = `<svg class="gauge" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="#2A2427" stroke-width="9" stroke-dasharray="188.5 251.3" transform="rotate(135 50 50)" stroke-linecap="round"/><circle cx="50" cy="50" r="40" fill="none" stroke="#D7192A" stroke-width="9" stroke-dasharray="${Math.min(188.5, 188.5 * n / 12)} 251.3" transform="rotate(135 50 50)" stroke-linecap="round"/><text x="50" y="57" text-anchor="middle" fill="#F4F0F0" font-size="20" font-weight="600" font-family="Hanken Grotesk">${Math.round(n / 12 * 100)}%</text></svg>`;
+ $('#kpis').innerHTML = kpi('Umsatz November', umsatz(), 'eur', up('+12 %') + ' zum Oktober', [128, 134, 129, 151, 146, 162, 171, 182], 'verkauf')
+  + kpi('Gewinn November', rohertrag(), 'eur', up('+9 %') + ` · Ø ${eur(rohertrag() / n)} pro Auto`, [11, 13, 12, 15, 14, 17, 18, 21], 'verkauf')
+  + `<div class="card kpi kpi--g" role="button" tabindex="0" data-go="verkauf"><small>Verkaufsziel November</small><span class="v">${n} / 12</span><span class="d">Autos verkauft · noch 5 Tage</span>${g}</div>`
+  + kpi('Anfragen diesen Monat', 74, 'int', up('+31 %') + ' seit der neuen Website', [3, 4, 4, 6, 5, 7, 9, 11], 'anfragen');
+ const offen = verkauf.filter((v) => v.st !== 'bezahlt');
+ $('#vk-kpis').innerHTML = kpi('Verkauft', n, 'int', 'Autos im November', null, '') + kpi('Umsatz', umsatz(), 'eur', up('+12 %') + ' zum Oktober', null, '') + kpi('Gewinn', rohertrag(), 'eur', `Marge ${Math.round(rohertrag() / umsatz() * 100)} %`, null, '') + kpi('Noch nicht bezahlt', offen.reduce((s, v) => s + v.vk, 0), 'eur', `${offen.length} Rechnung${offen.length === 1 ? '' : 'en'}`, null, 'rechnungen');
+ const ueb = verkauf.filter((v) => v.st === 'überfällig');
+ $('#re-kpis').innerHTML = kpi('Bezahlt', verkauf.filter((v) => v.st === 'bezahlt').reduce((s, v) => s + v.vk, 0), 'eur', 'im November', null, '') + kpi('Offen', verkauf.filter((v) => v.st === 'offen').reduce((s, v) => s + v.vk, 0), 'eur', 'noch nicht fällig', null, '') + kpi('Überfällig', ueb.reduce((s, v) => s + v.vk, 0), 'eur', ueb.length ? `<span class="down">${ueb.length} Rechnung · Mahnung bereit</span>` : '<span class="up">alles im grünen Bereich</span>', null, '') + kpi('Ausgaben', belege.reduce((s, b) => s + b.b, 0), 'eur', `${belege.length} Belege`, null, 'belege');
+ $('#au-kpis').innerHTML = kpi('Umsatz', umsatz(), 'eur', up('+12 %') + ' zum Oktober', null, '') + kpi('Gewinn nach Fixkosten', rohertrag() - fix(), 'eur', 'Miete, Strom, Versicherung abgezogen', null, '') + kpi('Ø Standzeit', standzeit(), 'tage', up('−6 Tage') + ' zum Oktober', null, 'bestand') + kpi('Anfrage → Kauf', 12, 'proz', 'jede 8. Anfrage kauft', null, '');
+ $$('.view.on [data-z]').length ? zaehleAlle($('.view.on')) : 0;
+ $$('[data-z]').forEach((el) => { if (!el.closest('.view.on')) el.textContent = FORM[el.dataset.f](+el.dataset.z); });
+}
+document.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.kpi[data-go],.vcar')) { e.preventDefault(); e.target.click(); } });
+
+// Diagramm
+let chartArt = 'umsatz';
+function chart() {
+ const W = 660, H = 240, L = 46, R = 12, T = 16, B = 30, PAD = 26;
+ let reihen, labels, mx, achse, leg;
+ if (chartArt === 'umsatz') {
+  labels = ['Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov'];
+  reihen = [[118, 134, 129, 151, 162, umsatz() / 1000], [12.1, 14.3, 13.2, 16.8, 18.0, rohertrag() / 1000]];
+  mx = 200; achse = (v) => v + 'k'; leg = '<span><i style="background:#D7192A"></i>Umsatz</span><span><i style="background:#5A2128;border-radius:2px"></i>Gewinn (Balken)</span>';
+  $('#ch-t').textContent = 'Umsatz und Gewinn · 6 Monate';
+ } else {
+  labels = []; for (let i = 13; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); labels.push(i ? d.toLocaleDateString('de-DE', { weekday: 'short' }).replace('.', '') : 'heute'); }
+  reihen = [[3, 5, 4, 6, 5, 8, 4, 6, 7, 9, 6, 8, 11, 9], [1, 2, 2, 3, 2, 4, 2, 3, 4, 5, 3, 5, 7, 5]];
+  mx = 12; achse = (v) => v; leg = '<span><i style="background:#D7192A"></i>Anfragen</span><span><i style="background:#A99FA3"></i>davon über die Website</span>';
+  $('#ch-t').textContent = 'Anfragen pro Tag · 14 Tage';
+ }
+ $('#ch-l').innerHTML = leg;
+ const n = labels.length, x = (i) => L + PAD + i * (W - L - R - 2 * PAD) / (n - 1), y = (v) => T + (1 - v / mx) * (H - T - B);
+ const pfad = (a) => a.map((v, i) => { if (!i) return `M${x(0).toFixed(1)} ${y(v).toFixed(1)}`; const x0 = x(i - 1), x1 = x(i), c = (x1 - x0) / 2; return `C${(x0 + c).toFixed(1)} ${y(a[i - 1]).toFixed(1)} ${(x1 - c).toFixed(1)} ${y(v).toFixed(1)} ${x1.toFixed(1)} ${y(v).toFixed(1)}`; }).join(' ');
+ let s = '<defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D7192A" stop-opacity=".32"/><stop offset="1" stop-color="#D7192A" stop-opacity="0"/></linearGradient></defs>';
+ for (let k = 0; k <= 4; k++) { const v = mx * k / 4; s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#2A2427"/><text x="${L - 8}" y="${y(v) + 4}" fill="#7E7579" font-size="11" text-anchor="end" font-family="Red Hat Mono">${achse(v)}</text>`; }
+ labels.forEach((t, i) => { if (n < 10 || i % 2 === 1 || i === n - 1) s += `<text x="${x(i)}" y="${H - 8}" fill="#7E7579" font-size="11" text-anchor="middle">${t}</text>`; });
+ if (chartArt === 'umsatz') { const gm = Math.max(...reihen[1]) * 2.6, bw = 34; reihen[1].forEach((v, i) => { const hh = v / gm * (H - T - B), yy = y(0) - hh; s += `<rect x="${x(i) - bw / 2}" y="${yy}" width="${bw}" height="${hh}" rx="5" fill="${i === n - 1 ? '#5A2128' : '#2E2629'}"/><text x="${x(i)}" y="${yy - 7}" text-anchor="middle" fill="${i === n - 1 ? '#F4F0F0' : '#A99FA3'}" font-size="11" font-family="Red Hat Mono">${v.toFixed(1).replace('.', ',')}k</text>`; }); }
+ s += `<path d="${pfad(reihen[0])} L${x(n - 1)} ${y(0)} L${x(0)} ${y(0)}Z" fill="url(#cg)" opacity="${chartArt === 'umsatz' ? .55 : 1}"/>${chartArt === 'umsatz' ? '' : `<path d="${pfad(reihen[1])}" fill="none" stroke="#A99FA3" stroke-width="1.6" stroke-dasharray="4 4"/>`}<path class="draw" d="${pfad(reihen[0])}" fill="none" stroke="#D7192A" stroke-width="2.4"/>`;
+ reihen[0].forEach((v, i) => { if (n < 10 || i % 3 === 1 || i === n - 1) s += `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="#F23A4C" stroke="#141113" stroke-width="2"><title>${labels[i]}: ${chartArt === 'umsatz' ? eur(v * 1000) : v + ' Anfragen'}</title></circle>`; });
+ const lx = x(n - 1), ly = y(reihen[0][n - 1]), txt = chartArt === 'umsatz' ? eur(Math.round(reihen[0][n - 1] * 1000)) : reihen[0][n - 1] + ' Anfragen';
+ s += `<g transform="translate(${Math.min(lx - 64, W - R - 128)},${Math.max(ly - 46, 2)})"><rect width="128" height="30" rx="7" fill="#221D20" stroke="#3B3337"/><text x="64" y="20" text-anchor="middle" fill="#F4F0F0" font-size="12.5" font-weight="600" font-family="Hanken Grotesk">${txt}</text></g>`;
+ $('#chart').innerHTML = s;
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('[data-chart]'); if (!b) return; chartArt = b.dataset.chart; $$('[data-chart]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); chart(); });
+
+// Übersicht
+function feat() {
+ const a = auto('glc'); if (!a) { $('#feat').hidden = true; return; }
+ $('#feat').innerHTML = `<div class="feat__img"><img src="${IMG(a.img, 1600)}" alt="${esc(a.m + ' ' + a.t)}"><span class="pill red">Auto der Woche · Night Drop</span></div><div class="feat__b"><p class="feat__t">${esc(a.m)} ${esc(a.t)}</p><div class="feat__p"><b>${eur(a.p)}</b><span class="pill ok">online</span></div><div class="facts"><span>EZ <b>${a.ez}</b></span><span>km <b>${fmt(a.km)}</b></span><span>Leistung <b>${a.kw.split(' (')[0]}</b></span><span>Anfragen <b>${a.a}</b></span></div><div class="row2"><span class="pill">${ic('i-eye', 's')}${fmt(a.v)} Aufrufe</span><span class="pill red">Besichtigung 16:30</span></div><button class="btn" style="width:100%" data-auto="glc">Kalkulation und Details</button></div>`;
+}
+function ampel() {
+ const s = [...autos].sort((a, b) => b.tage - a.tage).slice(0, 5);
+ $('#ampel').innerHTML = s.map((a) => `<div class="barrow"><span>${esc(a.m.replace('Mercedes-Benz', 'Mercedes').replace('Land Rover', 'Range Rover').replace('Range Rover', 'RR'))} ${esc(a.t.split(' ')[0] === 'Range' ? a.t.split(' ')[2] : a.t.split(' ')[0])}</span><span class="track"><i data-w="${Math.min(100, a.tage / 70 * 100)}" class="${a.tage > 45 ? '' : 'grau'}"></i></span><span${a.tage > 45 ? ' style="color:var(--warn)"' : ''}>${a.tage} Tage</span></div>`).join('');
+}
+function balken() { $$('.view.on .track i[data-w]').forEach((i) => { i.style.width = '0'; requestAnimationFrame(() => requestAnimationFrame(() => { i.style.width = i.dataset.w + '%'; })); }); }
+function aufgabe(p) {
+ const i = papier.indexOf(p);
+ const knopf = p.go ? `<button type="button" class="btn btn--ghost btn--sm" data-go="${p.go}">Öffnen</button>` : p.vorlage ? `<button type="button" class="btn btn--ghost btn--sm" data-vorlage="vertrag" data-fz="${p.vorlage}">Öffnen</button>` : '';
+ return `<div class="task${p.done ? ' done' : ''}"><input type="checkbox" id="pa${i}" ${p.done ? 'checked' : ''} data-pi="${i}"><label class="t" for="pa${i}"><b>${esc(p.b)}</b><span>${esc(p.s)}</span></label>${p.k && !p.done ? `<span class="pill ${p.k}">${p.k === 'red' ? 'dringend' : 'bald'}</span>` : ''}${knopf}</div>`;
+}
+function papierRender() {
+ const offen = papier.filter((p) => !p.done);
+ $('#heute-tasks').innerHTML = offen.filter((p) => p.k).slice(0, 4).map(aufgabe).join('') || '<p style="color:var(--dim);margin:0">Alles erledigt. Feierabend in Sicht.</p>';
+ $('#papier').innerHTML = papier.map(aufgabe).join('');
+ $('#p-offen').textContent = `${offen.length} offen`;
+ badges();
+}
+document.addEventListener('change', (e) => { if (e.target.dataset.pi != null) { const p = papier[+e.target.dataset.pi]; p.done = e.target.checked; if (p.done) toast('Erledigt: ' + p.b); setTimeout(papierRender, 250); } });
+function rail() {
+ const offen = anfragen.filter((a) => a.hot), ueb = verkauf.filter((v) => v.st === 'überfällig');
+ $('#notes').innerHTML = [
+  offen.length && ['i-inbox', `${offen.length} Anfrage${offen.length === 1 ? '' : 'n'} brauch${offen.length === 1 ? 't' : 'en'} dich`, 'mobile.de · WhatsApp · Website', '', 'anfragen'],
+  ueb.length && ['i-euro', `${ueb[0].fz.split(' ').slice(0, 2).join(' ')}: Rechnung überfällig`, 'Mahnung liegt als Entwurf bereit', '', 'rechnungen'],
+  ['i-msg', '6 Anfragen nachts automatisch beantwortet', 'zwischen 22 und 7 Uhr', 'ok', 'anfragen'],
+  ['i-key', 'Maserati Levante seit 58 Tagen auf dem Hof', 'Preis senken oder als Night Drop bewerben?', 'warn', 'bestand'],
+  ['i-star', 'Familie Aydın hat 5 Sterne gegeben', 'Google-Bewertung nach dem Kauf', 'ok', 'kunden'],
+ ].filter(Boolean).map(([i, b, s, k, g]) => `<button class="note" data-go="${g}"><span class="ic ${k}">${ic(i)}</span><div><b>${b}</b><span>${s}</span></div></button>`).join('');
+ const l = offen.map((a) => `<button class="lead" data-open="${a.id}"><span class="avatar">${esc(ini(a.name))}</span><div class="t"><b>${esc(a.name)}</b><span>${esc(fzName(a))} · ${esc(a.q)} · ${esc(a.zeit)}</span></div><span class="count">!</span></button>`).join('') || '<p style="color:var(--dim);font-size:14px;margin:0">Alles beantwortet. Stark.</p>';
+ $('#leads').innerHTML = l; $('#leads-m').innerHTML = l;
+ $('#heute-t').innerHTML = termine.slice(0, 3).map(([t, b, s]) => `<div class="termin"><time>${t}</time><div><b>${b}</b><span>${s}</span></div></div>`).join('');
+ badges();
+}
+function badges() {
+ const n = { neu: anfragen.filter((a) => a.hot).length, re: verkauf.filter((v) => v.st === 'überfällig').length, pa: papier.filter((p) => !p.done && p.k === 'red').length };
+ $$('[data-b]').forEach((b) => { b.textContent = n[b.dataset.b]; b.hidden = !n[b.dataset.b]; });
+ $$('[data-neu]').forEach((b) => { b.textContent = n.neu; b.hidden = !n.neu; });
+ $('#heute').textContent = new Date().toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' }) + ` · ${n.neu ? n.neu + ' Anfragen warten auf dich' : 'alle Anfragen beantwortet'}${n.re ? ', 1 Rechnung ist überfällig' : ''}`;
+}
+
+// Anfragen
+const fzName = (a) => a.fzText || (auto(a.fz) ? `${auto(a.fz).m.replace('Mercedes-Benz', 'Mercedes')} ${auto(a.fz).t}` : '');
+function board() {
+ $('#board').innerHTML = SPALTEN.map(([k, t]) => { const a = anfragen.filter((x) => x.s === k); return `<div class="col" data-col="${k}"><h3>${t}<span>${a.length}</span></h3>${a.map((x) => `<button class="tick${x.hot ? ' hot' : ''}" data-open="${x.id}" draggable="true" data-drag="${x.id}"><span class="top"><b>${esc(x.name)}</b><time>${esc(x.zeit)}</time></span><p>${esc(x.verlauf[0][1].slice(0, 86))}${x.verlauf[0][1].length > 86 ? '…' : ''}</p><span class="meta"><span>${esc(fzName(x))}</span><span class="pill${x.hot ? ' red' : ''}">${esc(x.q)}</span></span></button>`).join('')}</div>`; }).join('');
+}
+let ziehId = null;
+document.addEventListener('dragstart', (e) => { const t = e.target.closest?.('[data-drag]'); if (t) { ziehId = +t.dataset.drag; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', t.dataset.drag); } });
+document.addEventListener('dragover', (e) => { const c = e.target.closest?.('[data-col]'); if (c && ziehId) { e.preventDefault(); $$('.col').forEach((x) => x.classList.toggle('over', x === c)); } });
+document.addEventListener('drop', (e) => { const c = e.target.closest?.('[data-col]'); if (c && ziehId) { e.preventDefault(); const a = anfragen.find((x) => x.id === ziehId); a.s = c.dataset.col; a.hot = false; ziehId = null; board(); rail(); kunden(); toast(`${a.name} → ${SPALTEN.find((s) => s[0] === a.s)[1]}`); } });
+document.addEventListener('dragend', () => { ziehId = null; $$('.col').forEach((x) => x.classList.remove('over')); });
+
+// Schublade
+let tippTimer = null;
+function schublade({ titel, sub, body, foot, breit }) {
+ clearInterval(tippTimer);
+ $('#d-name').textContent = titel; $('#d-sub').textContent = sub || '';
+ $('#d-body').innerHTML = body; $('#d-foot').innerHTML = foot || '<button class="btn btn--ghost" data-close>Schließen</button>';
+ $('#d-p').classList.toggle('wide', !!breit);
+ $('#d-body').scrollTop = 0;
+ $('#drawer').classList.add('on'); $('#drawer').setAttribute('aria-hidden', 'false');
+ setTimeout(() => ($('#d-foot .btn') || $('#d-foot button'))?.focus({ preventScroll: true }), 320);
+}
+function zu() { clearInterval(tippTimer); $('#drawer').classList.remove('on'); $('#drawer').setAttribute('aria-hidden', 'true'); }
+function tippe(ta, text, fertig) {
+ if (RM) { ta.value = text; fertig && fertig(); return; }
+ let i = 0; ta.value = ''; clearInterval(tippTimer);
+ tippTimer = setInterval(() => { i += 3; ta.value = text.slice(0, i); ta.scrollTop = ta.scrollHeight; if (i >= text.length) { clearInterval(tippTimer); fertig && fertig(); } }, 12);
+}
+function anfrage(id) {
+ const a = anfragen.find((x) => x.id === +id); if (!a) return;
+ const fz = auto(a.fz);
+ let h = fz ? `<button class="cell" data-auto="${fz.id}" style="background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px;color:inherit;text-align:left">${bild(fz) ? `<img class="thumb" src="${bild(fz)}" alt="">` : ''}<div><b>${esc(fz.m)} ${esc(fz.t)}</b><span>${eur(fz.p)} · ${fmt(fz.km)} km · EZ ${fz.ez}</span></div></button>` : '';
+ h += a.verlauf.map(([r, t]) => `<div class="msg ${r}">${esc(t)}<small>${r === 'in' ? esc(a.q) : 'KMC Motors'}</small></div>`).join('');
+ if (a.entwurf) h += `<div class="draft"><label for="d-text"><span>${ic('i-bolt', 's')} Entwurf der KI · geht erst raus, wenn du sendest</span><span>${a.sprache ? esc(a.sprache) : ''}</span></label><textarea id="d-text" aria-label="Antwort"></textarea></div>`;
+ const nxt = { neu: 'auto', auto: 'termin', termin: 'vertrag', vertrag: 'verkauft' }[a.s];
+ schublade({ titel: a.name, sub: `${fzName(a)} · über ${a.q} · ${a.zeit}`, body: h,
+  foot: (a.entwurf ? `<button class="btn" data-send="${a.id}">${ic('i-send', 's')}Senden über ${esc(a.q.split(' ')[0])}</button>` : '') + (a.s === 'vertrag' ? `<button class="btn" data-vorlage="vertrag" data-fz="${a.fz}" data-kunde="${esc(a.name)}">${ic('i-pen', 's')}Kaufvertrag erstellen</button>` : '') + (nxt ? `<button class="btn btn--ghost" data-move="${a.id}:${nxt}">Weiter zu „${SPALTEN.find((s) => s[0] === nxt)[1]}“</button>` : '') });
+ if (a.entwurf) tippe($('#d-text'), a.entwurf);
+}
+document.addEventListener('click', (e) => {
+ const o = e.target.closest('[data-open]'); if (o) return anfrage(o.dataset.open);
+ if (e.target.closest('[data-close]')) return zu();
+ const s = e.target.closest('[data-send]');
+ if (s) { const a = anfragen.find((x) => x.id === +s.dataset.send); clearInterval(tippTimer); a.verlauf.push(['out', $('#d-text').value || a.entwurf]); delete a.entwurf; a.hot = false; if (a.s === 'neu') a.s = 'auto'; zu(); board(); rail(); kunden(); toast(`Gesendet an ${a.name} über ${a.q.split(' ')[0]}`); return; }
+ const m = e.target.closest('[data-move]');
+ if (m) { const [id, z] = m.dataset.move.split(':'); const a = anfragen.find((x) => x.id === +id); a.s = z; a.hot = false; zu(); board(); rail(); kunden(); toast(`${a.name} → ${SPALTEN.find((s) => s[0] === z)[1]}`); }
+});
+
+// Bestand
+let bFilter = 'alle';
+function fleet() {
+ const q = ($('#b-such').value || '').toLowerCase();
+ const l = autos.filter((a) => (`${a.m} ${a.t}`).toLowerCase().includes(q) && (bFilter === 'alle' || (bFilter === 'lang' && a.tage > 45) || (bFilter === 'foto' && !bild(a))));
+ $('#fleet').innerHTML = l.map((a) => { const k = a.st === 'online' ? 'ok' : a.st === 'reserviert' ? '' : a.st === 'Fotos fehlen' ? 'red' : 'warn'; const g = a.p - a.ek - (kosten[a.id] || 0);
+  return `<article class="card vcar" data-auto="${a.id}" tabindex="0" role="button" aria-label="${esc(a.m + ' ' + a.t)}"><div class="vcar__img">${bild(a) ? `<img src="${bild(a)}" alt="" loading="lazy">` : `<div class="nofoto">${ic('i-camera')}<span>Fotos fehlen</span><span>Antippen zum Hochladen</span></div>`}<span class="pill ${k}">${esc(a.st)}</span></div><div class="vcar__b"><b>${esc(a.m)} ${esc(a.t)}</b><div class="vcar__p"><strong>${eur(a.p)}</strong><span class="up" style="font-size:13px" title="Gewinn">+${eur(g)}</span></div><div class="vcar__m"><span>${fmt(a.km)} km</span><span>EZ ${a.ez}</span><span${a.tage > 45 ? ' style="color:var(--warn)"' : ''}>${a.tage} Tage</span><span>${a.a} Anfragen</span></div></div></article>`; }).join('') || '<p style="color:var(--dim)">Kein Auto passt zur Suche.</p>';
+}
+$('#b-such').addEventListener('input', fleet);
+$('#b-filter').addEventListener('click', (e) => { const b = e.target.closest('[data-f]'); if (!b) return; bFilter = b.dataset.f; $$('#b-filter button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); fleet(); });
+function autoDetail(id) {
+ const a = auto(id); if (!a) return;
+ const k = kosten[id] || 0, g = a.p - a.ek - k, marge = a.p ? Math.round(g / a.p * 100) : 0;
+ schublade({ titel: `${a.m} ${a.t}`, sub: `EZ ${a.ez} · ${fmt(a.km)} km · ${a.kw} · ${a.f}`,
+  body: `${bild(a) ? `<img class="bigimg" src="${bild(a, 1600)}" alt="${esc(a.m + ' ' + a.t)}">` : `<label class="drop" style="aspect-ratio:4/3;display:grid;place-items:center;align-content:center"><input type="file" accept="image/*" multiple data-fotoauto="${a.id}">${ic('i-camera')}<b>Fotos hochladen</b><span style="font-size:13px">Danach ist das Auto automatisch auf der Website</span></label>`}
+   <div class="card"><h3 style="margin-bottom:12px">Kalkulation <span class="pill" style="margin-left:6px">nur für dich sichtbar</span></h3><dl class="kv"><dt>Verkaufspreis</dt><dd><b>${eur(a.p)}</b></dd><dt>Einkauf</dt><dd>− ${eur(a.ek)}</dd><dt>Aufbereitung, Werkstatt, TÜV</dt><dd>− ${eur(k)}</dd><dt style="color:var(--ink);font-weight:600">Gewinn</dt><dd style="font-weight:700;color:var(--ok)">${eur(g)} · ${marge} %</dd><dt>Standzeit</dt><dd${a.tage > 45 ? ' style="color:var(--warn)"' : ''}>${a.tage} Tage</dd><dt>Aufrufe / Anfragen</dt><dd>${fmt(a.v)} / ${a.a}</dd><dt>Umsatzsteuer</dt><dd>${a.mwst ? 'MwSt. ausweisbar' : 'Differenzbesteuerung §25a'}</dd></dl></div>
+   <div class="f"><label for="d-preis">Preis ändern (Website und mobile.de)</label><div style="display:flex;gap:8px"><input id="d-preis" value="${fmt(a.p)}" inputmode="numeric"><button class="btn" data-preis="${a.id}">Speichern</button></div></div>`,
+  foot: `<button class="btn" data-verkauft="${a.id}">${ic('i-euro', 's')}Verkauft</button><button class="btn btn--ghost" data-vorlage="vertrag" data-fz="${a.id}">${ic('i-pen', 's')}Kaufvertrag</button>${a.ad ? `<a class="btn btn--ghost" href="https://suchen.mobile.de/fahrzeuge/details.html?id=${a.ad}" target="_blank" rel="noopener">${ic('i-globe', 's')}mobile.de</a>` : ''}` });
+}
+document.addEventListener('click', (e) => {
+ const c = e.target.closest('[data-auto]'); if (c) return autoDetail(c.dataset.auto);
+ const p = e.target.closest('[data-preis]');
+ if (p) { const a = auto(p.dataset.preis), n = +$('#d-preis').value.replace(/\D/g, ''); if (n > 0) { const alt = a.p; a.p = n; if (a.st === 'Preis prüfen') a.st = 'online'; fleet(); feat(); autoDetail(a.id); toast(`Preis ${eur(alt)} → ${eur(n)} · Website und mobile.de aktualisiert`); } return; }
+ const v = e.target.closest('[data-verkauft]'); if (v) return neuerVerkauf(v.dataset.verkauft);
+});
+document.addEventListener('change', (e) => {
+ const id = e.target.dataset?.fotoauto; if (!id || !e.target.files.length) return;
+ const n = e.target.files.length, r = new FileReader();
+ r.onload = () => { const a = auto(id); a.foto = r.result; a.st = 'online'; const p = papier.find((x) => x.b.startsWith('Fotos machen')); zu(); fleet(); toast(`${n} Foto${n === 1 ? '' : 's'} hochgeladen · ${a.m} ${a.t} ist jetzt online`); };
+ r.readAsDataURL(e.target.files[0]);
+});
+
+// Verkäufe & Rechnungen
+const stPill = (s) => `<span class="pill ${s === 'bezahlt' ? 'ok' : s === 'überfällig' ? 'red' : 'warn'}">${s}</span>`;
+function verkaufRender() {
+ $('#verkauf').innerHTML = verkauf.map((v) => `<tr class="click" data-rechnung="${v.id}"><td><div class="cell"><div><b>${esc(v.fz)}</b><span class="mono">${esc(v.fin)}</span></div></div></td><td>${esc(v.kunde)}</td><td class="mono" style="font-size:13px">${v.d}</td><td class="r">${eur(v.vk)}</td><td class="r" style="color:var(--muted)">${eur(v.ek + v.k)}</td><td class="r up" style="font-weight:600">+${eur(gewinn(v))}</td><td>${stPill(v.st)}</td><td class="r"><button class="btn btn--ghost btn--sm" data-rechnung="${v.id}">Rechnung</button></td></tr>`).join('');
+ $('#rechnungen').innerHTML = verkauf.map((v) => `<tr class="click" data-rechnung="${v.id}"><td class="mono" style="font-size:13px">${v.re}</td><td>${esc(v.kunde)}</td><td>${esc(v.fz)}</td><td class="mono" style="font-size:13px">${v.d}</td><td class="r">${eur(v.vk)}</td><td>${stPill(v.st)}</td><td class="r">${v.st === 'überfällig' ? `<button class="btn btn--sm" data-mahnung="${v.id}">Mahnung</button>` : v.st === 'offen' ? `<button class="btn btn--ghost btn--sm" data-bezahlt="${v.id}">Bezahlt</button>` : ''}</td></tr>`).join('');
+ renderKpis(); badges();
+}
+function rechnungDoc(v) {
+ const regel = v.best === 'regel', netto = Math.round(v.vk / 1.19 * 100) / 100, ust = Math.round((v.vk - netto) * 100) / 100;
+ return `<div class="doc"><div class="kopf"><div><div class="abs">${KMC.name} · ${KMC.str} · ${KMC.ort}</div><b>${esc(v.kunde)}</b><br>Anschrift laut Kaufvertrag</div><div style="text-align:right"><img src="img/kmc-logo-hell.svg" alt="KMC Motors"><div style="margin-top:12px">Rechnungsnr. <b>${v.re}</b><br>Rechnungsdatum ${v.d}<br>Lieferdatum ${v.d}</div></div></div>
+ <h2>Rechnung</h2>
+ <table><thead><tr><th>Pos.</th><th>Beschreibung</th><th class="r">Betrag</th></tr></thead><tbody><tr><td>1</td><td><b>${esc(v.fz)}</b><br>FIN ${esc(v.fin)}<br>Gebrauchtfahrzeug, wie besichtigt und probegefahren</td><td class="r">${regel ? eur(netto, 2) : eur(v.vk, 2)}</td></tr></tbody>
+ <tbody>${regel ? `<tr class="sum"><td></td><td class="r" style="font-weight:400">Nettobetrag</td><td class="r" style="font-weight:400">${eur(netto, 2)}</td></tr><tr class="sum"><td></td><td class="r" style="font-weight:400">zzgl. 19 % USt.</td><td class="r" style="font-weight:400">${eur(ust, 2)}</td></tr>` : ''}<tr class="sum"><td></td><td class="r">Gesamtbetrag</td><td class="r">${eur(v.vk, 2)}</td></tr></tbody></table>
+ <p class="hint">${regel ? 'Die Umsatzsteuer ist gesondert ausgewiesen.' : '<b>Gebrauchtgegenstände / Sonderregelung.</b> Differenzbesteuerung nach § 25a UStG, die Umsatzsteuer wird nicht gesondert ausgewiesen.'}</p>
+ <p>Zahlbar innerhalb von 7 Tagen ohne Abzug. Das Fahrzeug bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
+ <div class="fuss"><div>${KMC.name}<br>Inh. ${KMC.inhaber}<br>${KMC.str}, ${KMC.ort}</div><div>Tel. ${KMC.tel}<br>${KMC.mail}</div><div>Steuernummer: folgt<br>Bankverbindung: folgt</div></div></div>`;
+}
+function rechnung(id) {
+ const v = verkauf.find((x) => x.id === id); if (!v) return;
+ schublade({ titel: `Rechnung ${v.re}`, sub: `${v.kunde} · ${v.fz} · ${v.st}`, breit: true, body: rechnungDoc(v),
+  foot: `<button class="btn" data-mailre="${v.id}">${ic('i-send', 's')}Per E-Mail senden</button><button class="btn btn--ghost" data-print>${ic('i-print', 's')}Drucken / PDF</button>${v.st === 'überfällig' ? `<button class="btn btn--ghost" data-mahnung="${v.id}">Mahnung erstellen</button>` : ''}` });
+}
+document.addEventListener('click', (e) => {
+ if (e.target.closest('[data-print]')) return window.print();
+ const m = e.target.closest('[data-mahnung]');
+ if (m) { const v = verkauf.find((x) => x.id === m.dataset.mahnung); schublade({ titel: `Zahlungserinnerung ${v.re}`, sub: `${v.kunde} · ${eur(v.vk)} · Entwurf`, body: `<div class="draft"><label for="d-text"><span>${ic('i-bolt', 's')} Entwurf der KI · freundlich, erste Erinnerung</span></label><textarea id="d-text" style="min-height:260px"></textarea></div>`, foot: `<button class="btn" data-mahnsend="${v.id}">${ic('i-send', 's')}Senden</button><button class="btn btn--ghost" data-close>Abbrechen</button>` }); tippe($('#d-text'), `Sehr geehrter Herr ${v.kunde.split(' ').pop()},\n\nfür den ${v.fz} haben wir Ihnen am ${v.d} die Rechnung ${v.re} über ${eur(v.vk, 2)} gestellt. Bisher konnten wir leider keinen Zahlungseingang feststellen.\n\nBitte überweisen Sie den Betrag bis zum 02.12.2026. Hat sich Ihre Zahlung mit diesem Schreiben überschnitten, betrachten Sie es bitte als gegenstandslos.\n\nMit freundlichen Grüßen\nKaan Kömürcü\nKMC Motors`); return; }
+ const ms = e.target.closest('[data-mahnsend]'); if (ms) { const v = verkauf.find((x) => x.id === ms.dataset.mahnsend); v.st = 'offen'; const p = papier.find((x) => x.b.startsWith('Mahnung')); if (p) p.done = true; zu(); verkaufRender(); papierRender(); rail(); toast(`Zahlungserinnerung an ${v.kunde} gesendet`); return; }
+ const b = e.target.closest('[data-bezahlt]'); if (b) { const v = verkauf.find((x) => x.id === b.dataset.bezahlt); v.st = 'bezahlt'; verkaufRender(); toast(`${v.re} ist bezahlt`); return; }
+ const mr = e.target.closest('[data-mailre]'); if (mr) { const v = verkauf.find((x) => x.id === mr.dataset.mailre); zu(); toast(`Rechnung ${v.re} als PDF an ${v.kunde} gesendet`); return; }
+ const r = e.target.closest('[data-rechnung]'); if (r) return rechnung(r.dataset.rechnung);
+});
+
+// Kaufvertrag
+function vertrag({ fz, kunde, art = 'vertrag' }) {
+ const a = auto(fz) || auto('glc') || autos[0];
+ const kname = kunde || (a.id === 'spr' ? 'Imbiss Anatolia' : '');
+ const titel = { vertrag: 'Kaufvertrag über ein gebrauchtes Kraftfahrzeug', export: 'Kaufvertrag über ein gebrauchtes Kraftfahrzeug (Export)', inzahlung: 'Ankaufvertrag / Inzahlungnahme' }[art];
+ const verk = art === 'inzahlung' ? ['Verkäufer (Kunde)', kname || '__________________', 'Käufer', `${KMC.name}, Inh. ${KMC.inhaber}, ${KMC.str}, ${KMC.ort}`] : ['Verkäufer', `${KMC.name}, Inh. ${KMC.inhaber}, ${KMC.str}, ${KMC.ort}`, 'Käufer', kname || '__________________'];
+ schublade({ titel: titel.split(' (')[0], sub: `${a.m} ${a.t}${kname ? ' · ' + kname : ''}`, breit: true, body: `<div class="doc"><div class="muster">MUSTER · vor dem echten Einsatz einmal von einem Anwalt oder dem Kfz-Verband prüfen lassen</div><div class="kopf"><h2>${titel}</h2><img src="img/kmc-logo-hell.svg" alt="KMC Motors"></div>
+  <table><tbody><tr><td style="width:34%"><b>${verk[0]}</b></td><td>${esc(verk[1])}</td></tr><tr><td><b>${verk[2]}</b></td><td>${esc(verk[3])}<br>Anschrift, Geburtsdatum, Ausweisnr.: ________________________</td></tr><tr><td><b>Fahrzeug</b></td><td>${esc(a.m)} ${esc(a.t)}</td></tr><tr><td><b>FIN</b></td><td class="mono">_________________ (aus Zulassungsbescheinigung)</td></tr><tr><td><b>Erstzulassung / km-Stand</b></td><td>${a.ez} / ${fmt(a.km)} km (abgelesen)</td></tr><tr><td><b>Kaufpreis</b></td><td><b>${eur(a.p, 2)}</b> · ${art === 'export' ? 'Ausfuhr nach: __________' : a.mwst ? 'inkl. 19 % USt.' : 'Differenzbesteuerung nach § 25a UStG'}</td></tr><tr><td><b>Zahlung</b></td><td>☐ bar &nbsp; ☐ Überweisung &nbsp; ☐ Finanzierung</td></tr></tbody></table>
+  <b>Vereinbarungen</b><ol><li>Das Fahrzeug wird verkauft wie besichtigt und probegefahren.</li><li>${art === 'inzahlung' ? 'Der Verkäufer versichert, dass die Angaben zu Unfällen und Mängeln vollständig sind.' : 'Sachmängelhaftung gegenüber Verbrauchern: 12 Monate ab Übergabe.'}</li><li>Bekannte Mängel / Vorschäden: ______________________________</li><li>Das Fahrzeug bleibt bis zur vollständigen Zahlung Eigentum des Verkäufers.</li>${art === 'export' ? '<li>Der Käufer weist die Ausfuhr nach (Ausfuhrbegleitdokument mit Zollvermerk).</li>' : ''}</ol>
+  <p><b>Übergeben:</b> ☐ Zulassungsbescheinigung Teil I und II &nbsp; ☐ 2 Schlüssel &nbsp; ☐ HU-Bericht &nbsp; ☐ Serviceheft</p>
+  <div class="sign"><div>Ort, Datum · ${verk[0].split(' ')[0]}</div><div>Ort, Datum · ${verk[2].split(' ')[0]}</div></div></div>`,
+  foot: `<button class="btn" data-sign>${ic('i-pen', 's')}Zur Unterschrift aufs Handy</button><button class="btn btn--ghost" data-print>${ic('i-print', 's')}Drucken / PDF</button>` });
+}
+document.addEventListener('click', (e) => {
+ const v = e.target.closest('[data-vorlage]'); if (v) { e.preventDefault(); e.stopPropagation(); vertrag({ fz: v.dataset.fz, kunde: v.dataset.kunde, art: v.dataset.vorlage }); return; }
+ if (e.target.closest('[data-sign]')) { e.stopPropagation(); zu(); toast('Link zur digitalen Unterschrift per WhatsApp gesendet'); }
+}, true);
+
+// Neuer Verkauf
+function neuerVerkauf(id) {
+ const frei = autos.filter((a) => a.st !== 'Fotos fehlen' || a.id === id);
+ if (!frei.length) return toast('Kein Auto im Bestand');
+ const a = auto(id) || frei[0];
+ schublade({ titel: 'Verkauf erfassen', sub: 'Rechnung und Kaufvertrag entstehen daraus automatisch',
+  body: `<div class="fields" style="margin-top:0"><div class="f full"><label for="nv-auto">Fahrzeug</label><select id="nv-auto">${frei.map((x) => `<option value="${x.id}"${x.id === a.id ? ' selected' : ''}>${esc(x.m)} ${esc(x.t)} · ${eur(x.p)}</option>`).join('')}</select></div><div class="f"><label for="nv-kunde">Käufer</label><input id="nv-kunde" placeholder="Vor- und Nachname" autocomplete="off"></div><div class="f"><label for="nv-preis">Verkaufspreis (€)</label><input id="nv-preis" value="${fmt(a.p)}" inputmode="numeric"></div><div class="f"><label for="nv-zahl">Zahlung</label><select id="nv-zahl"><option>Überweisung</option><option>bar</option><option>Finanzierung</option></select></div><div class="f"><label for="nv-best">Umsatzsteuer</label><select id="nv-best"><option value="25a">Differenzbesteuerung §25a</option><option value="regel"${a.mwst ? ' selected' : ''}>19 % ausgewiesen</option></select></div></div><div class="card" id="nv-calc"></div>`,
+  foot: `<button class="btn" id="nv-ok">${ic('i-check', 's')}Speichern und Rechnung erstellen</button><button class="btn btn--ghost" data-close>Abbrechen</button>` });
+ const calc = () => { const x = auto($('#nv-auto').value), p = +$('#nv-preis').value.replace(/\D/g, '') || 0, g = p - x.ek - (kosten[x.id] || 0); $('#nv-calc').innerHTML = `<dl class="kv"><dt>Einkauf und Kosten</dt><dd>${eur(x.ek + (kosten[x.id] || 0))}</dd><dt style="color:var(--ink);font-weight:600">Dein Gewinn</dt><dd style="font-weight:700;color:${g > 0 ? 'var(--ok)' : 'var(--red2)'}">${eur(g)}</dd></dl>`; };
+ $('#nv-auto').addEventListener('change', () => { const x = auto($('#nv-auto').value); $('#nv-preis').value = fmt(x.p); $('#nv-best').value = x.mwst ? 'regel' : '25a'; calc(); });
+ $('#nv-preis').addEventListener('input', calc); calc();
+ $('#nv-ok').addEventListener('click', () => {
+  const x = auto($('#nv-auto').value), k = $('#nv-kunde').value.trim();
+  if (!k) { $('#nv-kunde').focus(); toast('Bitte noch den Käufer eintragen'); return; }
+  const nr = 'RE-2026-0' + (140 + verkauf.length);
+  verkauf.unshift({ id: 'n' + Date.now(), fz: `${x.m} ${x.t}`, fin: 'aus Zulassungsbescheinigung', kunde: k, d: heuteStr(), vk: +$('#nv-preis').value.replace(/\D/g, ''), ek: x.ek, k: kosten[x.id] || 0, best: $('#nv-best').value, re: nr, st: 'offen' });
+  autos.splice(autos.indexOf(x), 1);
+  verkaufRender(); fleet(); ampel(); feat(); kunden(); auswertung(); chart(); zu(); geh('verkauf'); toast(`Verkauft! Rechnung ${nr} erstellt, Auto von Website und mobile.de genommen`);
+ });
+}
+$('#neuVerkauf').addEventListener('click', () => neuerVerkauf());
+
+// Belege
+function belegeRender() {
+ const sum = (f) => belege.filter(f).reduce((s, b) => s + b.b, 0);
+ $('#be-sum').innerHTML = [['Fahrzeugkosten', sum((b) => b.fz !== '–'), 'Aufbereitung, Werkstatt, TÜV, Zulassung'], ['Fixkosten', sum((b) => b.fz === '–'), 'Miete, Strom, Versicherung, mobile.de'], ['Gesamt November', sum(() => true), `${belege.length} Belege, alle zugeordnet`]].map(([t, v, s]) => `<div class="card kpi" style="min-height:0"><small>${t}</small><span class="v">${eur(v, 2)}</span><span class="d">${s}</span></div>`).join('');
+ $('#belege').innerHTML = belege.map((b) => `<tr><td class="mono" style="font-size:13px">${b.d}</td><td>${esc(b.l)}</td><td><span class="pill">${esc(b.k)}</span></td><td>${esc(b.fz)}</td><td class="r">${b.b ? eur(b.b, 2) : '…'}</td><td>${b.liest ? '<span class="pill warn">KI liest …</span>' : '<span class="pill ok">zugeordnet</span>'}</td></tr>`).join('');
+}
+$('#beleg').addEventListener('change', (e) => {
+ if (!e.target.files.length) return;
+ const b = { d: heuteStr(), l: e.target.files[0].name.slice(0, 30), k: '…', fz: '…', b: 0, liest: true };
+ belege.unshift(b); belegeRender(); toast('Beleg hochgeladen, die KI liest ihn aus');
+ setTimeout(() => { Object.assign(b, { l: 'ATU Köln-Ehrenfeld', k: 'Werkstatt', fz: 'Audi S6 TDI', b: 349.9, liest: false }); kosten.s6 = (kosten.s6 || 0) + 349.9; belegeRender(); renderKpis(); fleet(); toast('Erkannt: ATU · 349,90 € · Werkstatt → Audi S6'); }, 2200);
+ e.target.value = '';
+});
+
+// Kunden
+function kunden() {
+ const l = [
+  ...anfragen.filter((a) => a.s !== 'verkauft').map((a) => ({ n: a.name, q: a.q, fz: fzName(a), z: a.zeit, st: a.hot ? ['red', 'wartet auf dich'] : ['', SPALTEN.find((s) => s[0] === a.s)[1]], id: a.id })),
+  ...verkauf.map((v) => ({ n: v.kunde, q: 'Kauf', fz: v.fz, z: v.d, st: v.kunde.includes('Aydın') ? ['ok', '★★★★★ Bewertung'] : ['ok', 'Käufer'] })),
+ ];
+ $('#kunden').innerHTML = l.map((k) => `<tr${k.id ? ` class="click" data-open="${k.id}"` : ''}><td><div class="cell"><span class="avatar" style="width:32px;height:32px;font-size:11px;margin-right:12px">${esc(ini(k.n))}</span><b>${esc(k.n)}</b></div></td><td>${esc(k.q)}</td><td>${esc(k.fz)}</td><td class="mono" style="font-size:13px">${esc(k.z)}</td><td><span class="pill ${k.st[0]}">${k.st[1]}</span></td></tr>`).join('');
+}
+
+// Auswertung + Export
+function auswertung() {
+ const q = [['mobile.de', 31], ['Website', 19], ['WhatsApp', 14], ['Instagram', 7], ['Telefon', 3]];
+ $('#quellen').innerHTML = q.map(([n, v]) => `<div class="barrow"><span>${n}</span><span class="track"><i data-w="${v / 31 * 100}"></i></span><span>${v} Anfragen</span></div>`).join('');
+ const m = {}; verkauf.forEach((v) => { const k = v.fz.split(' ')[0].replace('Mercedes-Benz', 'Mercedes'); m[k] = (m[k] || 0) + gewinn(v); });
+ const e = Object.entries(m).sort((a, b) => b[1] - a[1]), mx = e[0] ? e[0][1] : 1;
+ $('#gewinn').innerHTML = e.map(([n, v]) => `<div class="barrow"><span>${n}</span><span class="track"><i data-w="${v / mx * 100}"></i></span><span>${eur(v)}</span></div>`).join('');
+}
+document.addEventListener('click', (e) => {
+ if (!e.target.closest('[data-export]')) return;
+ const z = [['Typ', 'Datum', 'Belegnummer', 'Partner', 'Beschreibung', 'Betrag EUR', 'Besteuerung'].join(';')];
+ verkauf.forEach((v) => z.push(['Erlös', v.d, v.re, v.kunde, v.fz, v.vk.toFixed(2).replace('.', ','), v.best === 'regel' ? '19 % USt' : '§25a UStG'].join(';')));
+ belege.forEach((b, i) => z.push(['Ausgabe', b.d, 'BE-2026-' + (300 + i), b.l, `${b.k} ${b.fz}`, (-b.b).toFixed(2).replace('.', ','), ''].join(';')));
+ const url = URL.createObjectURL(new Blob(['﻿' + z.join('\r\n')], { type: 'text/csv;charset=utf-8' }));
+ const a = Object.assign(document.createElement('a'), { href: url, download: 'KMC-Motors_November-2026_Steuerberater.csv' }); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+ toast('Export für den Steuerberater heruntergeladen');
+});
+
+// Termine, Regeln
+$('#termine').innerHTML = termine.map(([t, b, s, k]) => `<div class="termin"><time>${t}</time><div style="flex:1;min-width:0"><b>${b}</b><span>${s}</span></div>${k === 'offen' ? '<button class="btn btn--sm" data-tok>Bestätigen</button>' : '<span class="pill ok">fix</span>'}</div>`).join('');
+document.addEventListener('click', (e) => { const b = e.target.closest('[data-tok]'); if (b) { b.outerHTML = '<span class="pill ok">fix</span>'; toast('Termin bestätigt, der Kunde bekommt eine Nachricht'); } });
+$('#regeln').innerHTML = regeln.map(([b, s, on], i) => `<div class="task"><input type="checkbox" id="rg${i}" ${on ? 'checked' : 'disabled'}><label class="t" for="rg${i}"><b>${b}</b><span>${s}</span></label><span class="pill ${on ? 'ok' : 'red'}">${on ? 'automatisch' : 'nur Entwurf'}</span></div>`).join('');
+
+// Inserat
+const F = (id) => $('#f-' + id);
+const fotos = [];
+function zeigeFotos(files) { [...files].filter((f) => f.type.startsWith('image/')).slice(0, 20 - fotos.length).forEach((f) => { const r = new FileReader(); r.onload = () => { fotos.push(r.result); renderFotos(); pruefe(); }; r.readAsDataURL(f); }); }
+function renderFotos() { $('#thumbs').innerHTML = fotos.map((s) => `<img src="${s}" alt="">`).join(''); $('#p-img').innerHTML = fotos[0] ? `<img src="${fotos[0]}" alt="">` : '<span style="font-family:var(--mono);font-size:12px;color:#777">Foto folgt</span>'; }
+$('#fotos').addEventListener('change', (e) => zeigeFotos(e.target.files));
+const drop = $('#drop');
+['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', (e) => zeigeFotos(e.dataTransfer.files));
+const zahl = (v) => (String(v).replace(/\D/g, '') ? fmt(+String(v).replace(/\D/g, '')) : '');
+function pruefe() {
+ const c = [['Mindestens 1 Foto', fotos.length > 0], ['Marke und Modell', !!(F('marke').value && F('modell').value.trim())], ['Erstzulassung', /\d{4}/.test(F('ez').value)], ['Kilometerstand', !!zahl(F('km').value)], ['Verkaufspreis', !!zahl(F('preis').value)], ['Beschreibung', F('text').value.trim().length > 40]];
+ $('#checks').innerHTML = c.map(([t, ok]) => `<li class="${ok ? 'ok' : ''}">${ic(ok ? 'i-check' : 'i-x', 's')}${t}</li>`).join('');
+ $('#p-t').textContent = [F('marke').value, F('modell').value].filter(Boolean).join(' ') || 'Marke Modell';
+ $('#p-p').textContent = zahl(F('preis').value) ? zahl(F('preis').value) + ' €' : '– €';
+ $('#p-tag').textContent = [F('ez').value && 'EZ ' + F('ez').value, zahl(F('km').value) && zahl(F('km').value) + ' km'].filter(Boolean).join(' · ') || 'Neu im Bestand';
+ return c.every(([, ok]) => ok);
+}
+$('#form').addEventListener('input', pruefe);
+$('#ki').addEventListener('click', () => {
+ const m = [F('marke').value, F('modell').value.trim()].filter(Boolean).join(' ');
+ if (!m) { toast('Erst Marke und Modell eintragen'); F('marke').focus(); return; }
+ const kw = +F('kw').value.replace(/\D/g, ''), ps = kw ? Math.round(kw * 1.36) : 0;
+ const ex = F('extra').value.split(',').map((s) => s.trim()).filter(Boolean);
+ const mg = ex.filter((s) => /kratzer|delle|mangel|schaden|steinschlag|beule/i.test(s)), plus = ex.filter((s) => !mg.includes(s));
+ const t = [`${m}${F('ez').value ? `, Erstzulassung ${F('ez').value}` : ''}${zahl(F('km').value) ? `, ${zahl(F('km').value)} km` : ''}.`, `${F('kraft').value}${kw ? ` mit ${kw} kW (${ps} PS)` : ''}.`, plus.length ? `Ausstattung: ${plus.join(', ')}.` : '', mg.length ? `Bekannte Mängel: ${mg.join(', ')}. Wir zeigen Ihnen alles offen vor Ort.` : '', 'Auf Wunsch mit DEKRA-Siegel und Garantie bis 24 Monate. Inzahlungnahme möglich. Wir sprechen Deutsch, Türkçe und English. Besichtigung und Probefahrt in der Escherstraße 129, Köln.'].filter(Boolean).join(' ');
+ tippe(F('text'), t, pruefe);
+});
+$('#form').addEventListener('submit', (e) => {
+ e.preventDefault();
+ if (!pruefe()) { toast('Es fehlen noch Pflichtangaben'); return; }
+ const id = 'n' + Date.now();
+ autos.unshift({ id, m: F('marke').value, t: F('modell').value.trim(), p: +F('preis').value.replace(/\D/g, ''), ek: +F('ek').value.replace(/\D/g, '') || 0, km: +F('km').value.replace(/\D/g, ''), ez: F('ez').value, kw: F('kw').value ? F('kw').value.replace(/\D/g, '') + ' kW' : '–', f: F('kraft').value, img: '', foto: fotos[0], tage: 0, a: 0, v: 0, st: 'online', ad: '' });
+ kosten[id] = 0;
+ $('#form').reset(); fotos.length = 0; renderFotos(); pruefe(); fleet(); ampel(); geh('bestand'); toast('Online auf der Website, das mobile.de-Paket liegt bereit');
+});
+
+// Suche (⌘K)
+let palIdx = 0, palTreffer = [];
+function palAuf() { $('#pal').classList.add('on'); $('#pal-in').value = ''; palSuche(); setTimeout(() => $('#pal-in').focus(), 10); }
+function palZu() { $('#pal').classList.remove('on'); }
+function palSuche() {
+ const q = $('#pal-in').value.toLowerCase().trim();
+ const alle = [
+  ...autos.map((a) => ({ t: `${a.m} ${a.t}`, s: eur(a.p), img: bild(a), go: () => autoDetail(a.id) })),
+  ...anfragen.map((a) => ({ t: a.name, s: `Anfrage · ${fzName(a)}`, i: 'i-inbox', go: () => anfrage(a.id) })),
+  ...verkauf.map((v) => ({ t: `${v.re} · ${v.kunde}`, s: `Rechnung · ${eur(v.vk)}`, i: 'i-doc', go: () => rechnung(v.id) })),
+  ...Object.entries(TITEL).map(([k, t]) => ({ t, s: 'Bereich', i: 'i-menu', go: () => geh(k) })),
+ ];
+ palTreffer = (q ? alle.filter((x) => (x.t + ' ' + x.s).toLowerCase().includes(q)) : alle).slice(0, 12); palIdx = 0;
+ $('#pal-list').innerHTML = palTreffer.map((x, i) => `<button data-pt="${i}"${i === 0 ? ' class="act"' : ''}>${x.img ? `<img src="${x.img}" alt="">` : ic(x.i || 'i-car')}<span>${esc(x.t)}</span><small>${esc(x.s)}</small></button>`).join('') || '<p style="padding:14px;color:var(--dim);margin:0">Nichts gefunden.</p>';
+}
+$('#pal-in').addEventListener('input', palSuche);
+$('#pal-in').addEventListener('keydown', (e) => {
+ if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && palTreffer.length) { e.preventDefault(); palIdx = (palIdx + (e.key === 'ArrowDown' ? 1 : -1) + palTreffer.length) % palTreffer.length; $$('#pal-list button').forEach((b, i) => b.classList.toggle('act', i === palIdx)); $$('#pal-list button')[palIdx].scrollIntoView({ block: 'nearest' }); }
+ if (e.key === 'Enter' && palTreffer[palIdx]) { palZu(); palTreffer[palIdx].go(); }
+});
+document.addEventListener('click', (e) => { if (e.target.closest('[data-pal]')) return palAuf(); const p = e.target.closest('[data-pt]'); if (p) { palZu(); palTreffer[+p.dataset.pt].go(); } else if (e.target.id === 'pal') palZu(); });
+document.addEventListener('keydown', (e) => {
+ if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); palAuf(); }
+ if (e.key === 'Escape') { zu(); palZu(); $('#more').classList.remove('on'); }
+});
+
+// Start
+const h = new Date().getHours();
+$('#gruss').textContent = (h < 11 ? 'Guten Morgen' : h < 18 ? 'Guten Tag' : 'Guten Abend') + ', Kaan.';
+feat(); ampel(); papierRender(); rail(); board(); fleet(); verkaufRender(); belegeRender(); kunden(); auswertung(); pruefe();
+geh(location.hash.slice(1) || 'uebersicht');
+renderKpis();
+})();
+</script>
+</body>
+</html>
