@@ -34,7 +34,7 @@ function rahmen({ basis, titel, beschreibung, body, robots = 'noindex, nofollow'
 <title>${esc(titel)}</title>
 <meta name="description" content="${esc(beschreibung)}">
 <meta name="robots" content="${robots}">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#0A0A0B">
 <link rel="icon" href="${basis}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${basis}assets/apple-touch-icon.png">
 <link rel="preload" href="${basis}assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
@@ -58,7 +58,7 @@ function kopf(basis) {
   const h = basis ? `${basis}index.html` : '';
   return `<header class="top">
 <div class="wrap top__in">
-<a class="top__logo" href="${basis || './'}"><img src="${basis}assets/logo/kmc-logo-hell.svg" alt="KMC Motors, zur Startseite" width="148" height="42"></a>
+<a class="top__logo" href="${basis || './'}"><img src="${basis}assets/logo/2026/kmc-quer-weiss.svg" alt="KMC Motors Köln, zur Startseite" width="200" height="36"></a>
 <nav class="top__nav" aria-label="Hauptnavigation"><a href="${h}#bestand">Bestand</a><a href="${h}#leistungen">Leistungen</a><a href="${h}#ablauf">Ablauf</a><a href="${h}#kontakt">Kontakt</a></nav>
 <div class="top__act"><a class="top__tel" href="tel:${B.telefonLink}">${esc(B.telefon)}</a><a class="btn" href="${wa('Hallo KMC Motors, ich habe eine Frage.')}">Anfragen</a></div>
 </div>
@@ -68,7 +68,7 @@ function kopf(basis) {
 function fuss(basis) {
   return `<footer class="foot">
 <div class="wrap foot__in">
-<img src="${basis}assets/logo/kmc-logo-hell.svg" alt="KMC Motors" width="116" height="33">
+<img src="${basis}assets/logo/2026/kmc-logo-weiss.svg" alt="KMC Motors Köln" width="130" height="90">
 <p>${esc(B.name)} · Inhaber ${esc(B.inhaber)} · ${esc(B.strasse)}, ${esc(B.plz)} ${esc(B.ort)}</p>
 <nav class="foot__nav" aria-label="Rechtliches"><a href="${basis}impressum.html">Impressum</a><a href="${basis}datenschutz.html">Datenschutz</a><a href="${esc(B.mobilede)}">mobile.de</a></nav>
 </div>
@@ -84,8 +84,21 @@ const bild = (basis, src) => `${basis}${src}`;
 const waAuto = (a) => wa(`Hallo KMC Motors, ich interessiere mich für den ${a.model}${istBeispiel(a) ? ' (Beispielfahrzeug)' : ''}, ${a.price}, Fahrzeug-ID ${a.id}. Wann kann ich ihn ansehen?`);
 const ezJahr = (a) => a.year;
 
+function karteOhneFoto(a) {
+  const zeilen = [['Erstzulassung', a.year], ['Kilometerstand', a.km], ['Leistung', a.power], ['Kraftstoff', a.fuel], ['Getriebe', a.gearbox]].filter(([, v]) => v);
+  return `<article class="car">
+<a class="car__img car__img--leer" href="fahrzeug/${slug(a.id)}/" tabindex="-1" aria-hidden="true"><img src="assets/logo/2026/kmc-symbol-weiss.svg" alt="" width="48" height="56"><span>Neu eingetroffen · Fotos folgen</span></a>
+<p class="car__tag">${esc(a.make)} · EZ ${esc(a.year)}</p>
+<h3><a href="fahrzeug/${slug(a.id)}/">${esc(a.model)}</a></h3>
+<p class="car__price">${esc(a.price)}</p>
+<dl class="spec">${zeilen.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+<div class="car__act"><a class="btn" href="${waAuto(a)}">Anfragen</a><a class="link" href="fahrzeug/${slug(a.id)}/"><span>Datenblatt</span>${PFEIL}</a></div>
+</article>`;
+}
+
 function karte(a) {
-  const p = a.img ? { src: a.imgS, alt: `${a.model}, Foto aus dem Inserat` } : (a.media?.poster || a.media?.gallery?.[0] || {});
+  const p = a.img ? { src: a.imgS, alt: `${a.model}, Foto aus dem Inserat` } : (a.media?.poster || a.media?.gallery?.[0] || null);
+  if (!p) return karteOhneFoto(a);
   const zeilen = [['Erstzulassung', a.year], ['Kilometerstand', a.km], ['Leistung', a.power], ['Kraftstoff', a.fuel], ['Getriebe', a.gearbox]].filter(([, v]) => v);
   return `<article class="car">
 <a class="car__img${a.img ? ' car__img--foto' : ''}" href="fahrzeug/${slug(a.id)}/" tabindex="-1" aria-hidden="true"><img src="${a.img ? p.src : bild('', p.src)}" alt="${esc(p.alt || a.model)}" loading="lazy"></a>
@@ -98,9 +111,9 @@ function karte(a) {
 }
 
 function held() {
-  const h = autos.find((a) => a.img);
+  const h = autos.find((a) => a.hero) || autos.find((a) => a.img);
   if (!h) return `<figure class="stage"><img src="assets/bilder/hero-auto-2000.webp" alt="Dunkler Sportwagen von schräg vorn im Studiolicht (Demo-Modell)" width="2000" height="881" fetchpriority="high"><figcaption><span>Demo-Modell</span><span>Hier steht später das Foto aus dem Bestand</span></figcaption></figure>`;
-  return `<figure class="stage stage--foto"><img src="${h.img}" alt="${esc(h.model)}, Foto aus dem Inserat" fetchpriority="high"><figcaption><span>Gerade im Bestand</span><a href="fahrzeug/${slug(h.id)}/"><b>${esc(h.model)}</b> · ${esc(h.price)}</a></figcaption></figure>`;
+  return `<figure class="stage stage--foto"><img src="${h.heroBild || h.img}" alt="${esc(h.model)}${h.heroBild ? ' im Studio' : ', Foto aus dem Inserat'}" fetchpriority="high"><figcaption><span>Gerade im Bestand</span><a href="fahrzeug/${slug(h.id)}/"><b>${esc(h.model)}</b> · ${esc(h.price)}</a></figcaption></figure>`;
 }
 
 function startseite() {
@@ -193,7 +206,7 @@ ${oeffnung.map((o) => `<tr><th scope="row">${esc(o.label)}</th><td>${esc(o.zeit)
 
 function fahrzeugseite(a) {
   const basis = '../../';
-  const g = a.img ? [{ src: a.img, alt: `${a.model}, Foto aus dem Inserat`, ext: true }] : (a.media?.gallery || []).length ? a.media.gallery : [a.media.poster];
+  const g = a.img ? [{ src: a.img, alt: `${a.model}, Foto aus dem Inserat`, ext: true }] : (a.media?.gallery || []).length ? a.media.gallery : a.media?.poster ? [a.media.poster] : [{ src: 'assets/logo/2026/kmc-symbol-weiss.svg', alt: 'Fotos folgen', leer: true }];
   const start = Math.max(0, g.findIndex((x) => x.start));
   const auf = (v) => (v == null || v === '' ? 'auf Anfrage' : v);
   const zeilen = [
@@ -212,7 +225,7 @@ function fahrzeugseite(a) {
 <p class="dp__back"><a class="link" href="${basis}index.html#bestand">${ico('M14 8H3M7 4L3 8l4 4')}<span>Zurück zum Bestand</span></a></p>
 <div class="dp__grid">
 <div class="dp__media">
-<figure class="dp__stage${a.img ? ' dp__stage--foto' : ''}"><img id="dp-bild" src="${g[start].ext ? g[start].src : basis + g[start].src}" alt="${esc(g[start].alt || a.model)}" width="1400"></figure>
+<figure class="dp__stage${a.img ? ' dp__stage--foto' : ''}${g[start].leer ? ' dp__stage--leer' : ''}"><img id="dp-bild" src="${g[start].ext ? g[start].src : basis + g[start].src}" alt="${esc(g[start].alt || a.model)}" width="1400"></figure>
 ${g.length > 1 ? `<div class="dp__thumbs" role="list">${g.map((x, i) => `<button type="button" role="listitem" data-src="${basis}${x.src}" data-alt="${esc(x.alt || '')}"${i === start ? ' aria-current="true"' : ''}><img src="${basis}${x.thumb || x.src}" alt="" loading="lazy"><span>${esc(x.label || '')}</span></button>`).join('')}</div>` : ''}
 ${istBeispiel(a) ? '<p class="dp__demo">Beispielfahrzeug · abgebildet ist ein Demo-Modell, nicht das angebotene Auto.</p>' : ''}
 </div>

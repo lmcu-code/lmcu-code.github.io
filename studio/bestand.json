@@ -57,8 +57,8 @@
    "fuel": "Diesel",
    "gearbox": null,
    "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=52922941094560",
-   "img": "https://img.classistatic.de/api/v1/mo-prod/images/60/601e6a60-7b36-4b4f-b12c-0d01e760b8c9?rule=mo-1600",
-   "imgS": "https://img.classistatic.de/api/v1/mo-prod/images/60/601e6a60-7b36-4b4f-b12c-0d01e760b8c9?rule=mo-640",
+   "img": "",
+   "imgS": "",
    "ausstattung": [
     "S-Sportsitze",
     "360°-Kamera",
@@ -111,7 +111,8 @@
     "Leder",
     "Skyhook-Fahrwerk",
     "21″ Leichtmetallfelgen"
-   ]
+   ],
+   "hero": true
   },
   {
    "id": "hyundai-i30-1-5-hybrid-dct-2023",
